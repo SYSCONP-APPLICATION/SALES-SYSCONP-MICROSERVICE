@@ -21,6 +21,7 @@ import jakarta.persistence.Table;
 import sales.sysconp.microservice.features.contact.infrastructure.entities.ContactEntity;
 import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
+import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
 
 @Entity
 @Table(name = "clients")
@@ -52,6 +53,9 @@ public class ClientEntity {
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private CompanyEntity company;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<PropertyEntity> properties;
 
     @Column(updatable = false)  
     @CreationTimestamp

@@ -22,6 +22,7 @@ import sales.sysconp.microservice.features.payment_method.infrastructure.entitie
 import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import sales.sysconp.microservice.features.system_payment_configuration.infrastructure.entities.SystemPaymentConfigurationEntity;
 import sales.sysconp.microservice.modules.auth.user.infrastructure.entities.UserEntity;
+import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
 
 @Entity
 @Table(name = "companies")
@@ -49,6 +50,9 @@ public class CompanyEntity {
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<SaleEntity> sales;
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<ProjectEntity> projects;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "system_payment_configuration_id", referencedColumnName = "id")
