@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -21,7 +22,7 @@ import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.C
 @Entity
 @Table(name = "users")
 public class UserEntity {
-    @Column(unique = true, nullable = false)
+    @Id
     private Long id;
 
     @Column(unique = true, nullable = false)

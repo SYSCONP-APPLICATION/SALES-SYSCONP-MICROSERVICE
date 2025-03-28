@@ -40,7 +40,7 @@ public class PaymentEntity {
 
     @ManyToOne
     @JoinColumn(name = "payment_method_id", nullable = false)
-    private PaymentMethodEntity paymentMethodEntity;
+    private PaymentMethodEntity paymentMethod;
 
     @ManyToOne
     @JoinColumn(name = "sale_id", nullable = false, referencedColumnName = "id")

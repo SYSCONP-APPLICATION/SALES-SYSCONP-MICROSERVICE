@@ -12,9 +12,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
-import sales.sysconp.microservice.features.payment_stamp.infrastructure.entities.PaymentStampEntity;
+import sales.sysconp.microservice.features.payment_stump.infrastructure.entities.PaymentStampEntity;
+// import sales.sysconp.microservice.features.payment_stamp.infrastructure.entities.PaymentStampEntity;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -40,7 +43,8 @@ public class SystemPaymentConfigurationEntity {
     @Column(nullable = false)
     private boolean requireForAllSales;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "payment_stamp_id", nullable = false)
     private PaymentStampEntity paymentStamp;
 
     @OneToOne(mappedBy = "systemPaymentConfiguration", cascade = CascadeType.ALL)

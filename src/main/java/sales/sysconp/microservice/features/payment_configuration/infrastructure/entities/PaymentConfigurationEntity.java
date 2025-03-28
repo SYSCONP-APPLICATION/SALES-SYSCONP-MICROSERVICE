@@ -11,8 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
+import sales.sysconp.microservice.features.payment_stump.infrastructure.entities.PaymentStampEntity;
 import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -34,6 +37,10 @@ public class PaymentConfigurationEntity {
     
     @OneToOne(mappedBy = "paymentConfiguration")
     private SaleEntity sale;
+
+    @ManyToOne
+    @JoinColumn(name = "payment_stamp_id", nullable = false)
+    private PaymentStampEntity paymentStamp;
 
     @Column(updatable = false)  
     @CreationTimestamp

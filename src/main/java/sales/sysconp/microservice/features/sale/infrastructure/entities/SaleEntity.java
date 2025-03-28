@@ -17,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
 import sales.sysconp.microservice.features.installment.infrastructure.entities.InstallmentEntity;
@@ -36,6 +37,7 @@ public class SaleEntity {
     @Column(unique = true, nullable = false)
     private UUID uuid;
 
+    @PrePersist
     public void generateUUID () {
         this.uuid = UUID.randomUUID();
     }
@@ -45,11 +47,11 @@ public class SaleEntity {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false, referencedColumnName = "id")
-    private ClientEntity clientId;
+    private ClientEntity client;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
-    private UserEntity userId;
+    private UserEntity user;
 
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
     private List<PaymentEntity> payments;
@@ -59,7 +61,7 @@ public class SaleEntity {
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_configuration_id", referencedColumnName = "id")
-    private PaymentConfigurationEntity paymentConfigurationEntity;
+    private PaymentConfigurationEntity paymentConfiguration;
 
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)

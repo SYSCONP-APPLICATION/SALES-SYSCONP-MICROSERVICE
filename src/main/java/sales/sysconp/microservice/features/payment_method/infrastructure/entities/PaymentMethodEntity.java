@@ -38,7 +38,7 @@ public class PaymentMethodEntity {
     private String name;
 
     @OneToMany(mappedBy = "paymentMethod", cascade = CascadeType.ALL)
-    private List<PaymentEntity> employees;
+    private List<PaymentEntity> payments;
 
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false, referencedColumnName = "id")
