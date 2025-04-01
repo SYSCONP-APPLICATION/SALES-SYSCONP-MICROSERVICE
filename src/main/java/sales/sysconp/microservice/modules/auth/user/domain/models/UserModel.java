@@ -1,8 +1,8 @@
 package sales.sysconp.microservice.modules.auth.user.domain.models;
 
-import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
-import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
+import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
+import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,15 +12,15 @@ public class UserModel {
     private Long id;
     private UUID uuid;
     private String name;
-    private CompanyEntity company;
-    private List<SaleEntity> sales;
-    private List<PaymentEntity> payments;
+    private CompanyModel company;
+    private List<SaleModel> sales;
+    private List<PaymentModel> payments;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public UserModel () {}
 
-    public UserModel(Long id, UUID uuid, String name, CompanyEntity company, List<SaleEntity> sales, List<PaymentEntity> payments, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserModel(Long id, UUID uuid, String name, CompanyModel company, List<SaleModel> sales, List<PaymentModel> payments, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -55,27 +55,27 @@ public class UserModel {
         this.name = name;
     }
 
-    public CompanyEntity getCompany() {
+    public CompanyModel getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyEntity company) {
+    public void setCompany(CompanyModel company) {
         this.company = company;
     }
 
-    public List<SaleEntity> getSales() {
+    public List<SaleModel> getSales() {
         return sales;
     }
 
-    public void setSales(List<SaleEntity> sales) {
+    public void setSales(List<SaleModel> sales) {
         this.sales = sales;
     }
 
-    public List<PaymentEntity> getPayments() {
+    public List<PaymentModel> getPayments() {
         return payments;
     }
 
-    public void setPayments(List<PaymentEntity> payments) {
+    public void setPayments(List<PaymentModel> payments) {
         this.payments = payments;
     }
 

@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
 
-@Mapper(componentModel = "spring", uses = { })
+@Mapper(componentModel = "spring")
 public interface PropertyMapper {
     PropertyModel toModel(PropertyEntity entity);
     PropertyEntity toEntity(PropertyModel model);

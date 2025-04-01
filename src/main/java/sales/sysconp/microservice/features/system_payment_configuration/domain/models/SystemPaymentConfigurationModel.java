@@ -1,7 +1,7 @@
 package sales.sysconp.microservice.features.system_payment_configuration.domain.models;
 
-import sales.sysconp.microservice.features.payment_stump.infrastructure.entities.PaymentStampEntity;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
+import sales.sysconp.microservice.features.payment_stump.domain.models.PaymentStampModel;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,15 +12,15 @@ public class SystemPaymentConfigurationModel {
     private Long dayOfMonth;
     private boolean requireOnCreateSale;
     private boolean requireForAllSales;
-    private PaymentStampEntity paymentStamp;
-    private CompanyEntity company;
+    private PaymentStampModel paymentStamp;
+    private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public SystemPaymentConfigurationModel() {
     }
 
-    public SystemPaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, boolean requireForAllSales, PaymentStampEntity paymentStamp, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SystemPaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, boolean requireForAllSales, PaymentStampModel paymentStamp, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
@@ -72,19 +72,19 @@ public class SystemPaymentConfigurationModel {
         this.requireForAllSales = requireForAllSales;
     }
 
-    public PaymentStampEntity getPaymentStamp() {
+    public PaymentStampModel getPaymentStamp() {
         return paymentStamp;
     }
 
-    public void setPaymentStamp(PaymentStampEntity paymentStamp) {
+    public void setPaymentStamp(PaymentStampModel paymentStamp) {
         this.paymentStamp = paymentStamp;
     }
 
-    public CompanyEntity getCompany() {
+    public CompanyModel getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyEntity company) {
+    public void setCompany(CompanyModel company) {
         this.company = company;
     }
 

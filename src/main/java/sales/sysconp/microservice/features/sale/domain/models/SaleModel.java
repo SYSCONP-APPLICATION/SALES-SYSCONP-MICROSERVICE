@@ -1,12 +1,12 @@
 package sales.sysconp.microservice.features.sale.domain.models;
 
-import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
-import sales.sysconp.microservice.features.installment.infrastructure.entities.InstallmentEntity;
-import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
-import sales.sysconp.microservice.features.payment_configuration.infrastructure.entities.PaymentConfigurationEntity;
+import sales.sysconp.microservice.features.client.domain.models.ClientModel;
+import sales.sysconp.microservice.features.installment.domain.models.InstallmentModel;
+import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
+import sales.sysconp.microservice.features.payment_configuration.domain.models.PaymentConfigurationModel;
 import sales.sysconp.microservice.features.sale.domain.enums.SaleStatus;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
-import sales.sysconp.microservice.modules.auth.user.infrastructure.entities.UserEntity;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
+import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,19 +16,19 @@ public class SaleModel {
     private Long id;
     private UUID uuid;
     private SaleStatus status;
-    private ClientEntity client;
-    private UserEntity user;
-    private List<PaymentEntity> payments;
-    private List<InstallmentEntity> installments;
-    private PaymentConfigurationEntity paymentConfiguration;
-    private CompanyEntity company;
+    private ClientModel client;
+    private UserModel user;
+    private List<PaymentModel> payments;
+    private List<InstallmentModel> installments;
+    private PaymentConfigurationModel paymentConfiguration;
+    private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public SaleModel() {
     }
 
-    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientEntity client, UserEntity user, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientModel client, UserModel user, List<PaymentModel> payments, List<InstallmentModel> installments, PaymentConfigurationModel paymentConfiguration, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
@@ -66,51 +66,51 @@ public class SaleModel {
         this.status = status;
     }
 
-    public ClientEntity getClient() {
+    public ClientModel getClient() {
         return client;
     }
 
-    public void setClient(ClientEntity client) {
+    public void setClient(ClientModel client) {
         this.client = client;
     }
 
-    public UserEntity getUser() {
+    public UserModel getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
 
-    public List<PaymentEntity> getPayments() {
+    public List<PaymentModel> getPayments() {
         return payments;
     }
 
-    public void setPayments(List<PaymentEntity> payments) {
+    public void setPayments(List<PaymentModel> payments) {
         this.payments = payments;
     }
 
-    public List<InstallmentEntity> getInstallments() {
+    public List<InstallmentModel> getInstallments() {
         return installments;
     }
 
-    public void setInstallments(List<InstallmentEntity> installments) {
+    public void setInstallments(List<InstallmentModel> installments) {
         this.installments = installments;
     }
 
-    public PaymentConfigurationEntity getPaymentConfiguration() {
+    public PaymentConfigurationModel getPaymentConfiguration() {
         return paymentConfiguration;
     }
 
-    public void setPaymentConfiguration(PaymentConfigurationEntity paymentConfiguration) {
+    public void setPaymentConfiguration(PaymentConfigurationModel paymentConfiguration) {
         this.paymentConfiguration = paymentConfiguration;
     }
 
-    public CompanyEntity getCompany() {
+    public CompanyModel getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyEntity company) {
+    public void setCompany(CompanyModel company) {
         this.company = company;
     }
 

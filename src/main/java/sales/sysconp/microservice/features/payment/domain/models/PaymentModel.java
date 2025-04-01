@@ -1,14 +1,11 @@
 package sales.sysconp.microservice.features.payment.domain.models;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import sales.sysconp.microservice.features.bank.infrastructure.entities.BankEntity;
-import sales.sysconp.microservice.features.installment.infrastructure.entities.InstallmentEntity;
-import sales.sysconp.microservice.features.payment_method.infrastructure.entities.PaymentMethodEntity;
-import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
-import sales.sysconp.microservice.modules.auth.user.infrastructure.entities.UserEntity;
+import sales.sysconp.microservice.features.bank.domain.models.BankModel;
+import sales.sysconp.microservice.features.installment.domain.models.InstallmentModel;
+import sales.sysconp.microservice.features.payment_method.domain.models.PaymentMethodModel;
+import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
+import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -17,19 +14,19 @@ public class PaymentModel {
     private Long id;
     private UUID uuid;
     private Double value;
-    private PaymentMethodEntity paymentMethod;
-    private SaleEntity sale;
-    private InstallmentEntity installment;
-    private BankEntity bank;
-    private CompanyEntity company;
-    private UserEntity user;
+    private PaymentMethodModel paymentMethod;
+    private SaleModel sale;
+    private InstallmentModel installment;
+    private BankModel bank;
+    private CompanyModel company;
+    private UserModel user;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public PaymentModel() {
     }
 
-    public PaymentModel(Long id, UUID uuid, Double value, PaymentMethodEntity paymentMethod, SaleEntity sale, InstallmentEntity installment, BankEntity bank, CompanyEntity company, UserEntity user, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PaymentModel(Long id, UUID uuid, Double value, PaymentMethodModel paymentMethod, SaleModel sale, InstallmentModel installment, BankModel bank, CompanyModel company, UserModel user, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.value = value;
@@ -67,51 +64,51 @@ public class PaymentModel {
         this.value = value;
     }
 
-    public PaymentMethodEntity getPaymentMethod() {
+    public PaymentMethodModel getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(PaymentMethodEntity paymentMethod) {
+    public void setPaymentMethod(PaymentMethodModel paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
-    public SaleEntity getSale() {
+    public SaleModel getSale() {
         return sale;
     }
 
-    public void setSale(SaleEntity sale) {
+    public void setSale(SaleModel sale) {
         this.sale = sale;
     }
 
-    public InstallmentEntity getInstallment() {
+    public InstallmentModel getInstallment() {
         return installment;
     }
 
-    public void setInstallment(InstallmentEntity installment) {
+    public void setInstallment(InstallmentModel installment) {
         this.installment = installment;
     }
 
-    public BankEntity getBank() {
+    public BankModel getBank() {
         return bank;
     }
 
-    public void setBank(BankEntity bank) {
+    public void setBank(BankModel bank) {
         this.bank = bank;
     }
 
-    public CompanyEntity getCompany() {
+    public CompanyModel getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyEntity company) {
+    public void setCompany(CompanyModel company) {
         this.company = company;
     }
 
-    public UserEntity getUser() {
+    public UserModel getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
 

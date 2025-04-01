@@ -1,8 +1,5 @@
 package sales.sysconp.microservice.features.bank.domain.models;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 

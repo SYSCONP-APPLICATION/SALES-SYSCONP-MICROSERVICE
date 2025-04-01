@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
 import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring")
 public interface SaleMapper {
     SaleModel toModel(SaleEntity entity);
     SaleEntity toEntity(SaleModel model);

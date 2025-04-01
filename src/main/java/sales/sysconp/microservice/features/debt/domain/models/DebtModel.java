@@ -1,6 +1,6 @@
 package sales.sysconp.microservice.features.debt.domain.models;
 
-import sales.sysconp.microservice.features.installment.infrastructure.entities.InstallmentEntity;
+import sales.sysconp.microservice.features.installment.domain.models.InstallmentModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,26 +12,26 @@ public class DebtModel {
     private Double debtValue;
     private String debtDescription;
     private Long debtAppliedBy;
-    private Long debtPayedOrForgivedBy;
+    private Long debtPayedOrForgivenBy;
     private LocalDateTime debtPayedAt;
-    private LocalDateTime forgivedAt;
-    private InstallmentEntity installment;
+    private LocalDateTime forgivenAt;
+    private InstallmentModel installment;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public DebtModel() {
     }
 
-    public DebtModel(Long id, UUID uuid, Double debtPercentage, Double debtValue, String debtDescription, Long debtAppliedBy, Long debtPayedOrForgivedBy, LocalDateTime debtPayedAt, LocalDateTime forgivedAt, InstallmentEntity installment, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public DebtModel(Long id, UUID uuid, Double debtPercentage, Double debtValue, String debtDescription, Long debtAppliedBy, Long debtPayedOrForgivenBy, LocalDateTime debtPayedAt, LocalDateTime forgivenAt, InstallmentModel installment, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.debtPercentage = debtPercentage;
         this.debtValue = debtValue;
         this.debtDescription = debtDescription;
         this.debtAppliedBy = debtAppliedBy;
-        this.debtPayedOrForgivedBy = debtPayedOrForgivedBy;
+        this.debtPayedOrForgivenBy = debtPayedOrForgivenBy;
         this.debtPayedAt = debtPayedAt;
-        this.forgivedAt = forgivedAt;
+        this.forgivenAt = forgivenAt;
         this.installment = installment;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -85,12 +85,12 @@ public class DebtModel {
         this.debtAppliedBy = debtAppliedBy;
     }
 
-    public Long getDebtPayedOrForgivedBy() {
-        return debtPayedOrForgivedBy;
+    public Long getDebtPayedOrForgivenBy() {
+        return debtPayedOrForgivenBy;
     }
 
-    public void setDebtPayedOrForgivedBy(Long debtPayedOrForgivedBy) {
-        this.debtPayedOrForgivedBy = debtPayedOrForgivedBy;
+    public void setDebtPayedOrForgivenBy(Long debtPayedOrForgivenBy) {
+        this.debtPayedOrForgivenBy = debtPayedOrForgivenBy;
     }
 
     public LocalDateTime getDebtPayedAt() {
@@ -101,19 +101,19 @@ public class DebtModel {
         this.debtPayedAt = debtPayedAt;
     }
 
-    public LocalDateTime getForgivedAt() {
-        return forgivedAt;
+    public LocalDateTime getForgivenAt() {
+        return forgivenAt;
     }
 
-    public void setForgivedAt(LocalDateTime forgivedAt) {
-        this.forgivedAt = forgivedAt;
+    public void setForgivenAt(LocalDateTime forgivenAt) {
+        this.forgivenAt = forgivenAt;
     }
 
-    public InstallmentEntity getInstallment() {
+    public InstallmentModel getInstallment() {
         return installment;
     }
 
-    public void setInstallment(InstallmentEntity installment) {
+    public void setInstallment(InstallmentModel installment) {
         this.installment = installment;
     }
 

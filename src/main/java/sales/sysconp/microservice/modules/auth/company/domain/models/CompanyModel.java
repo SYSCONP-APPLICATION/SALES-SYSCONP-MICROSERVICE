@@ -1,13 +1,13 @@
 package sales.sysconp.microservice.modules.auth.company.domain.models;
 
-import sales.sysconp.microservice.features.bank.infrastructure.entities.BankEntity;
-import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
-import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
-import sales.sysconp.microservice.features.payment_method.infrastructure.entities.PaymentMethodEntity;
-import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
-import sales.sysconp.microservice.features.system_payment_configuration.infrastructure.entities.SystemPaymentConfigurationEntity;
-import sales.sysconp.microservice.modules.auth.user.infrastructure.entities.UserEntity;
-import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
+import sales.sysconp.microservice.features.bank.domain.models.BankModel;
+import sales.sysconp.microservice.features.client.domain.models.ClientModel;
+import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
+import sales.sysconp.microservice.features.payment_method.domain.models.PaymentMethodModel;
+import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
+import sales.sysconp.microservice.features.system_payment_configuration.domain.models.SystemPaymentConfigurationModel;
+import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
+import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,20 +16,20 @@ import java.util.UUID;
 public class CompanyModel {
     private Long id;
     private UUID uuid;
-    private List<UserEntity> users;
-    private List<BankEntity> banks;
-    private List<ClientEntity> clients;
-    private List<PaymentEntity> payments;
-    private List<PaymentMethodEntity> paymentMethods;
-    private List<SaleEntity> sales;
-    private List<ProjectEntity> projects;
-    private SystemPaymentConfigurationEntity systemPaymentConfiguration;
+    private List<UserModel> users;
+    private List<BankModel> banks;
+    private List<ClientModel> clients;
+    private List<PaymentModel> payments;
+    private List<PaymentMethodModel> paymentMethods;
+    private List<SaleModel> sales;
+    private List<ProjectModel> projects;
+    private SystemPaymentConfigurationModel systemPaymentConfiguration;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public CompanyModel() {}
 
-    public CompanyModel(Long id, UUID uuid, List<UserEntity> users, List<BankEntity> banks, List<ClientEntity> clients, List<PaymentEntity> payments, List<PaymentMethodEntity> paymentMethods, List<SaleEntity> sales, List<ProjectEntity> projects, SystemPaymentConfigurationEntity systemPaymentConfiguration, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public CompanyModel(Long id, UUID uuid, List<UserModel> users, List<BankModel> banks, List<ClientModel> clients, List<PaymentModel> payments, List<PaymentMethodModel> paymentMethods, List<SaleModel> sales, List<ProjectModel> projects, SystemPaymentConfigurationModel systemPaymentConfiguration, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.users = users;
@@ -60,67 +60,67 @@ public class CompanyModel {
         this.uuid = uuid;
     }
 
-    public List<UserEntity> getUsers() {
+    public List<UserModel> getUsers() {
         return users;
     }
 
-    public void setUsers(List<UserEntity> users) {
+    public void setUsers(List<UserModel> users) {
         this.users = users;
     }
 
-    public List<BankEntity> getBanks() {
+    public List<BankModel> getBanks() {
         return banks;
     }
 
-    public void setBanks(List<BankEntity> banks) {
+    public void setBanks(List<BankModel> banks) {
         this.banks = banks;
     }
 
-    public List<ClientEntity> getClients() {
+    public List<ClientModel> getClients() {
         return clients;
     }
 
-    public void setClients(List<ClientEntity> clients) {
+    public void setClients(List<ClientModel> clients) {
         this.clients = clients;
     }
 
-    public List<PaymentEntity> getPayments() {
+    public List<PaymentModel> getPayments() {
         return payments;
     }
 
-    public void setPayments(List<PaymentEntity> payments) {
+    public void setPayments(List<PaymentModel> payments) {
         this.payments = payments;
     }
 
-    public List<PaymentMethodEntity> getPaymentMethods() {
+    public List<PaymentMethodModel> getPaymentMethods() {
         return paymentMethods;
     }
 
-    public void setPaymentMethods(List<PaymentMethodEntity> paymentMethods) {
+    public void setPaymentMethods(List<PaymentMethodModel> paymentMethods) {
         this.paymentMethods = paymentMethods;
     }
 
-    public List<SaleEntity> getSales() {
+    public List<SaleModel> getSales() {
         return sales;
     }
 
-    public void setSales(List<SaleEntity> sales) {
+    public void setSales(List<SaleModel> sales) {
         this.sales = sales;
     }
 
-    public List<ProjectEntity> getProjects() {
+    public List<ProjectModel> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<ProjectEntity> projects) {
+    public void setProjects(List<ProjectModel> projects) {
         this.projects = projects;
     }
 
-    public SystemPaymentConfigurationEntity getSystemPaymentConfiguration() {
+    public SystemPaymentConfigurationModel getSystemPaymentConfiguration() {
         return systemPaymentConfiguration;
     }
 
-    public void setSystemPaymentConfiguration(SystemPaymentConfigurationEntity systemPaymentConfiguration) {
+    public void setSystemPaymentConfiguration(SystemPaymentConfigurationModel systemPaymentConfiguration) {
         this.systemPaymentConfiguration = systemPaymentConfiguration;
     }
 

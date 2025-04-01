@@ -1,10 +1,7 @@
 package sales.sysconp.microservice.features.payment_method.domain.models;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
+import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,14 +11,14 @@ public class PaymentMethodModel {
     private Long id;
     private UUID uuid;
     private String name;
-    private List<PaymentEntity> payments;
-    private CompanyEntity company;
+    private List<PaymentModel> payments;
+    private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public PaymentMethodModel () {}
 
-    public PaymentMethodModel(Long id, UUID uuid, String name, List<PaymentEntity> payments, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PaymentMethodModel(Long id, UUID uuid, String name, List<PaymentModel> payments, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -55,19 +52,19 @@ public class PaymentMethodModel {
         this.name = name;
     }
 
-    public List<PaymentEntity> getPayments() {
+    public List<PaymentModel> getPayments() {
         return payments;
     }
 
-    public void setPayments(List<PaymentEntity> payments) {
+    public void setPayments(List<PaymentModel> payments) {
         this.payments = payments;
     }
 
-    public CompanyEntity getCompany() {
+    public CompanyModel getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyEntity company) {
+    public void setCompany(CompanyModel company) {
         this.company = company;
     }
 

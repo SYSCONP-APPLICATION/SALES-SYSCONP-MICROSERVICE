@@ -1,6 +1,6 @@
 package sales.sysconp.microservice.modules.project.property_category.domain.models;
 
-import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
+import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,14 +10,14 @@ public class PropertyCategoryModel {
     private Long id;
     private UUID uuid;
     private String name;
-    private List<PropertyEntity> properties;
+    private List<PropertyModel> properties;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public PropertyCategoryModel() {
     }
 
-    public PropertyCategoryModel(Long id, UUID uuid, String name, List<PropertyEntity> properties, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PropertyCategoryModel(Long id, UUID uuid, String name, List<PropertyModel> properties, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -50,11 +50,11 @@ public class PropertyCategoryModel {
         this.name = name;
     }
 
-    public List<PropertyEntity> getProperties() {
+    public List<PropertyModel> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<PropertyEntity> properties) {
+    public void setProperties(List<PropertyModel> properties) {
         this.properties = properties;
     }
 

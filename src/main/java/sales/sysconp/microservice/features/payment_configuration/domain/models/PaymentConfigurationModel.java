@@ -1,7 +1,7 @@
 package sales.sysconp.microservice.features.payment_configuration.domain.models;
 
-import sales.sysconp.microservice.features.payment_stump.infrastructure.entities.PaymentStampEntity;
-import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
+import sales.sysconp.microservice.features.payment_stump.domain.models.PaymentStampModel;
+import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -10,15 +10,15 @@ public class PaymentConfigurationModel {
     private Long id;
     private UUID uuid;
     private Long dayOfMonth;
-    private SaleEntity sale;
-    private PaymentStampEntity paymentStamp;
+    private SaleModel sale;
+    private PaymentStampModel paymentStamp;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public PaymentConfigurationModel() {
     }
 
-    public PaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, SaleEntity sale, PaymentStampEntity paymentStamp, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, SaleModel sale, PaymentStampModel paymentStamp, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
@@ -52,19 +52,19 @@ public class PaymentConfigurationModel {
         this.dayOfMonth = dayOfMonth;
     }
 
-    public SaleEntity getSale() {
+    public SaleModel getSale() {
         return sale;
     }
 
-    public void setSale(SaleEntity sale) {
+    public void setSale(SaleModel sale) {
         this.sale = sale;
     }
 
-    public PaymentStampEntity getPaymentStamp() {
+    public PaymentStampModel getPaymentStamp() {
         return paymentStamp;
     }
 
-    public void setPaymentStamp(PaymentStampEntity paymentStamp) {
+    public void setPaymentStamp(PaymentStampModel paymentStamp) {
         this.paymentStamp = paymentStamp;
     }
 

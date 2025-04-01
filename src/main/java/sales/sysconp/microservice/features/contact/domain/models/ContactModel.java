@@ -1,7 +1,7 @@
 package sales.sysconp.microservice.features.contact.domain.models;
 
-import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
-import sales.sysconp.microservice.features.contact_type.infrastructure.entities.ContactTypeEntity;
+import sales.sysconp.microservice.features.client.domain.models.ClientModel;
+import sales.sysconp.microservice.features.contact_type.domain.models.ContactTypeModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -11,15 +11,15 @@ public class ContactModel {
     private UUID uuid;
     private String value;
     private Boolean isPrimary;
-    private ContactTypeEntity contactType;
-    private ClientEntity client;
+    private ContactTypeModel contactType;
+    private ClientModel client;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public ContactModel() {
     }
 
-    public ContactModel(Long id, UUID uuid, String value, Boolean isPrimary, ContactTypeEntity contactType, ClientEntity client, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ContactModel(Long id, UUID uuid, String value, Boolean isPrimary, ContactTypeModel contactType, ClientModel client, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.value = value;
@@ -62,19 +62,19 @@ public class ContactModel {
         isPrimary = primary;
     }
 
-    public ContactTypeEntity getContactType() {
+    public ContactTypeModel getContactType() {
         return contactType;
     }
 
-    public void setContactType(ContactTypeEntity contactType) {
+    public void setContactType(ContactTypeModel contactType) {
         this.contactType = contactType;
     }
 
-    public ClientEntity getClient() {
+    public ClientModel getClient() {
         return client;
     }
 
-    public void setClient(ClientEntity client) {
+    public void setClient(ClientModel client) {
         this.client = client;
     }
 

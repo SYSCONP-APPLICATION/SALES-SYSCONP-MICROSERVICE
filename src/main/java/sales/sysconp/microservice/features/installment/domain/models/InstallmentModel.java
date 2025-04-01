@@ -1,8 +1,8 @@
 package sales.sysconp.microservice.features.installment.domain.models;
 
-import sales.sysconp.microservice.features.debt.infrastructure.entities.DebtEntity;
-import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
-import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
+import sales.sysconp.microservice.features.debt.domain.models.DebtModel;
+import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
+import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,16 +14,16 @@ public class InstallmentModel {
     private Double amount;
     private LocalDateTime paymentDate;
     private LocalDateTime paidAt;
-    private SaleEntity sale;
-    private List<PaymentEntity> payments;
-    private DebtEntity debt;
+    private SaleModel sale;
+    private List<PaymentModel> payments;
+    private DebtModel debt;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public InstallmentModel() {
     }
 
-    public InstallmentModel(Long id, UUID uuid, Double amount, LocalDateTime paymentDate, LocalDateTime paidAt, SaleEntity sale, List<PaymentEntity> payments, DebtEntity debt, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public InstallmentModel(Long id, UUID uuid, Double amount, LocalDateTime paymentDate, LocalDateTime paidAt, SaleModel sale, List<PaymentModel> payments, DebtModel debt, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.amount = amount;
@@ -76,27 +76,27 @@ public class InstallmentModel {
         this.paidAt = paidAt;
     }
 
-    public SaleEntity getSale() {
+    public SaleModel getSale() {
         return sale;
     }
 
-    public void setSale(SaleEntity sale) {
+    public void setSale(SaleModel sale) {
         this.sale = sale;
     }
 
-    public List<PaymentEntity> getPayments() {
+    public List<PaymentModel> getPayments() {
         return payments;
     }
 
-    public void setPayments(List<PaymentEntity> payments) {
+    public void setPayments(List<PaymentModel> payments) {
         this.payments = payments;
     }
 
-    public DebtEntity getDebt() {
+    public DebtModel getDebt() {
         return debt;
     }
 
-    public void setDebt(DebtEntity debt) {
+    public void setDebt(DebtModel debt) {
         this.debt = debt;
     }
 

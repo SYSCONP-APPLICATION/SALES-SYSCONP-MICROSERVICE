@@ -1,10 +1,9 @@
 package sales.sysconp.microservice.modules.project.project.domain.models;
 
-import jakarta.persistence.*;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
-import sales.sysconp.microservice.modules.project.building.infrastructure.entities.BuildingEntity;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
+import sales.sysconp.microservice.modules.project.building.domain.models.BuildingModel;
 import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
-import sales.sysconp.microservice.modules.project.zone.infrastructure.entities.ZoneEntity;
+import sales.sysconp.microservice.modules.project.zone.domain.models.ZoneModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,15 +16,15 @@ public class ProjectModel {
     private String description;
     private ProjectStatusEnum status;
     private String location;
-    private List<ZoneEntity> zones;
-    private List<BuildingEntity> buildings;
-    private CompanyEntity company;
+    private List<ZoneModel> zones;
+    private List<BuildingModel> buildings;
+    private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public ProjectModel() {}
 
-    public ProjectModel(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, String location, List<ZoneEntity> zones, List<BuildingEntity> buildings, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ProjectModel(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, String location, List<ZoneModel> zones, List<BuildingModel> buildings, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -87,27 +86,27 @@ public class ProjectModel {
         this.location = location;
     }
 
-    public List<ZoneEntity> getZones() {
+    public List<ZoneModel> getZones() {
         return zones;
     }
 
-    public void setZones(List<ZoneEntity> zones) {
+    public void setZones(List<ZoneModel> zones) {
         this.zones = zones;
     }
 
-    public List<BuildingEntity> getBuildings() {
+    public List<BuildingModel> getBuildings() {
         return buildings;
     }
 
-    public void setBuildings(List<BuildingEntity> buildings) {
+    public void setBuildings(List<BuildingModel> buildings) {
         this.buildings = buildings;
     }
 
-    public CompanyEntity getCompany() {
+    public CompanyModel getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyEntity company) {
+    public void setCompany(CompanyModel company) {
         this.company = company;
     }
 

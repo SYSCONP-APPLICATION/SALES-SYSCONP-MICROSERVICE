@@ -1,7 +1,7 @@
 package sales.sysconp.microservice.features.payment_stump.domain.models;
 
-import sales.sysconp.microservice.features.payment_configuration.infrastructure.entities.PaymentConfigurationEntity;
-import sales.sysconp.microservice.features.system_payment_configuration.infrastructure.entities.SystemPaymentConfigurationEntity;
+import sales.sysconp.microservice.features.payment_configuration.domain.models.PaymentConfigurationModel;
+import sales.sysconp.microservice.features.system_payment_configuration.domain.models.SystemPaymentConfigurationModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,15 +11,15 @@ public class PaymentStampModel {
     private Long id;
     private UUID uuid;
     private String name;
-    private List<PaymentConfigurationEntity> paymentConfigurations;
-    private List<SystemPaymentConfigurationEntity> systemPaymentConfigurations;
+    private List<PaymentConfigurationModel> paymentConfigurations;
+    private List<SystemPaymentConfigurationModel> systemPaymentConfigurations;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public PaymentStampModel() {
     }
 
-    public PaymentStampModel(Long id, UUID uuid, String name, List<PaymentConfigurationEntity> paymentConfigurations, List<SystemPaymentConfigurationEntity> systemPaymentConfigurations, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PaymentStampModel(Long id, UUID uuid, String name, List<PaymentConfigurationModel> paymentConfigurations, List<SystemPaymentConfigurationModel> systemPaymentConfigurations, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -53,19 +53,19 @@ public class PaymentStampModel {
         this.name = name;
     }
 
-    public List<PaymentConfigurationEntity> getPaymentConfigurations() {
+    public List<PaymentConfigurationModel> getPaymentConfigurations() {
         return paymentConfigurations;
     }
 
-    public void setPaymentConfigurations(List<PaymentConfigurationEntity> paymentConfigurations) {
+    public void setPaymentConfigurations(List<PaymentConfigurationModel> paymentConfigurations) {
         this.paymentConfigurations = paymentConfigurations;
     }
 
-    public List<SystemPaymentConfigurationEntity> getSystemPaymentConfigurations() {
+    public List<SystemPaymentConfigurationModel> getSystemPaymentConfigurations() {
         return systemPaymentConfigurations;
     }
 
-    public void setSystemPaymentConfigurations(List<SystemPaymentConfigurationEntity> systemPaymentConfigurations) {
+    public void setSystemPaymentConfigurations(List<SystemPaymentConfigurationModel> systemPaymentConfigurations) {
         this.systemPaymentConfigurations = systemPaymentConfigurations;
     }
 

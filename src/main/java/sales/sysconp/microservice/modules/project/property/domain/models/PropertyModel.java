@@ -1,15 +1,11 @@
 package sales.sysconp.microservice.modules.project.property.domain.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
-import sales.sysconp.microservice.modules.project.building.infrastructure.entities.BuildingEntity;
+import sales.sysconp.microservice.features.client.domain.models.ClientModel;
+import sales.sysconp.microservice.modules.project.building.domain.models.BuildingModel;
 import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
-import sales.sysconp.microservice.modules.project.property_category.infrastructure.entities.PropertyCategoryEntity;
-import sales.sysconp.microservice.modules.project.property_type.infrastructure.entities.PropertyTypeEntity;
-import sales.sysconp.microservice.modules.project.zone.infrastructure.entities.ZoneEntity;
+import sales.sysconp.microservice.modules.project.property_category.domain.models.PropertyCategoryModel;
+import sales.sysconp.microservice.modules.project.property_type.domain.models.PropertyTypeModel;
+import sales.sysconp.microservice.modules.project.zone.domain.models.ZoneModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,18 +19,18 @@ public class PropertyModel {
     private Integer bedrooms;
     private Integer bathrooms;
     private PropertyStatusEnum status;
-    private BuildingEntity building;
-    private PropertyCategoryEntity propertyCategory;
-    private PropertyTypeEntity propertyType;
-    private ZoneEntity zone;
-    private ClientEntity client;
+    private BuildingModel building;
+    private PropertyCategoryModel propertyCategory;
+    private PropertyTypeModel propertyType;
+    private ZoneModel zone;
+    private ClientModel client;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public PropertyModel() {
     }
 
-    public PropertyModel(Long id, UUID uuid, String name, String description, String area, Integer bedrooms, Integer bathrooms, PropertyStatusEnum status, BuildingEntity building, PropertyCategoryEntity propertyCategory, PropertyTypeEntity propertyType, ZoneEntity zone, ClientEntity client, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PropertyModel(Long id, UUID uuid, String name, String description, String area, Integer bedrooms, Integer bathrooms, PropertyStatusEnum status, BuildingModel building, PropertyCategoryModel propertyCategory, PropertyTypeModel propertyType, ZoneModel zone, ClientModel client, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -116,43 +112,43 @@ public class PropertyModel {
         this.status = status;
     }
 
-    public BuildingEntity getBuilding() {
+    public BuildingModel getBuilding() {
         return building;
     }
 
-    public void setBuilding(BuildingEntity building) {
+    public void setBuilding(BuildingModel building) {
         this.building = building;
     }
 
-    public PropertyCategoryEntity getPropertyCategory() {
+    public PropertyCategoryModel getPropertyCategory() {
         return propertyCategory;
     }
 
-    public void setPropertyCategory(PropertyCategoryEntity propertyCategory) {
+    public void setPropertyCategory(PropertyCategoryModel propertyCategory) {
         this.propertyCategory = propertyCategory;
     }
 
-    public PropertyTypeEntity getPropertyType() {
+    public PropertyTypeModel getPropertyType() {
         return propertyType;
     }
 
-    public void setPropertyType(PropertyTypeEntity propertyType) {
+    public void setPropertyType(PropertyTypeModel propertyType) {
         this.propertyType = propertyType;
     }
 
-    public ZoneEntity getZone() {
+    public ZoneModel getZone() {
         return zone;
     }
 
-    public void setZone(ZoneEntity zone) {
+    public void setZone(ZoneModel zone) {
         this.zone = zone;
     }
 
-    public ClientEntity getClient() {
+    public ClientModel getClient() {
         return client;
     }
 
-    public void setClient(ClientEntity client) {
+    public void setClient(ClientModel client) {
         this.client = client;
     }
 

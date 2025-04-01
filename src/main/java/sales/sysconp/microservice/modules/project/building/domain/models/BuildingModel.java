@@ -1,8 +1,8 @@
 package sales.sysconp.microservice.modules.project.building.domain.models;
 
-import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
-import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
-import sales.sysconp.microservice.modules.project.zone.infrastructure.entities.ZoneEntity;
+import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
+import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
+import sales.sysconp.microservice.modules.project.zone.domain.models.ZoneModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,15 +13,15 @@ public class BuildingModel {
     private UUID uuid;
     private String name;
     private String description;
-    private List<PropertyEntity> properties;
-    private ZoneEntity zone;
-    private ProjectEntity project;
+    private List<PropertyModel> properties;
+    private ZoneModel zone;
+    private ProjectModel project;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public BuildingModel() {}
 
-    public BuildingModel(Long id, UUID uuid, String name, String description, List<PropertyEntity> properties, ZoneEntity zone, ProjectEntity project, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public BuildingModel(Long id, UUID uuid, String name, String description, List<PropertyModel> properties, ZoneModel zone, ProjectModel project, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -65,27 +65,27 @@ public class BuildingModel {
         this.description = description;
     }
 
-    public List<PropertyEntity> getProperties() {
+    public List<PropertyModel> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<PropertyEntity> properties) {
+    public void setProperties(List<PropertyModel> properties) {
         this.properties = properties;
     }
 
-    public ZoneEntity getZone() {
+    public ZoneModel getZone() {
         return zone;
     }
 
-    public void setZone(ZoneEntity zone) {
+    public void setZone(ZoneModel zone) {
         this.zone = zone;
     }
 
-    public ProjectEntity getProject() {
+    public ProjectModel getProject() {
         return project;
     }
 
-    public void setProject(ProjectEntity project) {
+    public void setProject(ProjectModel project) {
         this.project = project;
     }
 

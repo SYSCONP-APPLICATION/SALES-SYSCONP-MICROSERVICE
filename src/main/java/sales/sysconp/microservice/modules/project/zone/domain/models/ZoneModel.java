@@ -1,8 +1,8 @@
 package sales.sysconp.microservice.modules.project.zone.domain.models;
 
-import sales.sysconp.microservice.modules.project.building.infrastructure.entities.BuildingEntity;
-import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
-import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
+import sales.sysconp.microservice.modules.project.building.domain.models.BuildingModel;
+import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
+import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,16 +13,16 @@ public class ZoneModel {
     private UUID uuid;
     private String name;
     private String postalCode;
-    private ProjectEntity project;
-    private List<PropertyEntity> properties;
-    private List<BuildingEntity> buildings;
+    private ProjectModel project;
+    private List<PropertyModel> properties;
+    private List<BuildingModel> buildings;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public ZoneModel() {
     }
 
-    public ZoneModel(Long id, UUID uuid, String name, String postalCode, ProjectEntity project, List<PropertyEntity> properties, List<BuildingEntity> buildings, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ZoneModel(Long id, UUID uuid, String name, String postalCode, ProjectModel project, List<PropertyModel> properties, List<BuildingModel> buildings, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -66,27 +66,27 @@ public class ZoneModel {
         this.postalCode = postalCode;
     }
 
-    public ProjectEntity getProject() {
+    public ProjectModel getProject() {
         return project;
     }
 
-    public void setProject(ProjectEntity project) {
+    public void setProject(ProjectModel project) {
         this.project = project;
     }
 
-    public List<PropertyEntity> getProperties() {
+    public List<PropertyModel> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<PropertyEntity> properties) {
+    public void setProperties(List<PropertyModel> properties) {
         this.properties = properties;
     }
 
-    public List<BuildingEntity> getBuildings() {
+    public List<BuildingModel> getBuildings() {
         return buildings;
     }
 
-    public void setBuildings(List<BuildingEntity> buildings) {
+    public void setBuildings(List<BuildingModel> buildings) {
         this.buildings = buildings;
     }
 

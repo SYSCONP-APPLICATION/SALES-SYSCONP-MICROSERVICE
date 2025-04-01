@@ -1,6 +1,6 @@
 package sales.sysconp.microservice.features.contact_type.domain.models;
 
-import sales.sysconp.microservice.features.contact.infrastructure.entities.ContactEntity;
+import sales.sysconp.microservice.features.contact.domain.models.ContactModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,14 +10,14 @@ public class ContactTypeModel {
     private Long id;
     private UUID uuid;
     private String name;
-    private List<ContactEntity> contacts;
+    private List<ContactModel> contacts;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public ContactTypeModel() {
     }
 
-    public ContactTypeModel(Long id, UUID uuid, String name, List<ContactEntity> contacts, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ContactTypeModel(Long id, UUID uuid, String name, List<ContactModel> contacts, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -50,11 +50,11 @@ public class ContactTypeModel {
         this.name = name;
     }
 
-    public List<ContactEntity> getContacts() {
+    public List<ContactModel> getContacts() {
         return contacts;
     }
 
-    public void setContacts(List<ContactEntity> contacts) {
+    public void setContacts(List<ContactModel> contacts) {
         this.contacts = contacts;
     }
 
