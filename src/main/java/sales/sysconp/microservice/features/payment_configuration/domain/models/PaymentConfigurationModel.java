@@ -14,11 +14,12 @@ public class PaymentConfigurationModel {
     private PaymentStampModel paymentStamp;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public PaymentConfigurationModel() {
     }
 
-    public PaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, SaleModel sale, PaymentStampModel paymentStamp, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, SaleModel sale, PaymentStampModel paymentStamp, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
@@ -26,6 +27,7 @@ public class PaymentConfigurationModel {
         this.paymentStamp = paymentStamp;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -82,5 +84,13 @@ public class PaymentConfigurationModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

@@ -50,10 +50,13 @@ public class PaymentStampEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Column()
+    private LocalDateTime deletedAt;
+
     public PaymentStampEntity() {
     }
 
-    public PaymentStampEntity(Long id, UUID uuid, String name, List<PaymentConfigurationEntity> paymentConfigurations, List<SystemPaymentConfigurationEntity> systemPaymentConfigurations, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PaymentStampEntity(Long id, UUID uuid, String name, List<PaymentConfigurationEntity> paymentConfigurations, List<SystemPaymentConfigurationEntity> systemPaymentConfigurations, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -61,6 +64,7 @@ public class PaymentStampEntity {
         this.systemPaymentConfigurations = systemPaymentConfigurations;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -117,5 +121,13 @@ public class PaymentStampEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

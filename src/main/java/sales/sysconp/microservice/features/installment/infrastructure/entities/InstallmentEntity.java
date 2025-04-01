@@ -64,10 +64,13 @@ public class InstallmentEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Column()
+    private LocalDateTime deletedAt;
+
     public InstallmentEntity() {
     }
 
-    public InstallmentEntity(Long id, UUID uuid, Double amount, LocalDateTime paymentDate, LocalDateTime paidAt, SaleEntity sale, List<PaymentEntity> payments, DebtEntity debt, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public InstallmentEntity(Long id, UUID uuid, Double amount, LocalDateTime paymentDate, LocalDateTime paidAt, SaleEntity sale, List<PaymentEntity> payments, DebtEntity debt, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.amount = amount;
@@ -78,6 +81,7 @@ public class InstallmentEntity {
         this.debt = debt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -158,5 +162,13 @@ public class InstallmentEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

@@ -1,49 +1,33 @@
-package sales.sysconp.microservice.modules.project.property_type.infrastructure.entities;
+package sales.sysconp.microservice.modules.auth.user.application.dto;
+
+import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
+import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
-
-@Entity
-@Table(name = "property_types")
-public class PropertyTypeEntity {
-    @Id
+public class UserResponseDTO {
     private Long id;
-
-    @Column(unique = true, nullable = false)
     private UUID uuid;
-
-    @Column(nullable = false)
     private String name;
-
-    @OneToMany(mappedBy = "propertyType", cascade = CascadeType.ALL)
-    private List<PropertyEntity> properties;
-
-    @Column(updatable = false)  
+    private CompanyModel company;
+    private List<SaleModel> sales;
+    private List<PaymentModel> payments;
     private LocalDateTime createdAt;
-
-    @Column(updatable = true)  
     private LocalDateTime updatedAt;
-
-    @Column(updatable = true)
     private LocalDateTime deletedAt;
 
-    public PropertyTypeEntity() {
-    }
+    public UserResponseDTO () {}
 
-    public PropertyTypeEntity(Long id, UUID uuid, String name, List<PropertyEntity> properties, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public UserResponseDTO(Long id, UUID uuid, String name, CompanyModel company, List<SaleModel> sales, List<PaymentModel> payments, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
-        this.properties = properties;
+        this.company = company;
+        this.sales = sales;
+        this.payments = payments;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -73,12 +57,28 @@ public class PropertyTypeEntity {
         this.name = name;
     }
 
-    public List<PropertyEntity> getProperties() {
-        return properties;
+    public CompanyModel getCompany() {
+        return company;
     }
 
-    public void setProperties(List<PropertyEntity> properties) {
-        this.properties = properties;
+    public void setCompany(CompanyModel company) {
+        this.company = company;
+    }
+
+    public List<SaleModel> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<SaleModel> sales) {
+        this.sales = sales;
+    }
+
+    public List<PaymentModel> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<PaymentModel> payments) {
+        this.payments = payments;
     }
 
     public LocalDateTime getCreatedAt() {

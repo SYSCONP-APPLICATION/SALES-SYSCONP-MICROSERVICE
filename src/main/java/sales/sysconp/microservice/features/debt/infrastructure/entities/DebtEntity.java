@@ -42,13 +42,13 @@ public class DebtEntity {
     private Long debtAppliedBy;
 
     @Column(nullable = true)
-    private Long debtPayedOrForgivedBy;
+    private Long debtPayedOrForgivenBy;
 
     @Column(nullable = true)
     private LocalDateTime debtPayedAt;
 
     @Column(nullable = true)
-    private LocalDateTime forgivedAt;
+    private LocalDateTime forgivenAt;
 
     @OneToOne(mappedBy = "debt")
     private InstallmentEntity installment;
@@ -61,22 +61,26 @@ public class DebtEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Column()
+    private LocalDateTime deletedAt;
+
     public DebtEntity() {
     }
 
-    public DebtEntity(Long id, UUID uuid, Double debtPercentage, Double debtValue, String debtDescription, Long debtAppliedBy, Long debtPayedOrForgivedBy, LocalDateTime debtPayedAt, LocalDateTime forgivedAt, InstallmentEntity installment, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public DebtEntity(Long id, UUID uuid, Double debtPercentage, Double debtValue, String debtDescription, Long debtAppliedBy, Long debtPayedOrForgivenBy, LocalDateTime debtPayedAt, LocalDateTime forgivenAt, InstallmentEntity installment, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.debtPercentage = debtPercentage;
         this.debtValue = debtValue;
         this.debtDescription = debtDescription;
         this.debtAppliedBy = debtAppliedBy;
-        this.debtPayedOrForgivedBy = debtPayedOrForgivedBy;
+        this.debtPayedOrForgivenBy = debtPayedOrForgivenBy;
         this.debtPayedAt = debtPayedAt;
-        this.forgivedAt = forgivedAt;
+        this.forgivenAt = forgivenAt;
         this.installment = installment;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -127,12 +131,12 @@ public class DebtEntity {
         this.debtAppliedBy = debtAppliedBy;
     }
 
-    public Long getDebtPayedOrForgivedBy() {
-        return debtPayedOrForgivedBy;
+    public Long getDebtPayedOrForgivenBy() {
+        return debtPayedOrForgivenBy;
     }
 
-    public void setDebtPayedOrForgivedBy(Long debtPayedOrForgivedBy) {
-        this.debtPayedOrForgivedBy = debtPayedOrForgivedBy;
+    public void setDebtPayedOrForgivenBy(Long debtPayedOrForgivedBy) {
+        this.debtPayedOrForgivenBy = debtPayedOrForgivedBy;
     }
 
     public LocalDateTime getDebtPayedAt() {
@@ -143,12 +147,12 @@ public class DebtEntity {
         this.debtPayedAt = debtPayedAt;
     }
 
-    public LocalDateTime getForgivedAt() {
-        return forgivedAt;
+    public LocalDateTime getForgivenAt() {
+        return forgivenAt;
     }
 
-    public void setForgivedAt(LocalDateTime forgivedAt) {
-        this.forgivedAt = forgivedAt;
+    public void setForgivenAt(LocalDateTime forgivedAt) {
+        this.forgivenAt = forgivedAt;
     }
 
     public InstallmentEntity getInstallment() {
@@ -173,5 +177,13 @@ public class DebtEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

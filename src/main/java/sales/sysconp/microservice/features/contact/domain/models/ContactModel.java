@@ -15,11 +15,12 @@ public class ContactModel {
     private ClientModel client;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public ContactModel() {
     }
 
-    public ContactModel(Long id, UUID uuid, String value, Boolean isPrimary, ContactTypeModel contactType, ClientModel client, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ContactModel(Long id, UUID uuid, String value, Boolean isPrimary, ContactTypeModel contactType, ClientModel client, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.value = value;
@@ -28,6 +29,7 @@ public class ContactModel {
         this.client = client;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -54,11 +56,11 @@ public class ContactModel {
         this.value = value;
     }
 
-    public Boolean getPrimary() {
+    public Boolean getIsPrimary() {
         return isPrimary;
     }
 
-    public void setPrimary(Boolean primary) {
+    public void setIsPrimary(Boolean primary) {
         isPrimary = primary;
     }
 
@@ -92,5 +94,13 @@ public class ContactModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

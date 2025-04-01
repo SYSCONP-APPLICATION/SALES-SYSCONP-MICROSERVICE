@@ -24,11 +24,12 @@ public class SaleModel {
     private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public SaleModel() {
     }
 
-    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientModel client, UserModel user, List<PaymentModel> payments, List<InstallmentModel> installments, PaymentConfigurationModel paymentConfiguration, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientModel client, UserModel user, List<PaymentModel> payments, List<InstallmentModel> installments, PaymentConfigurationModel paymentConfiguration, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
@@ -40,6 +41,7 @@ public class SaleModel {
         this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -128,5 +130,13 @@ public class SaleModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

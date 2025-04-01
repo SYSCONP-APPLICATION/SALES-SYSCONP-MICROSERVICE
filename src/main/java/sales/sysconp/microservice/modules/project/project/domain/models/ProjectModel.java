@@ -21,10 +21,11 @@ public class ProjectModel {
     private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public ProjectModel() {}
 
-    public ProjectModel(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, String location, List<ZoneModel> zones, List<BuildingModel> buildings, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ProjectModel(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, String location, List<ZoneModel> zones, List<BuildingModel> buildings, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -36,6 +37,7 @@ public class ProjectModel {
         this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -124,5 +126,13 @@ public class ProjectModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

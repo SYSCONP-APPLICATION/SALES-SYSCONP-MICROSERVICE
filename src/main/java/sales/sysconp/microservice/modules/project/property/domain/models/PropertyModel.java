@@ -26,11 +26,12 @@ public class PropertyModel {
     private ClientModel client;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public PropertyModel() {
     }
 
-    public PropertyModel(Long id, UUID uuid, String name, String description, String area, Integer bedrooms, Integer bathrooms, PropertyStatusEnum status, BuildingModel building, PropertyCategoryModel propertyCategory, PropertyTypeModel propertyType, ZoneModel zone, ClientModel client, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PropertyModel(Long id, UUID uuid, String name, String description, String area, Integer bedrooms, Integer bathrooms, PropertyStatusEnum status, BuildingModel building, PropertyCategoryModel propertyCategory, PropertyTypeModel propertyType, ZoneModel zone, ClientModel client, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -46,6 +47,7 @@ public class PropertyModel {
         this.client = client;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -166,5 +168,13 @@ public class PropertyModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

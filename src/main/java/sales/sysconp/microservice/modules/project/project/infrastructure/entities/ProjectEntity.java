@@ -54,9 +54,12 @@ public class ProjectEntity {
     @Column(updatable = true)  
     private LocalDateTime updatedAt;
 
+    @Column(updatable = true)
+    private LocalDateTime deletedAt;
+
     public ProjectEntity() {}
 
-    public ProjectEntity(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, String location, List<ZoneEntity> zones, List<BuildingEntity> buildings, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ProjectEntity(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, String location, List<ZoneEntity> zones, List<BuildingEntity> buildings, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -68,6 +71,7 @@ public class ProjectEntity {
         this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -156,5 +160,13 @@ public class ProjectEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

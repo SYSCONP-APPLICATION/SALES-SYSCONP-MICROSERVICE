@@ -20,11 +20,12 @@ public class ClientModel {
     private List<PropertyEntity> properties;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public ClientModel() {
     }
 
-    public ClientModel(Long id, UUID uuid, String name, String identityCardNumber, List<ContactEntity> contacts, List<SaleEntity> sales, CompanyEntity company, List<PropertyEntity> properties, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ClientModel(Long id, UUID uuid, String name, String identityCardNumber, List<ContactEntity> contacts, List<SaleEntity> sales, CompanyEntity company, List<PropertyEntity> properties, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -35,6 +36,7 @@ public class ClientModel {
         this.properties = properties;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -115,5 +117,13 @@ public class ClientModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

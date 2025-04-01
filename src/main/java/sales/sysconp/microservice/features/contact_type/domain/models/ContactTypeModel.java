@@ -13,17 +13,19 @@ public class ContactTypeModel {
     private List<ContactModel> contacts;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public ContactTypeModel() {
     }
 
-    public ContactTypeModel(Long id, UUID uuid, String name, List<ContactModel> contacts, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ContactTypeModel(Long id, UUID uuid, String name, List<ContactModel> contacts, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.contacts = contacts;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -72,5 +74,13 @@ public class ContactTypeModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

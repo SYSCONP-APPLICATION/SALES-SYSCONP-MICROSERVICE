@@ -15,11 +15,12 @@ public class PaymentStampModel {
     private List<SystemPaymentConfigurationModel> systemPaymentConfigurations;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public PaymentStampModel() {
     }
 
-    public PaymentStampModel(Long id, UUID uuid, String name, List<PaymentConfigurationModel> paymentConfigurations, List<SystemPaymentConfigurationModel> systemPaymentConfigurations, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public PaymentStampModel(Long id, UUID uuid, String name, List<PaymentConfigurationModel> paymentConfigurations, List<SystemPaymentConfigurationModel> systemPaymentConfigurations, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -27,6 +28,7 @@ public class PaymentStampModel {
         this.systemPaymentConfigurations = systemPaymentConfigurations;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -83,5 +85,13 @@ public class PaymentStampModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

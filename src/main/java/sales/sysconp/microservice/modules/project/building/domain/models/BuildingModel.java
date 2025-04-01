@@ -18,10 +18,11 @@ public class BuildingModel {
     private ProjectModel project;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public BuildingModel() {}
 
-    public BuildingModel(Long id, UUID uuid, String name, String description, List<PropertyModel> properties, ZoneModel zone, ProjectModel project, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public BuildingModel(Long id, UUID uuid, String name, String description, List<PropertyModel> properties, ZoneModel zone, ProjectModel project, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -31,6 +32,7 @@ public class BuildingModel {
         this.project = project;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -103,5 +105,14 @@ public class BuildingModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

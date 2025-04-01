@@ -4,9 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,9 +44,12 @@ public class UserEntity {
     @Column(updatable = true)
     private LocalDateTime updatedAt;
 
+    @Column(updatable = true)
+    private LocalDateTime deletedAt;
+
     public UserEntity() { }
 
-    public UserEntity(Long id, UUID uuid, String name, CompanyEntity company, List<SaleEntity> sales, List<PaymentEntity> payments, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserEntity(Long id, UUID uuid, String name, CompanyEntity company, List<SaleEntity> sales, List<PaymentEntity> payments, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -58,6 +58,7 @@ public class UserEntity {
         this.payments = payments;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -122,5 +123,13 @@ public class UserEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

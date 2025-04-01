@@ -18,11 +18,12 @@ public class ZoneModel {
     private List<BuildingModel> buildings;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public ZoneModel() {
     }
 
-    public ZoneModel(Long id, UUID uuid, String name, String postalCode, ProjectModel project, List<PropertyModel> properties, List<BuildingModel> buildings, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ZoneModel(Long id, UUID uuid, String name, String postalCode, ProjectModel project, List<PropertyModel> properties, List<BuildingModel> buildings, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -32,6 +33,7 @@ public class ZoneModel {
         this.buildings = buildings;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -104,5 +106,13 @@ public class ZoneModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

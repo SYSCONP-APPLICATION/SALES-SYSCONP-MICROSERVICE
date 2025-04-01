@@ -58,10 +58,13 @@ public class SystemPaymentConfigurationEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Column(updatable = true)
+    private LocalDateTime deletedAt;
+
     public SystemPaymentConfigurationEntity() {
     }
 
-    public SystemPaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, boolean requireForAllSales, PaymentStampEntity paymentStamp, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SystemPaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, boolean requireForAllSales, PaymentStampEntity paymentStamp, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
@@ -71,6 +74,7 @@ public class SystemPaymentConfigurationEntity {
         this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -143,5 +147,13 @@ public class SystemPaymentConfigurationEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

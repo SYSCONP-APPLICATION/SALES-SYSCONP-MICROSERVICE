@@ -55,10 +55,13 @@ public class ContactEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Column()
+    private LocalDateTime deletedAt;
+
     public ContactEntity() {
     }
 
-    public ContactEntity(Long id, UUID uuid, String value, Boolean isPrimary, ContactTypeEntity contactType, ClientEntity client, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ContactEntity(Long id, UUID uuid, String value, Boolean isPrimary, ContactTypeEntity contactType, ClientEntity client, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.value = value;
@@ -67,6 +70,7 @@ public class ContactEntity {
         this.client = client;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -93,11 +97,11 @@ public class ContactEntity {
         this.value = value;
     }
 
-    public Boolean getPrimary() {
+    public Boolean getIsPrimary() {
         return isPrimary;
     }
 
-    public void setPrimary(Boolean primary) {
+    public void setIsPrimary(Boolean primary) {
         isPrimary = primary;
     }
 
@@ -131,5 +135,13 @@ public class ContactEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }
