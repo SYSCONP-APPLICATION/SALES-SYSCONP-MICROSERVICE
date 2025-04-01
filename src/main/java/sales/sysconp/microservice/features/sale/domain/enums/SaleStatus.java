@@ -1,4 +1,4 @@
-package sales.sysconp.microservice.features.sale.domain.models;
+package sales.sysconp.microservice.features.sale.domain.enums;
 
 public enum SaleStatus {
     PENDING,

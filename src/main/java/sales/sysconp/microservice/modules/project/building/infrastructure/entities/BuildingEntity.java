@@ -47,4 +47,90 @@ public class BuildingEntity {
 
     @Column(updatable = true)  
     private LocalDateTime updatedAt;
+
+    public BuildingEntity() {}
+
+    public BuildingEntity(Long id, UUID uuid, String name, String description, List<PropertyEntity> properties, ZoneEntity zone, ProjectEntity project, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.uuid = uuid;
+        this.name = name;
+        this.description = description;
+        this.properties = properties;
+        this.zone = zone;
+        this.project = project;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<PropertyEntity> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<PropertyEntity> properties) {
+        this.properties = properties;
+    }
+
+    public ZoneEntity getZone() {
+        return zone;
+    }
+
+    public void setZone(ZoneEntity zone) {
+        this.zone = zone;
+    }
+
+    public ProjectEntity getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectEntity project) {
+        this.project = project;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

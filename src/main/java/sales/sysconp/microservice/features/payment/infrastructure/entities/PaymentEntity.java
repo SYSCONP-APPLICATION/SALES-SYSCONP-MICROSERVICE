@@ -69,4 +69,109 @@ public class PaymentEntity {
     @Column(updatable = true)  
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public PaymentEntity() {
+    }
+
+    public PaymentEntity(Long id, UUID uuid, Double value, PaymentMethodEntity paymentMethod, SaleEntity sale, InstallmentEntity installment, BankEntity bank, CompanyEntity company, UserEntity user, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.uuid = uuid;
+        this.value = value;
+        this.paymentMethod = paymentMethod;
+        this.sale = sale;
+        this.installment = installment;
+        this.bank = bank;
+        this.company = company;
+        this.user = user;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
+    }
+
+    public PaymentMethodEntity getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethodEntity paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public SaleEntity getSale() {
+        return sale;
+    }
+
+    public void setSale(SaleEntity sale) {
+        this.sale = sale;
+    }
+
+    public InstallmentEntity getInstallment() {
+        return installment;
+    }
+
+    public void setInstallment(InstallmentEntity installment) {
+        this.installment = installment;
+    }
+
+    public BankEntity getBank() {
+        return bank;
+    }
+
+    public void setBank(BankEntity bank) {
+        this.bank = bank;
+    }
+
+    public CompanyEntity getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyEntity company) {
+        this.company = company;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

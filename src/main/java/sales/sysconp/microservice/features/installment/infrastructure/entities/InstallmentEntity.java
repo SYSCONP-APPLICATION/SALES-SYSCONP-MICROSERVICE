@@ -63,4 +63,100 @@ public class InstallmentEntity {
     @Column(updatable = true)  
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public InstallmentEntity() {
+    }
+
+    public InstallmentEntity(Long id, UUID uuid, Double amount, LocalDateTime paymentDate, LocalDateTime paidAt, SaleEntity sale, List<PaymentEntity> payments, DebtEntity debt, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.uuid = uuid;
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+        this.paidAt = paidAt;
+        this.sale = sale;
+        this.payments = payments;
+        this.debt = debt;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDateTime paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public LocalDateTime getPaidAt() {
+        return paidAt;
+    }
+
+    public void setPaidAt(LocalDateTime paidAt) {
+        this.paidAt = paidAt;
+    }
+
+    public SaleEntity getSale() {
+        return sale;
+    }
+
+    public void setSale(SaleEntity sale) {
+        this.sale = sale;
+    }
+
+    public List<PaymentEntity> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<PaymentEntity> payments) {
+        this.payments = payments;
+    }
+
+    public DebtEntity getDebt() {
+        return debt;
+    }
+
+    public void setDebt(DebtEntity debt) {
+        this.debt = debt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
