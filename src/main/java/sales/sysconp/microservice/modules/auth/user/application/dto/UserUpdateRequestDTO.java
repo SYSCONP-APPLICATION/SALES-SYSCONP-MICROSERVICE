@@ -12,4 +12,12 @@ public class UserUpdateRequestDTO {
 
     @NotNull(message = "updatedAt is required")
     private LocalDateTime updatedAt;
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 }
