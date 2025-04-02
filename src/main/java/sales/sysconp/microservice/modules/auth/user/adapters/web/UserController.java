@@ -48,7 +48,6 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    // Endpoint para buscar um usuário por id
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> findUserById(@PathVariable Long id) {
         try {
@@ -59,14 +58,8 @@ public class UserController {
         }
     }
 
-    // Endpoint para deletar um usuário
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        try {
-            userService.deleteUser(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 No Content
-        } catch (EntityNotFoundException ex) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 Not Found
-        }
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }

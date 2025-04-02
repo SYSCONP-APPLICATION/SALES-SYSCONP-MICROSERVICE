@@ -12,6 +12,7 @@ import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
 import sales.sysconp.microservice.modules.auth.user.infrastructure.repository.UserRepositoryAdapter;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -37,7 +38,7 @@ public class UserService implements UserServiceInPort {
     public UserResponseDTO findUserById(Long id) {
          UserModel userModel = this.userRepositoryAdapter
                  .findById(id)
-                 .orElseThrow(() -> new EntityNotFoundException("User not found!"));
+                 .orElseThrow(() -> new EntityNotFoundException("Usuario nao encontrado!"));
 
          return userMapper.toResponseDTO(userModel);
     }
@@ -56,7 +57,6 @@ public class UserService implements UserServiceInPort {
 
     @Override
     public UserResponseDTO createUser(UserCreateRequestDTO userCreateRequestDTO) {
-
         Optional<UserModel> userById = this.userRepositoryAdapter.findById(userCreateRequestDTO.getId());
 
         if (userById.isPresent()) {
@@ -85,7 +85,7 @@ public class UserService implements UserServiceInPort {
     public void deleteUser(Long id) {
         this.userRepositoryAdapter
                 .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Usuario nao encontrado!"));
+                .orElseThrow(() -> new NoSuchElementException("Usuario nao encontrado!"));
 
         this.userRepositoryAdapter.deleteById(id);
     }
