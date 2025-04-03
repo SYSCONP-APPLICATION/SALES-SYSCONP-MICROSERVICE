@@ -38,7 +38,7 @@ public class UserService implements UserServiceInPort {
     public UserResponseDTO findUserById(Long id) {
          UserModel userModel = this.userRepositoryAdapter
                  .findById(id)
-                 .orElseThrow(() -> new EntityNotFoundException("Usuario nao encontrado!"));
+                 .orElseThrow(() -> new NoSuchElementException("Usuario nao encontrado!"));
 
          return userMapper.toResponseDTO(userModel);
     }
