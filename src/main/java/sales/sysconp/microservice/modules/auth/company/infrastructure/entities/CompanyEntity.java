@@ -12,6 +12,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import sales.sysconp.microservice.features.bank.infrastructure.entities.BankEntity;
 import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
 import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
@@ -24,13 +26,21 @@ import sales.sysconp.microservice.modules.project.property_category.infrastructu
 
 @Entity
 @Table(name = "companies")
+@SQLDelete(sql = "UPDATE users SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class CompanyEntity {
     @Id
     private Long id;
 
     @Column(unique = true, nullable = false)
     private UUID uuid;
-    
+
+    @Column(unique = true, nullable = false)
+    private String brandName;
+
+    @Column(unique = true, nullable = false)
+    private String commercialName;
+
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<UserEntity> users;
 
@@ -71,7 +81,7 @@ public class CompanyEntity {
     public CompanyEntity() {
     }
 
-    public CompanyEntity(Long id, UUID uuid, List<UserEntity> users, List<BankEntity> banks, List<ClientEntity> clients, List<PaymentEntity> payments, List<PaymentMethodEntity> paymentMethods, List<SaleEntity> sales, List<ProjectEntity> projects, SystemPaymentConfigurationEntity systemPaymentConfiguration, List<PropertyCategoryEntity> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CompanyEntity(Long id, UUID uuid, List<UserEntity> users, List<BankEntity> banks, List<ClientEntity> clients, List<PaymentEntity> payments, List<PaymentMethodEntity> paymentMethods, List<SaleEntity> sales, List<ProjectEntity> projects, SystemPaymentConfigurationEntity systemPaymentConfiguration, List<PropertyCategoryEntity> propertyCategories, String brandName, String commercialName, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.users = users;
@@ -83,6 +93,8 @@ public class CompanyEntity {
         this.projects = projects;
         this.systemPaymentConfiguration = systemPaymentConfiguration;
         this.propertyCategories = propertyCategories;
+        this.brandName = brandName;
+        this.commercialName = commercialName;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -198,5 +210,21 @@ public class CompanyEntity {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getCommercialName() {
+        return commercialName;
+    }
+
+    public void setCommercialName(String commercialName) {
+        this.commercialName = commercialName;
     }
 }

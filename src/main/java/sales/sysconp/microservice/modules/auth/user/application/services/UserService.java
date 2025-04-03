@@ -49,8 +49,12 @@ public class UserService implements UserServiceInPort {
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario não encontrado!"));
 
-        userModel.setName(userUpdateRequestDTO.getName());
-        userModel.setUpdatedAt(userUpdateRequestDTO.getUpdatedAt());
+        if (userUpdateRequestDTO.getName() != null) {
+            userModel.setName(userUpdateRequestDTO.getName());
+        }
+        if (userUpdateRequestDTO.getUpdatedAt() != null) {
+            userModel.setUpdatedAt(userUpdateRequestDTO.getUpdatedAt());
+        }
 
         return userMapper.toResponseDTO(this.userRepositoryAdapter.save(userModel));
     }

@@ -17,11 +17,10 @@ public class UserResponseDTO {
     private List<PaymentModel> payments;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
     public UserResponseDTO () {}
 
-    public UserResponseDTO(Long id, UUID uuid, String name, CompanyModel company, List<SaleModel> sales, List<PaymentModel> payments, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public UserResponseDTO(Long id, UUID uuid, String name, CompanyModel company, List<SaleModel> sales, List<PaymentModel> payments, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -30,7 +29,6 @@ public class UserResponseDTO {
         this.payments = payments;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -95,13 +93,5 @@ public class UserResponseDTO {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

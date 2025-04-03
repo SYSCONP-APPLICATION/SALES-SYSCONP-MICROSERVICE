@@ -1,4 +1,4 @@
-package sales.sysconp.microservice.modules.auth.company.domain.models;
+package sales.sysconp.microservice.modules.auth.company.application.dto;
 
 import sales.sysconp.microservice.features.bank.domain.models.BankModel;
 import sales.sysconp.microservice.features.client.domain.models.ClientModel;
@@ -14,11 +14,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class CompanyModel {
+public class CompanyResponseDTO {
     private Long id;
     private UUID uuid;
-    private String brandName;
-    private String commercialName;
     private List<UserModel> users;
     private List<BankModel> banks;
     private List<ClientModel> clients;
@@ -30,16 +28,13 @@ public class CompanyModel {
     private List<PropertyCategoryModel> propertyCategories;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public CompanyModel() {
+    public CompanyResponseDTO() {
     }
 
-    public CompanyModel(Long id, UUID uuid, String brandName, String commercialName, List<UserModel> users, List<BankModel> banks, List<ClientModel> clients, List<PaymentModel> payments, List<PaymentMethodModel> paymentMethods, List<SaleModel> sales, List<ProjectModel> projects, SystemPaymentConfigurationModel systemPaymentConfiguration, List<PropertyCategoryModel> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CompanyResponseDTO(Long id, UUID uuid, List<UserModel> users, List<BankModel> banks, List<ClientModel> clients, List<PaymentModel> payments, List<PaymentMethodModel> paymentMethods, List<SaleModel> sales, List<ProjectModel> projects, SystemPaymentConfigurationModel systemPaymentConfiguration, List<PropertyCategoryModel> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
-        this.brandName = brandName;
-        this.commercialName = commercialName;
         this.users = users;
         this.banks = banks;
         this.clients = clients;
@@ -51,7 +46,6 @@ public class CompanyModel {
         this.propertyCategories = propertyCategories;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -80,22 +74,6 @@ public class CompanyModel {
 
     public List<BankModel> getBanks() {
         return banks;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
-
-    public String getCommercialName() {
-        return commercialName;
-    }
-
-    public void setCommercialName(String commercialName) {
-        this.commercialName = commercialName;
     }
 
     public void setBanks(List<BankModel> banks) {
@@ -172,13 +150,5 @@ public class CompanyModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

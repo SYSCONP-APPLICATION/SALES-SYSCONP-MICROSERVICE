@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.modules.auth.user.adapters.web;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,9 @@ public class CreateUserController {
     }
 
     @PostMapping("create")
-    public UserResponseDTO createUser(@RequestBody UserCreateRequestDTO userCreateRequestDTO) {
+    public UserResponseDTO createUser(
+            @RequestBody @Valid UserCreateRequestDTO userCreateRequestDTO
+    ) {
         return userService.createUser(userCreateRequestDTO);
     }
 }

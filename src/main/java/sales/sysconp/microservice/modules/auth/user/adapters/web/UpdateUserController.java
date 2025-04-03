@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.modules.auth.user.adapters.web;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import sales.sysconp.microservice.modules.auth.user.application.dto.UserResponseDTO;
 import sales.sysconp.microservice.modules.auth.user.application.dto.UserUpdateRequestDTO;
@@ -15,7 +16,10 @@ public class UpdateUserController {
     }
 
     @PutMapping("update/{id}")
-    public UserResponseDTO updateUser(@PathVariable Long id, @RequestBody UserUpdateRequestDTO userUpdateRequestDTO) {
+    public UserResponseDTO updateUser(
+            @PathVariable Long id,
+            @RequestBody @Valid UserUpdateRequestDTO userUpdateRequestDTO
+    ) {
         return userService.updateUser(id, userUpdateRequestDTO);
     }
 }

@@ -11,7 +11,6 @@ public class UserCreateRequestDTO {
     private Long id;
 
     @NotNull(message = "uuid is required")
-    @NotEmpty(message = "uuid is required")
     private UUID uuid;
 
     @NotNull(message = "name is required")
