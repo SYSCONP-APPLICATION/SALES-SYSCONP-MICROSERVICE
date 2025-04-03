@@ -1,9 +1,15 @@
 package sales.sysconp.microservice.modules.project.project.domain.models;
 
+import jakarta.persistence.*;
 import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
-import sales.sysconp.microservice.modules.project.building.domain.models.BuildingModel;
+import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
+import sales.sysconp.microservice.modules.project.collections.domain.models.CollectionModel;
+import sales.sysconp.microservice.modules.project.collections.infrastructure.entities.CollectionEntity;
 import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
-import sales.sysconp.microservice.modules.project.zone.domain.models.ZoneModel;
+import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
+import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
+import sales.sysconp.microservice.modules.project.street.domain.models.StreetModel;
+import sales.sysconp.microservice.modules.project.street.infrastructure.entities.StreetEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,26 +21,32 @@ public class ProjectModel {
     private String name;
     private String description;
     private ProjectStatusEnum status;
-    private String location;
-    private List<ZoneModel> zones;
-    private List<BuildingModel> buildings;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private List<StreetModel> streets;
+    private List<PropertyModel> properties;
+    private List<CollectionModel> collections;
     private CompanyModel company;
+    private StreetModel street;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
     public ProjectModel() {}
 
-    public ProjectModel(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, String location, List<ZoneModel> zones, List<BuildingModel> buildings, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public ProjectModel(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, LocalDateTime startDate, LocalDateTime endDate, List<StreetModel> streets, List<PropertyModel> properties, List<CollectionModel> collections, CompanyModel company, StreetModel street, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.description = description;
         this.status = status;
-        this.location = location;
-        this.zones = zones;
-        this.buildings = buildings;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.streets = streets;
+        this.properties = properties;
+        this.collections = collections;
         this.company = company;
+        this.street = street;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -80,28 +92,44 @@ public class ProjectModel {
         this.status = status;
     }
 
-    public String getLocation() {
-        return location;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 
-    public List<ZoneModel> getZones() {
-        return zones;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setZones(List<ZoneModel> zones) {
-        this.zones = zones;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
-    public List<BuildingModel> getBuildings() {
-        return buildings;
+    public List<StreetModel> getStreets() {
+        return streets;
     }
 
-    public void setBuildings(List<BuildingModel> buildings) {
-        this.buildings = buildings;
+    public void setStreets(List<StreetModel> streets) {
+        this.streets = streets;
+    }
+
+    public List<PropertyModel> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<PropertyModel> properties) {
+        this.properties = properties;
+    }
+
+    public List<CollectionModel> getCollections() {
+        return collections;
+    }
+
+    public void setCollections(List<CollectionModel> collections) {
+        this.collections = collections;
     }
 
     public CompanyModel getCompany() {
@@ -110,6 +138,14 @@ public class ProjectModel {
 
     public void setCompany(CompanyModel company) {
         this.company = company;
+    }
+
+    public StreetModel getStreet() {
+        return street;
+    }
+
+    public void setStreet(StreetModel street) {
+        this.street = street;
     }
 
     public LocalDateTime getCreatedAt() {

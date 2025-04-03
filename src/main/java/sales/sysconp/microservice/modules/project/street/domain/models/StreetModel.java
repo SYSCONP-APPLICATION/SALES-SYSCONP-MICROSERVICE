@@ -1,31 +1,30 @@
-package sales.sysconp.microservice.modules.project.property_category.domain.models;
+package sales.sysconp.microservice.modules.project.street.domain.models;
 
-import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
+import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class PropertyCategoryModel {
+public class StreetModel {
     private Long id;
     private UUID uuid;
     private String name;
     private List<PropertyModel> properties;
-    private CompanyModel company;
+    private ProjectModel project;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
-    public PropertyCategoryModel() {
-    }
+    public StreetModel() {}
 
-    public PropertyCategoryModel(Long id, UUID uuid, String name, List<PropertyModel> properties, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public StreetModel(Long id, UUID uuid, String name, List<PropertyModel> properties, ProjectModel project, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.properties = properties;
-        this.company = company;
+        this.project = project;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -63,12 +62,12 @@ public class PropertyCategoryModel {
         this.properties = properties;
     }
 
-    public CompanyModel getCompany() {
-        return company;
+    public ProjectModel getProject() {
+        return project;
     }
 
-    public void setCompany(CompanyModel company) {
-        this.company = company;
+    public void setProject(ProjectModel project) {
+        this.project = project;
     }
 
     public LocalDateTime getCreatedAt() {

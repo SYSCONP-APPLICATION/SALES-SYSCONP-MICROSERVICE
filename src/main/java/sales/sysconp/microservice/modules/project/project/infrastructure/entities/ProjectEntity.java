@@ -1,21 +1,15 @@
 package sales.sysconp.microservice.modules.project.project.infrastructure.entities;
 
+import jakarta.persistence.*;
+import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
+import sales.sysconp.microservice.modules.project.collections.infrastructure.entities.CollectionEntity;
+import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
+import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
+import sales.sysconp.microservice.modules.project.street.infrastructure.entities.StreetEntity;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
-import sales.sysconp.microservice.modules.project.building.infrastructure.entities.BuildingEntity;
-import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
-import sales.sysconp.microservice.modules.project.zone.infrastructure.entities.ZoneEntity;
 
 @Entity
 @Table(name = "projects")
@@ -26,49 +20,63 @@ public class ProjectEntity {
     @Column(unique = true, nullable = false)
     private UUID uuid;
 
-    @Column(unique = false, nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = false, nullable = true)
+    @Column(nullable = true)
     private String description;
 
-    @Column(unique = false, nullable = false)
+    @Column(nullable = false)
     private ProjectStatusEnum status;
 
-    @Column(unique = false, nullable = false)
-    private String location;
+    @Column(nullable = false)
+    private LocalDateTime startDate;
+
+    @Column(nullable = true)
+    private LocalDateTime endDate;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<ZoneEntity> zones;
+    private List<StreetEntity> streets;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<BuildingEntity> buildings;
+    private List<PropertyEntity> properties;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<CollectionEntity> collections;
+
+    @ManyToOne()
+    @JoinColumn(name = "company_id", nullable = false, referencedColumnName = "id")
     private CompanyEntity company;
 
-    @Column(updatable = false)  
+    @ManyToOne()
+    @JoinColumn(name = "street_id", nullable = false, referencedColumnName = "id")
+    private StreetEntity street;
+
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(updatable = true)  
+    @Column(updatable = true)
     private LocalDateTime updatedAt;
 
     @Column(updatable = true)
     private LocalDateTime deletedAt;
 
-    public ProjectEntity() {}
+    public ProjectEntity() {
+    }
 
-    public ProjectEntity(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, String location, List<ZoneEntity> zones, List<BuildingEntity> buildings, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public ProjectEntity(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, LocalDateTime startDate, LocalDateTime endDate, List<StreetEntity> streets, List<PropertyEntity> properties, List<CollectionEntity> collections, CompanyEntity company, StreetEntity street, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.description = description;
         this.status = status;
-        this.location = location;
-        this.zones = zones;
-        this.buildings = buildings;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.streets = streets;
+        this.properties = properties;
+        this.collections = collections;
         this.company = company;
+        this.street = street;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -114,28 +122,44 @@ public class ProjectEntity {
         this.status = status;
     }
 
-    public String getLocation() {
-        return location;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 
-    public List<ZoneEntity> getZones() {
-        return zones;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setZones(List<ZoneEntity> zones) {
-        this.zones = zones;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
-    public List<BuildingEntity> getBuildings() {
-        return buildings;
+    public List<StreetEntity> getStreets() {
+        return streets;
     }
 
-    public void setBuildings(List<BuildingEntity> buildings) {
-        this.buildings = buildings;
+    public void setStreets(List<StreetEntity> streets) {
+        this.streets = streets;
+    }
+
+    public List<PropertyEntity> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<PropertyEntity> properties) {
+        this.properties = properties;
+    }
+
+    public List<CollectionEntity> getCollections() {
+        return collections;
+    }
+
+    public void setCollections(List<CollectionEntity> collections) {
+        this.collections = collections;
     }
 
     public CompanyEntity getCompany() {
@@ -144,6 +168,14 @@ public class ProjectEntity {
 
     public void setCompany(CompanyEntity company) {
         this.company = company;
+    }
+
+    public StreetEntity getStreet() {
+        return street;
+    }
+
+    public void setStreet(StreetEntity street) {
+        this.street = street;
     }
 
     public LocalDateTime getCreatedAt() {

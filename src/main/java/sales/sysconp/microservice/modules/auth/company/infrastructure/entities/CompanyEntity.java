@@ -20,6 +20,7 @@ import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEnti
 import sales.sysconp.microservice.features.system_payment_configuration.infrastructure.entities.SystemPaymentConfigurationEntity;
 import sales.sysconp.microservice.modules.auth.user.infrastructure.entities.UserEntity;
 import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
+import sales.sysconp.microservice.modules.project.property_category.infrastructure.entities.PropertyCategoryEntity;
 
 @Entity
 @Table(name = "companies")
@@ -55,6 +56,9 @@ public class CompanyEntity {
     @JoinColumn(name = "system_payment_configuration_id", referencedColumnName = "id")
     private SystemPaymentConfigurationEntity systemPaymentConfiguration;
 
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<PropertyCategoryEntity> propertyCategories;
+
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
@@ -64,9 +68,10 @@ public class CompanyEntity {
     @Column(updatable = true)
     private LocalDateTime deletedAt;
 
-    public CompanyEntity() { }
+    public CompanyEntity() {
+    }
 
-    public CompanyEntity(Long id, UUID uuid, List<UserEntity> users, List<BankEntity> banks, List<ClientEntity> clients, List<PaymentEntity> payments, List<PaymentMethodEntity> paymentMethods, List<SaleEntity> sales, List<ProjectEntity> projects, SystemPaymentConfigurationEntity systemPaymentConfiguration, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CompanyEntity(Long id, UUID uuid, List<UserEntity> users, List<BankEntity> banks, List<ClientEntity> clients, List<PaymentEntity> payments, List<PaymentMethodEntity> paymentMethods, List<SaleEntity> sales, List<ProjectEntity> projects, SystemPaymentConfigurationEntity systemPaymentConfiguration, List<PropertyCategoryEntity> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.users = users;
@@ -77,6 +82,7 @@ public class CompanyEntity {
         this.sales = sales;
         this.projects = projects;
         this.systemPaymentConfiguration = systemPaymentConfiguration;
+        this.propertyCategories = propertyCategories;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -160,6 +166,14 @@ public class CompanyEntity {
 
     public void setSystemPaymentConfiguration(SystemPaymentConfigurationEntity systemPaymentConfiguration) {
         this.systemPaymentConfiguration = systemPaymentConfiguration;
+    }
+
+    public List<PropertyCategoryEntity> getPropertyCategories() {
+        return propertyCategories;
+    }
+
+    public void setPropertyCategories(List<PropertyCategoryEntity> propertyCategories) {
+        this.propertyCategories = propertyCategories;
     }
 
     public LocalDateTime getCreatedAt() {

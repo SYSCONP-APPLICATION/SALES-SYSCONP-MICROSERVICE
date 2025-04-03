@@ -1,7 +1,8 @@
-package sales.sysconp.microservice.modules.project.property_category.infrastructure.entities;
+package sales.sysconp.microservice.modules.project.collections.infrastructure.entities;
 
 import jakarta.persistence.*;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
+import sales.sysconp.microservice.modules.auth.company.domain.enums.CollectionTypeEnum;
+import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
 
 import java.time.LocalDateTime;
@@ -9,8 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "property_categories")
-public class PropertyCategoryEntity {
+@Table(name = "collections")
+public class CollectionEntity {
     @Id
     private Long id;
 
@@ -20,12 +21,18 @@ public class PropertyCategoryEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "propertyCategory", cascade = CascadeType.ALL)
-    private List<PropertyEntity> properties;
+    @Column(nullable = true)
+    private String description;
+
+    @Column(nullable = false)
+    private CollectionTypeEnum type;
 
     @ManyToOne()
-    @JoinColumn(name = "company_id", nullable = false, referencedColumnName = "id")
-    private CompanyEntity company;
+    @JoinColumn(name = "project_id", nullable = false, referencedColumnName = "id")
+    private ProjectEntity project;
+
+    @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL)
+    private List<PropertyEntity> properties;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -36,15 +43,17 @@ public class PropertyCategoryEntity {
     @Column(updatable = true)
     private LocalDateTime deletedAt;
 
-    public PropertyCategoryEntity() {
+    public CollectionEntity() {
     }
 
-    public PropertyCategoryEntity(Long id, UUID uuid, String name, List<PropertyEntity> properties, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CollectionEntity(Long id, UUID uuid, String name, String description, CollectionTypeEnum type, ProjectEntity project, List<PropertyEntity> properties, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
+        this.description = description;
+        this.type = type;
+        this.project = project;
         this.properties = properties;
-        this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -74,20 +83,36 @@ public class PropertyCategoryEntity {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public CollectionTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(CollectionTypeEnum type) {
+        this.type = type;
+    }
+
+    public ProjectEntity getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectEntity project) {
+        this.project = project;
+    }
+
     public List<PropertyEntity> getProperties() {
         return properties;
     }
 
     public void setProperties(List<PropertyEntity> properties) {
         this.properties = properties;
-    }
-
-    public CompanyEntity getCompany() {
-        return company;
-    }
-
-    public void setCompany(CompanyEntity company) {
-        this.company = company;
     }
 
     public LocalDateTime getCreatedAt() {

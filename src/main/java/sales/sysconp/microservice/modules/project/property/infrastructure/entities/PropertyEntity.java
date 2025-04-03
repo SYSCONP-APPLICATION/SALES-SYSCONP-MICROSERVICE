@@ -1,23 +1,20 @@
 package sales.sysconp.microservice.modules.project.property.infrastructure.entities;
 
+import jakarta.persistence.*;
+import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
+import sales.sysconp.microservice.modules.project.collections.infrastructure.entities.CollectionEntity;
+import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
+import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyTypeEnum;
+import sales.sysconp.microservice.modules.project.property_category.infrastructure.entities.PropertyCategoryEntity;
+import sales.sysconp.microservice.modules.project.street.infrastructure.entities.StreetEntity;
+import sales.sysconp.microservice.modules.project.unity.infrastructure.entities.UnityEntity;
+
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
-import sales.sysconp.microservice.modules.project.building.infrastructure.entities.BuildingEntity;
-import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
-import sales.sysconp.microservice.modules.project.property_category.infrastructure.entities.PropertyCategoryEntity;
-import sales.sysconp.microservice.modules.project.property_type.infrastructure.entities.PropertyTypeEntity;
-import sales.sysconp.microservice.modules.project.zone.infrastructure.entities.ZoneEntity;
-
 @Entity
-@Table(name = "property")
+@Table(name = "properties")
 public class PropertyEntity {
     @Id
     private Long id;
@@ -28,45 +25,39 @@ public class PropertyEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(unique = false, nullable = true)
+    @Column(nullable = true)
     private String description;
 
-    @Column(unique = false, nullable = true)
-    private String area;
-
-    @Column(unique = false, nullable = true)
-    private Integer bedrooms;
-
-    @Column(unique = false, nullable = true)
-    private Integer bathrooms;
-
     @Column(nullable = false)
-    private PropertyStatusEnum status;
+    private PropertyTypeEnum type;
 
-    @ManyToOne
-    @JoinColumn(name = "building_id") 
-    private BuildingEntity building;
+    @ManyToOne()
+    @JoinColumn(name = "project_id", nullable = false, referencedColumnName = "id")
+    private ProjectEntity project;
 
-    @ManyToOne
-    @JoinColumn(name = "property_category_id") 
+    @ManyToOne()
+    @JoinColumn(name = "collection_id", nullable = false, referencedColumnName = "id")
+    private CollectionEntity collection;
+
+    @ManyToOne()
+    @JoinColumn(name = "property_category_id", nullable = false, referencedColumnName = "id")
     private PropertyCategoryEntity propertyCategory;
 
-    @ManyToOne
-    @JoinColumn(name = "property_type_id") 
-    private PropertyTypeEntity propertyType;
+    @ManyToOne()
+    @JoinColumn(name = "street_id", nullable = false, referencedColumnName = "id")
+    private StreetEntity street;
 
-    @ManyToOne
-    @JoinColumn(name = "zone_id") 
-    private ZoneEntity zone;
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    private List<UnityEntity> unities;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id") 
+    @ManyToOne()
+    @JoinColumn(name = "client_id", nullable = true, referencedColumnName = "id")
     private ClientEntity client;
 
-    @Column(updatable = false)  
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(updatable = true)  
+    @Column(updatable = true)
     private LocalDateTime updatedAt;
 
     @Column(updatable = true)
@@ -75,20 +66,18 @@ public class PropertyEntity {
     public PropertyEntity() {
     }
 
-    public PropertyEntity(Long id, UUID uuid, String name, String description, String area, Integer bedrooms, Integer bathrooms, PropertyStatusEnum status, BuildingEntity building, PropertyCategoryEntity propertyCategory, PropertyTypeEntity propertyType, ZoneEntity zone, ClientEntity client, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PropertyEntity(Long id, UUID uuid, String name, String description, StreetEntity street, ClientEntity client, PropertyTypeEnum type, ProjectEntity project, CollectionEntity collection, PropertyCategoryEntity propertyCategory, List<UnityEntity> unities, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.description = description;
-        this.area = area;
-        this.bedrooms = bedrooms;
-        this.bathrooms = bathrooms;
-        this.status = status;
-        this.building = building;
-        this.propertyCategory = propertyCategory;
-        this.propertyType = propertyType;
-        this.zone = zone;
+        this.type = type;
+        this.project = project;
+        this.collection = collection;
+        this.street = street;
         this.client = client;
+        this.propertyCategory = propertyCategory;
+        this.unities = unities;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -126,44 +115,28 @@ public class PropertyEntity {
         this.description = description;
     }
 
-    public String getArea() {
-        return area;
+    public PropertyTypeEnum getType() {
+        return type;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setType(PropertyTypeEnum type) {
+        this.type = type;
     }
 
-    public Integer getBedrooms() {
-        return bedrooms;
+    public ProjectEntity getProject() {
+        return project;
     }
 
-    public void setBedrooms(Integer bedrooms) {
-        this.bedrooms = bedrooms;
+    public void setProject(ProjectEntity project) {
+        this.project = project;
     }
 
-    public Integer getBathrooms() {
-        return bathrooms;
+    public CollectionEntity getCollection() {
+        return collection;
     }
 
-    public void setBathrooms(Integer bathrooms) {
-        this.bathrooms = bathrooms;
-    }
-
-    public PropertyStatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(PropertyStatusEnum status) {
-        this.status = status;
-    }
-
-    public BuildingEntity getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(BuildingEntity building) {
-        this.building = building;
+    public void setCollection(CollectionEntity collection) {
+        this.collection = collection;
     }
 
     public PropertyCategoryEntity getPropertyCategory() {
@@ -174,28 +147,12 @@ public class PropertyEntity {
         this.propertyCategory = propertyCategory;
     }
 
-    public PropertyTypeEntity getPropertyType() {
-        return propertyType;
+    public List<UnityEntity> getUnities() {
+        return unities;
     }
 
-    public void setPropertyType(PropertyTypeEntity propertyType) {
-        this.propertyType = propertyType;
-    }
-
-    public ZoneEntity getZone() {
-        return zone;
-    }
-
-    public void setZone(ZoneEntity zone) {
-        this.zone = zone;
-    }
-
-    public ClientEntity getClient() {
-        return client;
-    }
-
-    public void setClient(ClientEntity client) {
-        this.client = client;
+    public void setUnities(List<UnityEntity> unities) {
+        this.unities = unities;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -220,5 +177,21 @@ public class PropertyEntity {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public StreetEntity getStreet() {
+        return street;
+    }
+
+    public void setStreet(StreetEntity street) {
+        this.street = street;
+    }
+
+    public ClientEntity getClient() {
+        return client;
+    }
+
+    public void setClient(ClientEntity client) {
+        this.client = client;
     }
 }

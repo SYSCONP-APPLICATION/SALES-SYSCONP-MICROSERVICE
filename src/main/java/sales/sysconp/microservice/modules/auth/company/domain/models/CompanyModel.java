@@ -8,6 +8,7 @@ import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
 import sales.sysconp.microservice.features.system_payment_configuration.domain.models.SystemPaymentConfigurationModel;
 import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
 import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
+import sales.sysconp.microservice.modules.project.property_category.domain.models.PropertyCategoryModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,13 +25,15 @@ public class CompanyModel {
     private List<SaleModel> sales;
     private List<ProjectModel> projects;
     private SystemPaymentConfigurationModel systemPaymentConfiguration;
+    private List<PropertyCategoryModel> propertyCategories;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
-    public CompanyModel() {}
+    public CompanyModel() {
+    }
 
-    public CompanyModel(Long id, UUID uuid, List<UserModel> users, List<BankModel> banks, List<ClientModel> clients, List<PaymentModel> payments, List<PaymentMethodModel> paymentMethods, List<SaleModel> sales, List<ProjectModel> projects, SystemPaymentConfigurationModel systemPaymentConfiguration, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CompanyModel(Long id, UUID uuid, List<UserModel> users, List<BankModel> banks, List<ClientModel> clients, List<PaymentModel> payments, List<PaymentMethodModel> paymentMethods, List<SaleModel> sales, List<ProjectModel> projects, SystemPaymentConfigurationModel systemPaymentConfiguration, List<PropertyCategoryModel> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.users = users;
@@ -41,6 +44,7 @@ public class CompanyModel {
         this.sales = sales;
         this.projects = projects;
         this.systemPaymentConfiguration = systemPaymentConfiguration;
+        this.propertyCategories = propertyCategories;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -124,6 +128,14 @@ public class CompanyModel {
 
     public void setSystemPaymentConfiguration(SystemPaymentConfigurationModel systemPaymentConfiguration) {
         this.systemPaymentConfiguration = systemPaymentConfiguration;
+    }
+
+    public List<PropertyCategoryModel> getPropertyCategories() {
+        return propertyCategories;
+    }
+
+    public void setPropertyCategories(List<PropertyCategoryModel> propertyCategories) {
+        this.propertyCategories = propertyCategories;
     }
 
     public LocalDateTime getCreatedAt() {

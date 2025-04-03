@@ -1,31 +1,50 @@
-package sales.sysconp.microservice.modules.project.property_category.domain.models;
+package sales.sysconp.microservice.modules.project.street.infrastructure.entities;
 
-import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
-import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
+import jakarta.persistence.*;
+import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
+import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class PropertyCategoryModel {
+@Entity
+@Table(name = "streets")
+public class StreetEntity {
+    @Id
     private Long id;
+
+    @Column(unique = true, nullable = false)
     private UUID uuid;
+
+    @Column(nullable = false)
     private String name;
-    private List<PropertyModel> properties;
-    private CompanyModel company;
+
+    @OneToMany(mappedBy = "street", cascade = CascadeType.ALL)
+    private List<PropertyEntity> properties;
+
+    @ManyToOne()
+    @JoinColumn(name = "project_id", nullable = false, referencedColumnName = "id")
+    private ProjectEntity project;
+
+    @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    @Column(updatable = true)
     private LocalDateTime updatedAt;
+
+    @Column(updatable = true)
     private LocalDateTime deletedAt;
 
-    public PropertyCategoryModel() {
+    public StreetEntity() {
     }
 
-    public PropertyCategoryModel(Long id, UUID uuid, String name, List<PropertyModel> properties, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public StreetEntity(Long id, UUID uuid, String name, List<PropertyEntity> properties, ProjectEntity project, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.properties = properties;
-        this.company = company;
+        this.project = project;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -55,20 +74,20 @@ public class PropertyCategoryModel {
         this.name = name;
     }
 
-    public List<PropertyModel> getProperties() {
+    public List<PropertyEntity> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<PropertyModel> properties) {
+    public void setProperties(List<PropertyEntity> properties) {
         this.properties = properties;
     }
 
-    public CompanyModel getCompany() {
-        return company;
+    public ProjectEntity getProject() {
+        return project;
     }
 
-    public void setCompany(CompanyModel company) {
-        this.company = company;
+    public void setProject(ProjectEntity project) {
+        this.project = project;
     }
 
     public LocalDateTime getCreatedAt() {

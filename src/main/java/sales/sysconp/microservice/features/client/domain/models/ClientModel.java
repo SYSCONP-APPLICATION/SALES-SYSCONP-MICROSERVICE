@@ -1,9 +1,9 @@
 package sales.sysconp.microservice.features.client.domain.models;
 
-import sales.sysconp.microservice.features.contact.infrastructure.entities.ContactEntity;
-import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
-import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
+import sales.sysconp.microservice.features.contact.domain.models.ContactModel;
+import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
+import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,10 +14,10 @@ public class ClientModel {
     private UUID uuid;
     private String name;
     private String identityCardNumber;
-    private List<ContactEntity> contacts;
-    private List<SaleEntity> sales;
-    private CompanyEntity company;
-    private List<PropertyEntity> properties;
+    private List<ContactModel> contacts;
+    private List<SaleModel> sales;
+    private CompanyModel company;
+    private List<PropertyModel> properties;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -25,7 +25,7 @@ public class ClientModel {
     public ClientModel() {
     }
 
-    public ClientModel(Long id, UUID uuid, String name, String identityCardNumber, List<ContactEntity> contacts, List<SaleEntity> sales, CompanyEntity company, List<PropertyEntity> properties, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public ClientModel(Long id, UUID uuid, String name, String identityCardNumber, List<ContactModel> contacts, List<SaleModel> sales, CompanyModel company, List<PropertyModel> properties, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -71,35 +71,35 @@ public class ClientModel {
         this.identityCardNumber = identityCardNumber;
     }
 
-    public List<ContactEntity> getContacts() {
+    public List<ContactModel> getContacts() {
         return contacts;
     }
 
-    public void setContacts(List<ContactEntity> contacts) {
+    public void setContacts(List<ContactModel> contacts) {
         this.contacts = contacts;
     }
 
-    public List<SaleEntity> getSales() {
+    public List<SaleModel> getSales() {
         return sales;
     }
 
-    public void setSales(List<SaleEntity> sales) {
+    public void setSales(List<SaleModel> sales) {
         this.sales = sales;
     }
 
-    public CompanyEntity getCompany() {
+    public CompanyModel getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyEntity company) {
+    public void setCompany(CompanyModel company) {
         this.company = company;
     }
 
-    public List<PropertyEntity> getProperties() {
+    public List<PropertyModel> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<PropertyEntity> properties) {
+    public void setProperties(List<PropertyModel> properties) {
         this.properties = properties;
     }
 
