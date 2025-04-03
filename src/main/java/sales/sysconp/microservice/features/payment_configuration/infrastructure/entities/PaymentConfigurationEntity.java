@@ -49,4 +49,85 @@ public class PaymentConfigurationEntity {
     @Column(updatable = true)  
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Column()
+    private LocalDateTime deletedAt;
+
+    public PaymentConfigurationEntity() {
+    }
+
+    public PaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, SaleEntity sale, PaymentStampEntity paymentStamp, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+        this.id = id;
+        this.uuid = uuid;
+        this.dayOfMonth = dayOfMonth;
+        this.sale = sale;
+        this.paymentStamp = paymentStamp;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public Long getDayOfMonth() {
+        return dayOfMonth;
+    }
+
+    public void setDayOfMonth(Long dayOfMonth) {
+        this.dayOfMonth = dayOfMonth;
+    }
+
+    public SaleEntity getSale() {
+        return sale;
+    }
+
+    public void setSale(SaleEntity sale) {
+        this.sale = sale;
+    }
+
+    public PaymentStampEntity getPaymentStamp() {
+        return paymentStamp;
+    }
+
+    public void setPaymentStamp(PaymentStampEntity paymentStamp) {
+        this.paymentStamp = paymentStamp;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 }

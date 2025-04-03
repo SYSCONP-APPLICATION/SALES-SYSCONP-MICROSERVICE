@@ -57,4 +57,103 @@ public class SystemPaymentConfigurationEntity {
     @Column(updatable = true)  
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Column(updatable = true)
+    private LocalDateTime deletedAt;
+
+    public SystemPaymentConfigurationEntity() {
+    }
+
+    public SystemPaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, boolean requireForAllSales, PaymentStampEntity paymentStamp, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+        this.id = id;
+        this.uuid = uuid;
+        this.dayOfMonth = dayOfMonth;
+        this.requireOnCreateSale = requireOnCreateSale;
+        this.requireForAllSales = requireForAllSales;
+        this.paymentStamp = paymentStamp;
+        this.company = company;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public Long getDayOfMonth() {
+        return dayOfMonth;
+    }
+
+    public void setDayOfMonth(Long dayOfMonth) {
+        this.dayOfMonth = dayOfMonth;
+    }
+
+    public boolean isRequireOnCreateSale() {
+        return requireOnCreateSale;
+    }
+
+    public void setRequireOnCreateSale(boolean requireOnCreateSale) {
+        this.requireOnCreateSale = requireOnCreateSale;
+    }
+
+    public boolean isRequireForAllSales() {
+        return requireForAllSales;
+    }
+
+    public void setRequireForAllSales(boolean requireForAllSales) {
+        this.requireForAllSales = requireForAllSales;
+    }
+
+    public PaymentStampEntity getPaymentStamp() {
+        return paymentStamp;
+    }
+
+    public void setPaymentStamp(PaymentStampEntity paymentStamp) {
+        this.paymentStamp = paymentStamp;
+    }
+
+    public CompanyEntity getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyEntity company) {
+        this.company = company;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 }
