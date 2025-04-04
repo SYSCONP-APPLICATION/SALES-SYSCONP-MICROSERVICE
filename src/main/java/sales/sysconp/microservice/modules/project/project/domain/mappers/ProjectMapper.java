@@ -10,6 +10,7 @@ import sales.sysconp.microservice.modules.project.project.infrastructure.entitie
 public interface ProjectMapper {
     @Mapping(target = "company", ignore = true)
     @Mapping(target = "properties", ignore = true)
+    @Mapping(target = "streets", ignore = true)
     @Mapping(target = "collections", ignore = true)
     ProjectModel toModel(ProjectEntity entity);
 
