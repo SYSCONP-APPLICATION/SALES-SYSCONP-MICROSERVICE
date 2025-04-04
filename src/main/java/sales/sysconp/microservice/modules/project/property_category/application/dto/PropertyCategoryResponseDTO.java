@@ -1,31 +1,28 @@
-package sales.sysconp.microservice.modules.project.street.domain.models;
+package sales.sysconp.microservice.modules.project.property_category.application.dto;
 
-import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
-import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
-public class StreetModel {
+public class PropertyCategoryResponseDTO {
     private Long id;
     private UUID uuid;
     private String name;
-    private List<PropertyModel> properties;
+    private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public StreetModel() {}
+    public PropertyCategoryResponseDTO() {
+    }
 
-    public StreetModel(Long id, UUID uuid, String name, List<PropertyModel> properties, ProjectModel project, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PropertyCategoryResponseDTO(Long id, UUID uuid, String name, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
-        this.properties = properties;
+        this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -52,12 +49,12 @@ public class StreetModel {
         this.name = name;
     }
 
-    public List<PropertyModel> getProperties() {
-        return properties;
+    public CompanyModel getCompany() {
+        return company;
     }
 
-    public void setProperties(List<PropertyModel> properties) {
-        this.properties = properties;
+    public void setCompany(CompanyModel company) {
+        this.company = company;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -74,13 +71,5 @@ public class StreetModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

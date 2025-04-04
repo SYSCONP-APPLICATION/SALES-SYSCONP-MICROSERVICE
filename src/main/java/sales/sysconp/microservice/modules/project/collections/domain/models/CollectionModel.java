@@ -1,6 +1,6 @@
 package sales.sysconp.microservice.modules.project.collections.domain.models;
 
-import sales.sysconp.microservice.modules.auth.company.domain.enums.CollectionTypeEnum;
+import sales.sysconp.microservice.modules.project.collections.domain.enums.CollectionTypeEnum;
 import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 

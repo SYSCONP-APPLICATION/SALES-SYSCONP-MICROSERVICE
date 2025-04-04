@@ -1,11 +1,20 @@
 package sales.sysconp.microservice.modules.project.project.domain.mappers;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import sales.sysconp.microservice.modules.project.project.application.dto.ProjectResponseDTO;
 import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
 import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
 
 @Mapper(componentModel = "spring")
 public interface ProjectMapper {
+    @Mapping(target = "company.projects", ignore = true)
+    @Mapping(target = "company.users", ignore = true)
     ProjectModel toModel(ProjectEntity entity);
+
+    @Mapping(target = "company.projects", ignore = true)
+    @Mapping(target = "company.users", ignore = true)
     ProjectEntity toEntity(ProjectModel model);
+
+    ProjectResponseDTO toResponseDTO(ProjectModel model);
 }

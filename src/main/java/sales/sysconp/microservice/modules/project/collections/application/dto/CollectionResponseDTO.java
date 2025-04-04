@@ -1,31 +1,32 @@
-package sales.sysconp.microservice.modules.project.street.domain.models;
+package sales.sysconp.microservice.modules.project.collections.application.dto;
 
+import sales.sysconp.microservice.modules.project.collections.domain.enums.CollectionTypeEnum;
 import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
-import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
-public class StreetModel {
+public class CollectionResponseDTO {
     private Long id;
     private UUID uuid;
     private String name;
-    private List<PropertyModel> properties;
+    private String description;
+    private CollectionTypeEnum type;
+    private ProjectModel project;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public StreetModel() {}
+    public CollectionResponseDTO() {}
 
-    public StreetModel(Long id, UUID uuid, String name, List<PropertyModel> properties, ProjectModel project, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CollectionResponseDTO(Long id, UUID uuid, String name, String description, CollectionTypeEnum type, ProjectModel project, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
-        this.properties = properties;
+        this.description = description;
+        this.type = type;
+        this.project = project;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -52,12 +53,28 @@ public class StreetModel {
         this.name = name;
     }
 
-    public List<PropertyModel> getProperties() {
-        return properties;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProperties(List<PropertyModel> properties) {
-        this.properties = properties;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public CollectionTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(CollectionTypeEnum type) {
+        this.type = type;
+    }
+
+    public ProjectModel getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectModel project) {
+        this.project = project;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -74,13 +91,5 @@ public class StreetModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

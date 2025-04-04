@@ -23,6 +23,7 @@ public class CompanyModel {
     private List<BankModel> banks;
     private List<ClientModel> clients;
     private List<PaymentModel> payments;
+    private String location;
     private List<PaymentMethodModel> paymentMethods;
     private List<SaleModel> sales;
     private List<ProjectModel> projects;
@@ -35,7 +36,7 @@ public class CompanyModel {
     public CompanyModel() {
     }
 
-    public CompanyModel(Long id, UUID uuid, String brandName, String commercialName, List<UserModel> users, List<BankModel> banks, List<ClientModel> clients, List<PaymentModel> payments, List<PaymentMethodModel> paymentMethods, List<SaleModel> sales, List<ProjectModel> projects, SystemPaymentConfigurationModel systemPaymentConfiguration, List<PropertyCategoryModel> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CompanyModel(Long id, UUID uuid, String brandName, String location, String commercialName, List<UserModel> users, List<BankModel> banks, List<ClientModel> clients, List<PaymentModel> payments, List<PaymentMethodModel> paymentMethods, List<SaleModel> sales, List<ProjectModel> projects, SystemPaymentConfigurationModel systemPaymentConfiguration, List<PropertyCategoryModel> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.brandName = brandName;
@@ -46,6 +47,7 @@ public class CompanyModel {
         this.payments = payments;
         this.paymentMethods = paymentMethods;
         this.sales = sales;
+        this.location = location;
         this.projects = projects;
         this.systemPaymentConfiguration = systemPaymentConfiguration;
         this.propertyCategories = propertyCategories;
@@ -96,6 +98,14 @@ public class CompanyModel {
 
     public void setCommercialName(String commercialName) {
         this.commercialName = commercialName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setBanks(List<BankModel> banks) {

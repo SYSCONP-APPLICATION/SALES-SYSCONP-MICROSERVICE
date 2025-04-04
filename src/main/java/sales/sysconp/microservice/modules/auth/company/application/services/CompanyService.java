@@ -38,7 +38,7 @@ public class CompanyService implements CompanyServiceInPort {
     public CompanyResponseDTO findCompanyById(Long id) {
         CompanyModel model = this.companyRepositoryAdapter
                 .findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Usuario nao encontrado!"));
+                .orElseThrow(() -> new NoSuchElementException("Empresa nao encontrado!"));
 
         return companyMapper.toResponseDTO(model);
     }
@@ -47,7 +47,7 @@ public class CompanyService implements CompanyServiceInPort {
     public CompanyResponseDTO updateCompany(Long id, CompanyUpdateRequestDTO companyUpdateRequestDTO) {
         CompanyModel model = this.companyRepositoryAdapter
                 .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Usuario não encontrado!"));
+                .orElseThrow(() -> new EntityNotFoundException("Empresa não encontrado!"));
 
         Optional<CompanyModel> companyByBrandName = this.companyRepositoryAdapter
                 .findByBrandName(companyUpdateRequestDTO.getBrandName());
@@ -93,7 +93,7 @@ public class CompanyService implements CompanyServiceInPort {
         Optional<CompanyModel> companyByBrandName = this.companyRepositoryAdapter.findByBrandName(companyCreateRequestDTO.getBrandName());
 
         if (companyByBrandName.isPresent()) {
-            throw new EntityExistsException("Já existe uma empresa com esse nome fantasia!");
+            throw new EntityExistsException("Já existe uma empresa com esse nome de marca!");
         }
 
         Optional<CompanyModel> companyByCommercialName = this.companyRepositoryAdapter.findByCommercialName(companyCreateRequestDTO.getCommercialName());
@@ -119,7 +119,7 @@ public class CompanyService implements CompanyServiceInPort {
     public void deleteCompany(Long id) {
         this.companyRepositoryAdapter
                 .findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Usuario nao encontrado!"));
+                .orElseThrow(() -> new NoSuchElementException("Empresa nao encontrado!"));
 
         this.companyRepositoryAdapter.deleteById(id);
     }

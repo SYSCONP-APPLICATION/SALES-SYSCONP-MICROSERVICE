@@ -1,4 +1,4 @@
-package sales.sysconp.microservice.modules.project.project.domain.models;
+package sales.sysconp.microservice.modules.project.project.application.dto;
 
 import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 import sales.sysconp.microservice.modules.project.collections.domain.models.CollectionModel;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class ProjectModel {
+public class ProjectResponseDTO {
     private Long id;
     private UUID uuid;
     private String name;
@@ -21,15 +21,14 @@ public class ProjectModel {
     private List<StreetModel> streets;
     private List<PropertyModel> properties;
     private List<CollectionModel> collections;
-    private String location;
     private CompanyModel company;
+    private StreetModel street;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public ProjectModel() {}
+    public ProjectResponseDTO() {}
 
-    public ProjectModel(Long id, UUID uuid, String name, String location, String description, ProjectStatusEnum status, LocalDateTime startDate, LocalDateTime endDate, List<StreetModel> streets, List<PropertyModel> properties, List<CollectionModel> collections, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public ProjectResponseDTO(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, LocalDateTime startDate, LocalDateTime endDate, List<StreetModel> streets, List<PropertyModel> properties, List<CollectionModel> collections, CompanyModel company, StreetModel street, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -41,9 +40,9 @@ public class ProjectModel {
         this.properties = properties;
         this.collections = collections;
         this.company = company;
+        this.street = street;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -56,14 +55,6 @@ public class ProjectModel {
 
     public UUID getUuid() {
         return uuid;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public void setUuid(UUID uuid) {
@@ -142,6 +133,14 @@ public class ProjectModel {
         this.company = company;
     }
 
+    public StreetModel getStreet() {
+        return street;
+    }
+
+    public void setStreet(StreetModel street) {
+        this.street = street;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -156,13 +155,5 @@ public class ProjectModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

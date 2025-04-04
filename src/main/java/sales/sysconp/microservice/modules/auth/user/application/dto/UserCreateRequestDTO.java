@@ -17,6 +17,9 @@ public class UserCreateRequestDTO {
     @NotEmpty(message = "name is required")
     private String name;
 
+    @NotNull(message = "company is required")
+    private Long companyId;
+
     @NotNull(message = "createdAt is required")
     private LocalDateTime createdAt;
 
@@ -33,6 +36,10 @@ public class UserCreateRequestDTO {
 
     public String getName() {
         return name;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
     }
 
     public LocalDateTime getCreatedAt() {

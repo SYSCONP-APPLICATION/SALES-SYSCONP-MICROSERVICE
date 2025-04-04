@@ -1,7 +1,7 @@
 package sales.sysconp.microservice.modules.project.collections.infrastructure.entities;
 
 import jakarta.persistence.*;
-import sales.sysconp.microservice.modules.auth.company.domain.enums.CollectionTypeEnum;
+import sales.sysconp.microservice.modules.project.collections.domain.enums.CollectionTypeEnum;
 import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
 

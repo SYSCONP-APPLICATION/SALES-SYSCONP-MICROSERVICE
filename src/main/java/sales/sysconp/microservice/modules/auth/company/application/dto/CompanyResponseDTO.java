@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.modules.auth.company.application.dto;
 
+import jakarta.persistence.Column;
 import sales.sysconp.microservice.features.bank.domain.models.BankModel;
 import sales.sysconp.microservice.features.client.domain.models.ClientModel;
 import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
@@ -17,12 +18,15 @@ import java.util.UUID;
 public class CompanyResponseDTO {
     private Long id;
     private UUID uuid;
+    private String brandName;
+    private String commercialName;
     private List<UserModel> users;
     private List<BankModel> banks;
     private List<ClientModel> clients;
     private List<PaymentModel> payments;
     private List<PaymentMethodModel> paymentMethods;
     private List<SaleModel> sales;
+    private String location;
     private List<ProjectModel> projects;
     private SystemPaymentConfigurationModel systemPaymentConfiguration;
     private List<PropertyCategoryModel> propertyCategories;
@@ -32,9 +36,11 @@ public class CompanyResponseDTO {
     public CompanyResponseDTO() {
     }
 
-    public CompanyResponseDTO(Long id, UUID uuid, List<UserModel> users, List<BankModel> banks, List<ClientModel> clients, List<PaymentModel> payments, List<PaymentMethodModel> paymentMethods, List<SaleModel> sales, List<ProjectModel> projects, SystemPaymentConfigurationModel systemPaymentConfiguration, List<PropertyCategoryModel> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public CompanyResponseDTO(Long id, UUID uuid, String brandName, String location,String commercialName, List<UserModel> users, List<BankModel> banks, List<ClientModel> clients, List<PaymentModel> payments, List<PaymentMethodModel> paymentMethods, List<SaleModel> sales, List<ProjectModel> projects, SystemPaymentConfigurationModel systemPaymentConfiguration, List<PropertyCategoryModel> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
+        this.brandName = brandName;
+        this.commercialName = commercialName;
         this.users = users;
         this.banks = banks;
         this.clients = clients;
@@ -42,6 +48,7 @@ public class CompanyResponseDTO {
         this.paymentMethods = paymentMethods;
         this.sales = sales;
         this.projects = projects;
+        this.location = location;
         this.systemPaymentConfiguration = systemPaymentConfiguration;
         this.propertyCategories = propertyCategories;
         this.createdAt = createdAt;
@@ -82,6 +89,14 @@ public class CompanyResponseDTO {
 
     public List<ClientModel> getClients() {
         return clients;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setClients(List<ClientModel> clients) {
@@ -150,5 +165,21 @@ public class CompanyResponseDTO {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getCommercialName() {
+        return commercialName;
+    }
+
+    public void setCommercialName(String commercialName) {
+        this.commercialName = commercialName;
     }
 }

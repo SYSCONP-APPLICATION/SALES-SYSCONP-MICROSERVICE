@@ -26,7 +26,7 @@ import sales.sysconp.microservice.modules.project.property_category.infrastructu
 
 @Entity
 @Table(name = "companies")
-@SQLDelete(sql = "UPDATE users SET deleted_at = NOW() WHERE id = ?")
+@SQLDelete(sql = "UPDATE companies SET deleted_at = NOW() WHERE id = ?")
 @SQLRestriction("deleted_at IS NULL")
 public class CompanyEntity {
     @Id

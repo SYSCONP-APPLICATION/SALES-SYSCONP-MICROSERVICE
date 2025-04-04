@@ -53,4 +53,14 @@ public class UserRepositoryAdapter implements UserRepositoryOutPort {
     public void deleteById(long id) {
         this.jpaRepository.deleteById(id);
     }
+
+
+    @Override
+    public List<UserModel> findByCompanyId(long companyId) {
+        return this.jpaRepository
+                .findByCompanyId(companyId)
+                .stream()
+                .map(userMapper::toModel)
+                .toList();
+    }
 }
