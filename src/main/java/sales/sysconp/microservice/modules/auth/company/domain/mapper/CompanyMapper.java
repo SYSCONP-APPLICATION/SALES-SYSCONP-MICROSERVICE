@@ -10,11 +10,15 @@ import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.C
 public interface CompanyMapper {
     @Mapping(target = "users", ignore = true)
     @Mapping(target = "projects", ignore = true)
+    @Mapping(target = "propertyCategories", ignore = true)
+    @Mapping(target = "sales", ignore = true)
+    @Mapping(target = "payments", ignore = true)
+    @Mapping(target = "paymentMethods", ignore = true)
+    @Mapping(target = "clients", ignore = true)
+    @Mapping(target = "banks", ignore = true)
     CompanyModel toModel(CompanyEntity entity);
 
-    @Mapping(target = "users", ignore = true)
     CompanyEntity toEntity(CompanyModel model);
 
-    @Mapping(target = "users", ignore = true)
     CompanyResponseDTO toResponseDTO(CompanyModel model);
 }

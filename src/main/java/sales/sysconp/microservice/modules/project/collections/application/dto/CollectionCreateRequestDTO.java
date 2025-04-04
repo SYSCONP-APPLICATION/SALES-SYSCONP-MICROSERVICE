@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import sales.sysconp.microservice.modules.project.collections.domain.enums.CollectionTypeEnum;
-import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -26,7 +25,7 @@ public class CollectionCreateRequestDTO {
     private CollectionTypeEnum type;
 
     @NotNull(message = "O projeto  obrigat rio")
-    private ProjectModel project;
+    private Long projectId;
 
     @NotNull(message = "A data de cria o  obrigat rio")
     @PastOrPresent(message = "A data de cria o no pode ser no futuro")
@@ -52,8 +51,8 @@ public class CollectionCreateRequestDTO {
         return type;
     }
 
-    public ProjectModel getProject() {
-        return project;
+    public Long getProjectId() {
+        return projectId;
     }
 
     public LocalDateTime getCreatedAt() {

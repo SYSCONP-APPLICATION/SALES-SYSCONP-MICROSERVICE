@@ -8,12 +8,11 @@ import sales.sysconp.microservice.modules.project.project.infrastructure.entitie
 
 @Mapper(componentModel = "spring")
 public interface ProjectMapper {
-    @Mapping(target = "company.projects", ignore = true)
-    @Mapping(target = "company.users", ignore = true)
+    @Mapping(target = "company", ignore = true)
+    @Mapping(target = "properties", ignore = true)
+    @Mapping(target = "collections", ignore = true)
     ProjectModel toModel(ProjectEntity entity);
 
-    @Mapping(target = "company.projects", ignore = true)
-    @Mapping(target = "company.users", ignore = true)
     ProjectEntity toEntity(ProjectModel model);
 
     ProjectResponseDTO toResponseDTO(ProjectModel model);

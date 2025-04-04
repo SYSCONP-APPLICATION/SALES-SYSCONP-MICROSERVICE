@@ -7,8 +7,13 @@ import java.time.LocalDateTime;
 public class CollectionUpdateRequestDTO {
     private String name;
     private String description;
+    private Long projectId;
     private CollectionTypeEnum type;
     private LocalDateTime updatedAt;
+
+    public Long getProjectId() {
+        return projectId;
+    }
 
     public String getName() {
         return name;

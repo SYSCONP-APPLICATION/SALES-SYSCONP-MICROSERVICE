@@ -8,12 +8,10 @@ import sales.sysconp.microservice.modules.auth.user.infrastructure.entities.User
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    @Mapping(target = "company.users", ignore = true)
+    @Mapping(target = "company", ignore = true)
     UserModel toModel(UserEntity entity);
 
-    @Mapping(target = "company.users", ignore = true)
     UserEntity toEntity(UserModel model);
 
-    @Mapping(target = "company.users", ignore = true)
     UserResponseDTO toResponseDTO(UserModel model);
 }

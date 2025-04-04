@@ -1,6 +1,8 @@
 package sales.sysconp.microservice.modules.project.property_category.infrastructure.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
 
@@ -10,6 +12,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "property_categories")
+@SQLDelete(sql = "UPDATE property_categories SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class PropertyCategoryEntity {
     @Id
     private Long id;
@@ -24,7 +28,7 @@ public class PropertyCategoryEntity {
     private List<PropertyEntity> properties;
 
     @ManyToOne()
-    @JoinColumn(name = "company_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "company_id", nullable = false, referencedColumnName = "id", unique = false)
     private CompanyEntity company;
 
     @Column(updatable = false)
