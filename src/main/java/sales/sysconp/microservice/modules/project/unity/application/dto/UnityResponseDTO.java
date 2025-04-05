@@ -1,4 +1,4 @@
-package sales.sysconp.microservice.modules.project.unity.domain.models;
+package sales.sysconp.microservice.modules.project.unity.application.dto;
 
 import sales.sysconp.microservice.modules.project.compartment.domain.models.CompartmentModel;
 import sales.sysconp.microservice.modules.project.measurements.domain.models.MeasurementModel;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class UnityModel {
+public class UnityResponseDTO {
     private Long id;
     private UUID uuid;
     private String name;
@@ -17,11 +17,11 @@ public class UnityModel {
     private MeasurementModel measurement;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public UnityModel() {}
+    public UnityResponseDTO() {
+    }
 
-    public UnityModel(Long id, UUID uuid, String name, PropertyModel property, List<CompartmentModel> compartments, MeasurementModel measurement, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public UnityResponseDTO(Long id, UUID uuid, String name, PropertyModel property, List<CompartmentModel> compartments, MeasurementModel measurement, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -30,7 +30,6 @@ public class UnityModel {
         this.measurement = measurement;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -65,6 +64,14 @@ public class UnityModel {
         this.compartments = compartments;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public MeasurementModel getMeasurement() {
         return measurement;
     }
@@ -87,21 +94,5 @@ public class UnityModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

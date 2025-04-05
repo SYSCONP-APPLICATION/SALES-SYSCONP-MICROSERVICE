@@ -18,6 +18,9 @@ public class UnityEntity {
     @Column(unique = true, nullable = false)
     private UUID uuid;
 
+    @Column(nullable = true)
+    private String name;
+
     @ManyToOne()
     @JoinColumn(name = "property_id", nullable = false, referencedColumnName = "id")
     private PropertyEntity property;

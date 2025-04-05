@@ -1,4 +1,4 @@
-package sales.sysconp.microservice.modules.project.property.domain.models;
+package sales.sysconp.microservice.modules.project.property.application.dto;
 
 import sales.sysconp.microservice.features.client.domain.models.ClientModel;
 import sales.sysconp.microservice.modules.project.collections.domain.models.CollectionModel;
@@ -13,11 +13,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class PropertyModel {
+public class PropertyResponseDTO {
     private Long id;
     private UUID uuid;
     private String name;
     private String description;
+    private PropertyStatusEnum status;
     private PropertyTypeEnum type;
     private ProjectModel project;
     private CollectionModel collection;
@@ -25,30 +26,26 @@ public class PropertyModel {
     private ClientModel client;
     private PropertyCategoryModel propertyCategory;
     private List<UnityModel> unities;
-    private PropertyStatusEnum status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public PropertyModel() {
-    }
+    public PropertyResponseDTO() {}
 
-    public PropertyModel(Long id, UUID uuid, String name, String description, PropertyTypeEnum type, ProjectModel project, StreetModel street, ClientModel client, CollectionModel collection, PropertyStatusEnum status, PropertyCategoryModel propertyCategory, List<UnityModel> unities, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PropertyResponseDTO(Long id, UUID uuid, String name, String description, PropertyStatusEnum status, PropertyTypeEnum type, ProjectModel project, CollectionModel collection, StreetModel street, ClientModel client, PropertyCategoryModel propertyCategory, List<UnityModel> unities, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.description = description;
         this.type = type;
         this.project = project;
+        this.status = status;
         this.collection = collection;
+        this.street = street;
+        this.client = client;
         this.propertyCategory = propertyCategory;
         this.unities = unities;
-        this.street = street;
-        this.client =  client;
-        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -107,6 +104,22 @@ public class PropertyModel {
         this.collection = collection;
     }
 
+    public StreetModel getStreet() {
+        return street;
+    }
+
+    public void setStreet(StreetModel street) {
+        this.street = street;
+    }
+
+    public ClientModel getClient() {
+        return client;
+    }
+
+    public void setClient(ClientModel client) {
+        this.client = client;
+    }
+
     public PropertyCategoryModel getPropertyCategory() {
         return propertyCategory;
     }
@@ -137,30 +150,6 @@ public class PropertyModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
-    public StreetModel getStreet() {
-        return street;
-    }
-
-    public void setStreet(StreetModel street) {
-        this.street = street;
-    }
-
-    public ClientModel getClient() {
-        return client;
-    }
-
-    public void setClient(ClientModel client) {
-        this.client = client;
     }
 
     public PropertyStatusEnum getStatus() {
