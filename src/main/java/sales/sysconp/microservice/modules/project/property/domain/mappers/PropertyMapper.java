@@ -5,8 +5,9 @@ import org.mapstruct.Mapping;
 import sales.sysconp.microservice.modules.project.property.application.dto.PropertyResponseDTO;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
+import sales.sysconp.microservice.modules.project.unity.domain.mappers.UnityMapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { UnityMapper.class })
 public interface PropertyMapper {
     @Mapping(target = "project.properties", ignore = true)
     @Mapping(target = "project.streets", ignore = true)

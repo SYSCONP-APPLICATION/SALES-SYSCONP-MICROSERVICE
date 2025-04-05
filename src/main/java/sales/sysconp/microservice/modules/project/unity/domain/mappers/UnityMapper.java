@@ -8,10 +8,15 @@ import sales.sysconp.microservice.modules.project.unity.infrastructure.entities.
 
 @Mapper(componentModel = "spring")
 public interface UnityMapper {
-    @Mapping(target = "property", ignore = true)
     @Mapping(target = "measurement.unity", ignore = true)
     @Mapping(target = "compartments.unity", ignore = true)
+    @Mapping(target = "property.project", ignore = true)
+    @Mapping(target = "property.collection", ignore = true)
+    @Mapping(target = "property.street", ignore = true)
+    @Mapping(target = "property.propertyCategory", ignore = true)
+    @Mapping(target = "property.unities", ignore = true)
     UnityModel toModel(UnityEntity entity);
     UnityEntity toEntity(UnityModel model);
     UnityResponseDTO toResponseDTO(UnityModel model);
+
 }
