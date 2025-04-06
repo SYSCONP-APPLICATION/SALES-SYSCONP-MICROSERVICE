@@ -1,7 +1,10 @@
 package sales.sysconp.microservice.modules.project.compartment.infrastructure.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import sales.sysconp.microservice.modules.project.compartment.domain.enums.CompartmentTypeEnum;
+import sales.sysconp.microservice.modules.project.compartment.domain.enums.UnitOfMeditionEnum;
 import sales.sysconp.microservice.modules.project.unity.infrastructure.entities.UnityEntity;
 
 import java.time.LocalDateTime;
@@ -9,6 +12,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "compartments")
+@SQLDelete(sql = "UPDATE compartments SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class CompartmentEntity {
     @Id
     private Long id;
@@ -19,8 +24,19 @@ public class CompartmentEntity {
     @Column(nullable = true)
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private double area;
+    private UnitOfMeditionEnum heightMeasurement;
+
+    @Column(nullable = false)
+    private double height;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UnitOfMeditionEnum widthMeasurement;
+
+    @Column(nullable = false)
+    private double width;
 
     @Column(nullable = false)
     private CompartmentTypeEnum type;
@@ -41,11 +57,14 @@ public class CompartmentEntity {
     public CompartmentEntity() {
     }
 
-    public CompartmentEntity(Long id, UUID uuid, String description, double area, CompartmentTypeEnum type, UnityEntity unity, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CompartmentEntity(Long id, UUID uuid, String description, UnitOfMeditionEnum heightMeasurement, double height, UnitOfMeditionEnum widthMeasurement, double width, CompartmentTypeEnum type, UnityEntity unity, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.description = description;
-        this.area = area;
+        this.heightMeasurement = heightMeasurement;
+        this.height = height;
+        this.widthMeasurement = widthMeasurement;
+        this.width = width;
         this.type = type;
         this.unity = unity;
         this.createdAt = createdAt;
@@ -77,12 +96,36 @@ public class CompartmentEntity {
         this.description = description;
     }
 
-    public double getArea() {
-        return area;
+    public UnitOfMeditionEnum getHeightMeasurement() {
+        return heightMeasurement;
     }
 
-    public void setArea(double area) {
-        this.area = area;
+    public void setHeightMeasurement(UnitOfMeditionEnum heightMeasurement) {
+        this.heightMeasurement = heightMeasurement;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public UnitOfMeditionEnum getWidthMeasurement() {
+        return widthMeasurement;
+    }
+
+    public void setWidthMeasurement(UnitOfMeditionEnum widthMeasurement) {
+        this.widthMeasurement = widthMeasurement;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
     }
 
     public CompartmentTypeEnum getType() {

@@ -19,6 +19,7 @@ public interface PropertyMapper {
     @Mapping(target = "street.project", ignore = true)
     @Mapping(target = "propertyCategory.properties", ignore = true)
     @Mapping(target = "propertyCategory.company", ignore = true)
+    @Mapping(target = "unities", ignore = true)
     PropertyModel toModel(PropertyEntity entity);
     PropertyEntity toEntity(PropertyModel model);
 

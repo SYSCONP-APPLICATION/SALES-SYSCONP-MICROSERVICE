@@ -1,6 +1,8 @@
 package sales.sysconp.microservice.modules.project.collections.infrastructure.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import sales.sysconp.microservice.modules.project.collections.domain.enums.CollectionTypeEnum;
 import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
@@ -11,6 +13,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "collections")
+@SQLDelete(sql = "UPDATE collections SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class CollectionEntity {
     @Id
     private Long id;

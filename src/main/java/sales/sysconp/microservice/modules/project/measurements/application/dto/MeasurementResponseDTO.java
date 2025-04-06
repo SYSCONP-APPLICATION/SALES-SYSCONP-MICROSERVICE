@@ -1,4 +1,4 @@
-package sales.sysconp.microservice.modules.project.measurements.domain.models;
+package sales.sysconp.microservice.modules.project.measurements.application.dto;
 
 import sales.sysconp.microservice.modules.project.compartment.domain.enums.UnitOfMeditionEnum;
 import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
@@ -6,7 +6,7 @@ import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class MeasurementModel {
+public class MeasurementResponseDTO {
     private Long id;
     private UUID uuid;
     private double height;
@@ -16,12 +16,10 @@ public class MeasurementModel {
     private UnityModel unity;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public MeasurementModel() {
-    }
+    public MeasurementResponseDTO() {}
 
-    public MeasurementModel(Long id, UUID uuid, double height, double width, UnitOfMeditionEnum heightMeasurement, UnitOfMeditionEnum widthMeasurement, UnityModel unity, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public MeasurementResponseDTO(Long id, UUID uuid, double height, double width, UnitOfMeditionEnum heightMeasurement, UnitOfMeditionEnum widthMeasurement, UnityModel unity, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.height = height;
@@ -31,7 +29,6 @@ public class MeasurementModel {
         this.unity = unity;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -104,13 +101,5 @@ public class MeasurementModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }
