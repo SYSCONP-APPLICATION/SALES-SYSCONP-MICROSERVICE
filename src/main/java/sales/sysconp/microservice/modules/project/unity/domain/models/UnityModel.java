@@ -1,5 +1,7 @@
 package sales.sysconp.microservice.modules.project.unity.domain.models;
 
+import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
+import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import sales.sysconp.microservice.modules.project.compartment.domain.models.CompartmentModel;
 import sales.sysconp.microservice.modules.project.measurements.domain.models.MeasurementModel;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
@@ -12,6 +14,7 @@ public class UnityModel {
     private Long id;
     private UUID uuid;
     private String name;
+    private SaleModel sale;
     private PropertyModel property;
     private List<CompartmentModel> compartments;
     private MeasurementModel measurement;
@@ -21,16 +24,25 @@ public class UnityModel {
 
     public UnityModel() {}
 
-    public UnityModel(Long id, UUID uuid, String name, PropertyModel property, List<CompartmentModel> compartments, MeasurementModel measurement, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public UnityModel(Long id, UUID uuid, String name, SaleModel sale, PropertyModel property, List<CompartmentModel> compartments, MeasurementModel measurement, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
+        this.sale = sale;
         this.property = property;
         this.compartments = compartments;
         this.measurement = measurement;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public SaleModel getSale() {
+        return sale;
+    }
+
+    public void setSale(SaleModel sale) {
+        this.sale = sale;
     }
 
     public Long getId() {

@@ -15,6 +15,7 @@ public interface UnityMapper {
     @Mapping(target = "property.street", ignore = true)
     @Mapping(target = "property.propertyCategory", ignore = true)
     @Mapping(target = "property.unities", ignore = true)
+    @Mapping(target = "sale", ignore = true)
     UnityModel toModel(UnityEntity entity);
     UnityEntity toEntity(UnityModel model);
     UnityResponseDTO toResponseDTO(UnityModel model);

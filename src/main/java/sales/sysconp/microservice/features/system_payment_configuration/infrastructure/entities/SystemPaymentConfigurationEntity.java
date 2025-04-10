@@ -13,7 +13,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import sales.sysconp.microservice.features.payment_stump.infrastructure.entities.PaymentStampEntity;
-// import sales.sysconp.microservice.features.payment_stamp.infrastructure.entities.PaymentStampEntity;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;

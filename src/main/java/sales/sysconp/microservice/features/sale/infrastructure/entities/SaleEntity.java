@@ -26,6 +26,7 @@ import sales.sysconp.microservice.features.payment_configuration.infrastructure.
 import sales.sysconp.microservice.features.sale.domain.enums.SaleStatus;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 import sales.sysconp.microservice.modules.auth.user.infrastructure.entities.UserEntity;
+import sales.sysconp.microservice.modules.project.unity.infrastructure.entities.UnityEntity;
 
 @Entity
 @Table(name = "sales")
@@ -67,6 +68,9 @@ public class SaleEntity {
     @JoinColumn(name = "company_id", nullable = false)
     private CompanyEntity company;
 
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
+    private List<UnityEntity> unities;
+
     @Column(updatable = false)  
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -81,12 +85,13 @@ public class SaleEntity {
     public SaleEntity() {
     }
 
-    public SaleEntity(Long id, UUID uuid, SaleStatus status, ClientEntity client, UserEntity user, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SaleEntity(Long id, UUID uuid, SaleStatus status, ClientEntity client, UserEntity user, List<UnityEntity> unities, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
         this.client = client;
         this.user = user;
+        this.unities = unities;
         this.payments = payments;
         this.installments = installments;
         this.paymentConfiguration = paymentConfiguration;
@@ -98,6 +103,14 @@ public class SaleEntity {
 
     public Long getId() {
         return id;
+    }
+
+    public void setUnities(List<UnityEntity> unities) {
+        this.unities = unities;
+    }
+
+    public List<UnityEntity> getUnities() {
+        return unities;
     }
 
     public void setId(Long id) {

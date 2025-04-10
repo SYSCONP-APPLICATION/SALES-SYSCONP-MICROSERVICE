@@ -3,6 +3,7 @@ package sales.sysconp.microservice.modules.project.unity.infrastructure.entities
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import sales.sysconp.microservice.modules.project.compartment.infrastructure.entities.CompartmentEntity;
 import sales.sysconp.microservice.modules.project.measurements.infrastructure.entities.MeasurementEntity;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
@@ -35,6 +36,10 @@ public class UnityEntity {
     @OneToOne()
     @JoinColumn(name = "measurement_id", nullable = true, referencedColumnName = "id")
     private MeasurementEntity measurement;
+
+    @ManyToOne()
+    @JoinColumn(name = "sale_id", nullable = true, referencedColumnName = "id")
+    private SaleEntity sale;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
