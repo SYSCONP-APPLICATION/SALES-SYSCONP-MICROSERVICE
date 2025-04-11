@@ -1,32 +1,34 @@
-package sales.sysconp.microservice.features.payment_configuration.domain.models;
+package sales.sysconp.microservice.features.system_payment_configuration.application.dto;
 
-import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class PaymentConfigurationModel {
+public class SystemPaymentConfigurationResponseDTO {
     private Long id;
     private UUID uuid;
     private Long dayOfMonth;
-    private SaleModel sale;
     private Long applyDebtAfter;
+    private boolean requireOnCreateSale;
+    private boolean requireForAllSales;
+    private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public PaymentConfigurationModel() {
+    public SystemPaymentConfigurationResponseDTO() {
     }
 
-    public PaymentConfigurationModel(Long id, UUID uuid, Long applyDebtAfter, Long dayOfMonth, SaleModel sale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SystemPaymentConfigurationResponseDTO(Long id, UUID uuid, Long dayOfMonth, Long applyDebtAfter, boolean requireOnCreateSale, boolean requireForAllSales, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
         this.applyDebtAfter = applyDebtAfter;
-        this.sale = sale;
+        this.requireOnCreateSale = requireOnCreateSale;
+        this.requireForAllSales = requireForAllSales;
+        this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -61,12 +63,28 @@ public class PaymentConfigurationModel {
         this.dayOfMonth = dayOfMonth;
     }
 
-    public SaleModel getSale() {
-        return sale;
+    public boolean isRequireOnCreateSale() {
+        return requireOnCreateSale;
     }
 
-    public void setSale(SaleModel sale) {
-        this.sale = sale;
+    public void setRequireOnCreateSale(boolean requireOnCreateSale) {
+        this.requireOnCreateSale = requireOnCreateSale;
+    }
+
+    public boolean isRequireForAllSales() {
+        return requireForAllSales;
+    }
+
+    public void setRequireForAllSales(boolean requireForAllSales) {
+        this.requireForAllSales = requireForAllSales;
+    }
+
+    public CompanyModel getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyModel company) {
+        this.company = company;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -83,13 +101,5 @@ public class PaymentConfigurationModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

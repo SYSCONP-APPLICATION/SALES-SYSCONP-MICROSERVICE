@@ -72,6 +72,9 @@ public class CompanyService implements CompanyServiceInPort {
         if (companyUpdateRequestDTO.getUpdatedAt() != null) {
             model.setUpdatedAt(companyUpdateRequestDTO.getUpdatedAt());
         }
+        if (companyUpdateRequestDTO.getLocation() != null) {
+            model.setLocation(companyUpdateRequestDTO.getLocation());
+        }
 
         return companyMapper.toResponseDTO(this.companyRepositoryAdapter.save(model));
     }
@@ -108,6 +111,7 @@ public class CompanyService implements CompanyServiceInPort {
         companyModel.setUuid(companyCreateRequestDTO.getUuid());
         companyModel.setCommercialName(companyCreateRequestDTO.getCommercialName());
         companyModel.setBrandName(companyCreateRequestDTO.getBrandName());
+        companyModel.setLocation(companyCreateRequestDTO.getLocation());
         companyModel.setCreatedAt(companyCreateRequestDTO.getCreatedAt());
         companyModel.setUpdatedAt(companyCreateRequestDTO.getUpdatedAt());
 

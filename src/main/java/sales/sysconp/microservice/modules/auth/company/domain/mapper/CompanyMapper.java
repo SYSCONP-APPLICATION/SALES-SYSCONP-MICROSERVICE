@@ -16,6 +16,7 @@ public interface CompanyMapper {
     @Mapping(target = "paymentMethods", ignore = true)
     @Mapping(target = "clients", ignore = true)
     @Mapping(target = "banks", ignore = true)
+    @Mapping(target = "systemPaymentConfiguration.company", ignore = true)
     CompanyModel toModel(CompanyEntity entity);
 
     CompanyEntity toEntity(CompanyModel model);

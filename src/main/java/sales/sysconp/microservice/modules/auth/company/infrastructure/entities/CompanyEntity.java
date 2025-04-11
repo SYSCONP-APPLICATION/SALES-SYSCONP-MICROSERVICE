@@ -41,6 +41,9 @@ public class CompanyEntity {
     @Column(unique = true, nullable = false)
     private String commercialName;
 
+    @Column(unique = true, nullable = false)
+    private String location;
+
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<UserEntity> users;
 
@@ -62,8 +65,7 @@ public class CompanyEntity {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<ProjectEntity> projects;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "system_payment_configuration_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "company")
     private SystemPaymentConfigurationEntity systemPaymentConfiguration;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
@@ -81,9 +83,12 @@ public class CompanyEntity {
     public CompanyEntity() {
     }
 
-    public CompanyEntity(Long id, UUID uuid, List<UserEntity> users, List<BankEntity> banks, List<ClientEntity> clients, List<PaymentEntity> payments, List<PaymentMethodEntity> paymentMethods, List<SaleEntity> sales, List<ProjectEntity> projects, SystemPaymentConfigurationEntity systemPaymentConfiguration, List<PropertyCategoryEntity> propertyCategories, String brandName, String commercialName, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CompanyEntity(Long id, UUID uuid, String brandName, String commercialName, String location, List<UserEntity> users, List<BankEntity> banks, List<ClientEntity> clients, List<PaymentEntity> payments, List<PaymentMethodEntity> paymentMethods, List<SaleEntity> sales, List<ProjectEntity> projects, SystemPaymentConfigurationEntity systemPaymentConfiguration, List<PropertyCategoryEntity> propertyCategories, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
+        this.brandName = brandName;
+        this.commercialName = commercialName;
+        this.location = location;
         this.users = users;
         this.banks = banks;
         this.clients = clients;
@@ -93,8 +98,6 @@ public class CompanyEntity {
         this.projects = projects;
         this.systemPaymentConfiguration = systemPaymentConfiguration;
         this.propertyCategories = propertyCategories;
-        this.brandName = brandName;
-        this.commercialName = commercialName;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -102,6 +105,14 @@ public class CompanyEntity {
 
     public Long getId() {
         return id;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setId(Long id) {
