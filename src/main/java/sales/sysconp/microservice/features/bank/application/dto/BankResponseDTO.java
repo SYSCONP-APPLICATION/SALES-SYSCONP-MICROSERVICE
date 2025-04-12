@@ -1,13 +1,11 @@
-package sales.sysconp.microservice.features.bank.domain.models;
+package sales.sysconp.microservice.features.bank.application.dto;
 
-import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
-import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
+import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
-public class BankModel {
+public class BankResponseDTO {
     private Long id;
     private UUID uuid;
     private String acronym;
@@ -15,16 +13,15 @@ public class BankModel {
     private String accountHolder;
     private String accountNumber;
     private String iban;
-    private List<PaymentModel> payments;
-    private CompanyModel company;
+    private CompanyEntity company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
-    public BankModel() {
+    public BankResponseDTO() {
     }
 
-    public BankModel(Long id, UUID uuid, String acronym, String name, String accountHolder, String accountNumber, String iban, List<PaymentModel> payments, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public BankResponseDTO(Long id, UUID uuid, String acronym, String name, String accountHolder, String accountNumber, String iban, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.acronym = acronym;
@@ -32,7 +29,6 @@ public class BankModel {
         this.accountHolder = accountHolder;
         this.accountNumber = accountNumber;
         this.iban = iban;
-        this.payments = payments;
         this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -95,19 +91,11 @@ public class BankModel {
         this.iban = iban;
     }
 
-    public List<PaymentModel> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(List<PaymentModel> payments) {
-        this.payments = payments;
-    }
-
-    public CompanyModel getCompany() {
+    public CompanyEntity getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyModel company) {
+    public void setCompany(CompanyEntity company) {
         this.company = company;
     }
 
