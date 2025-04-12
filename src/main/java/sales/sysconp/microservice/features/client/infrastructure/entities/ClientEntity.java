@@ -4,20 +4,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
+import sales.sysconp.microservice.features.address.infrastructure.entities.AddressEntity;
 import sales.sysconp.microservice.features.contact.infrastructure.entities.ContactEntity;
 import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
@@ -25,6 +18,8 @@ import sales.sysconp.microservice.modules.project.property.infrastructure.entiti
 
 @Entity
 @Table(name = "clients")
+@SQLDelete(sql = "UPDATE clients SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,6 +49,9 @@ public class ClientEntity {
     @JoinColumn(name = "company_id", nullable = false)
     private CompanyEntity company;
 
+    @OneToOne(mappedBy = "client")
+    private AddressEntity address;
+
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<PropertyEntity> properties;
 
@@ -71,7 +69,7 @@ public class ClientEntity {
     public ClientEntity() {
     }
 
-    public ClientEntity(Long id, UUID uuid, String name, String identityCardNumber, List<ContactEntity> contacts, List<SaleEntity> sales, CompanyEntity company, List<PropertyEntity> properties, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public ClientEntity(Long id, UUID uuid, String name, String identityCardNumber, AddressEntity address, List<ContactEntity> contacts, List<SaleEntity> sales, CompanyEntity company, List<PropertyEntity> properties, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -79,6 +77,7 @@ public class ClientEntity {
         this.contacts = contacts;
         this.sales = sales;
         this.company = company;
+        this.address = address;
         this.properties = properties;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -172,4 +171,8 @@ public class ClientEntity {
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
+
+    public AddressEntity getAddress() { return address; }
+
+    public void setAddress(AddressEntity address) { this.address = address; }
 }

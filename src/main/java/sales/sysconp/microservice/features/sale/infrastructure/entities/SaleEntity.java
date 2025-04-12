@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.CascadeType;
@@ -30,6 +32,8 @@ import sales.sysconp.microservice.modules.project.unity.infrastructure.entities.
 
 @Entity
 @Table(name = "sales")
+@SQLDelete(sql = "UPDATE sales SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class SaleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
