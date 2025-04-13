@@ -1,0 +1,19 @@
+package sales.sysconp.microservice.features.client.application.ports.out;
+
+import sales.sysconp.microservice.features.client.domain.models.ClientModel;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+public interface ClientRepositoryOutPort {
+    List<ClientModel> findAllByCompanyId(Long companyId);
+
+    Optional<ClientModel> findById(Long id);
+
+    Optional<ClientModel> findByUUID(UUID uuid);
+
+    ClientModel save(ClientModel clientModel);
+
+    void deleteById(Long id);
+}
