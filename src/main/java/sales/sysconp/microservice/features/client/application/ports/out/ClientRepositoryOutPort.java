@@ -13,6 +13,8 @@ public interface ClientRepositoryOutPort {
 
     Optional<ClientModel> findByUUID(UUID uuid);
 
+    Optional<ClientModel> findByIdentityCardNumberAndCompanyId(String identityCardNumber, Long companyId);
+
     ClientModel save(ClientModel clientModel);
 
     void deleteById(Long id);

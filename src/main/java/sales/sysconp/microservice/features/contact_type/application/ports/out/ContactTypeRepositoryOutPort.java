@@ -11,7 +11,9 @@ public interface ContactTypeRepositoryOutPort {
 
     Optional<ContactTypeModel> findById(Long id);
 
-    Optional<ContactTypeModel> findByUUID(UUID uuid);
+    Optional<ContactTypeModel> findByUuid(UUID uuid);
+
+    Optional<ContactTypeModel> findByName(String name);
 
     ContactTypeModel save(ContactTypeModel contactTypeModel);
 

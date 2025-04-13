@@ -13,9 +13,13 @@ public interface ContactServiceInPort {
 
     ContactResponseDTO updateContact(Long id, ContactUpdateRequestDTO contactUpdateRequestDTO);
 
-    Optional<ContactResponseDTO> getContactById(Long id);
+    ContactResponseDTO getContactById(Long id);
 
-    Optional<ContactResponseDTO> getContactByUUID(UUID uuid);
+    List<ContactResponseDTO> getContactsByClientId(Long clientId);
+
+    ContactResponseDTO getContactByUUID(UUID uuid);
+
+    List<ContactResponseDTO> findAllContactsByClientId(Long clientId);
 
     List<ContactResponseDTO> getAllContactsByCompanyId(Long companyId);
 

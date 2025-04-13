@@ -38,6 +38,20 @@ public class ContactRepositoryAdapter implements ContactRepositoryOutPort {
     }
 
     @Override
+    public List<ContactModel> findAllByClientId(Long clientId) {
+        return jpaRepository.findAllByClientId(clientId)
+                .stream()
+                .map(mapper::toModel)
+                .toList();
+    }
+
+    @Override
+    public Optional<ContactModel> findByValueAndClientIdAndContactTypeId(String value, Long clientId, Long contactTypeId) {
+        return jpaRepository.findByValueAndClientIdAndContactTypeId(value, clientId, contactTypeId)
+                .map(mapper::toModel);
+    }
+
+    @Override
     public ContactModel save(ContactModel contactModel) {
         return mapper.toModel(jpaRepository.save(mapper.toEntity(contactModel)));
     }

@@ -13,6 +13,10 @@ public interface ContactRepositoryOutPort {
 
     Optional<ContactModel> findByUUID(UUID uuid);
 
+    List<ContactModel> findAllByClientId(Long clientId);
+
+    Optional<ContactModel> findByValueAndClientIdAndContactTypeId(String value, Long clientId, Long contactTypeId);
+
     ContactModel save(ContactModel contactModel);
 
     void deleteById(Long id);

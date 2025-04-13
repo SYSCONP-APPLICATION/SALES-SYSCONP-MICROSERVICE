@@ -11,4 +11,8 @@ public interface JPAContactRepository extends JpaRepository<ContactEntity, Long>
     List<ContactEntity> findAllByCompanyId(Long companyId);
 
     Optional<ContactEntity> findByUuid(UUID uuid);
+
+    List<ContactEntity> findAllByClientId(Long clientId);
+
+    Optional<ContactEntity> findByValueAndClientIdAndContactTypeId(String value, Long clientId, Long contactTypeId);
 }

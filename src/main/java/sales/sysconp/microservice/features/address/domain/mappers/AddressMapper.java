@@ -1,6 +1,7 @@
 package sales.sysconp.microservice.features.address.domain.mappers;
 
 import org.mapstruct.Mapper;
+import sales.sysconp.microservice.features.address.application.dto.AddressResponseDTO;
 import sales.sysconp.microservice.features.address.domain.models.AddressModel;
 import sales.sysconp.microservice.features.address.infrastructure.entities.AddressEntity;
 
@@ -8,4 +9,5 @@ import sales.sysconp.microservice.features.address.infrastructure.entities.Addre
 public interface AddressMapper {
     AddressModel toModel(AddressEntity addressEntity);
     AddressEntity toEntity(AddressModel addressModel);
+    AddressResponseDTO toResponseDTO(AddressModel addressModel);
 }

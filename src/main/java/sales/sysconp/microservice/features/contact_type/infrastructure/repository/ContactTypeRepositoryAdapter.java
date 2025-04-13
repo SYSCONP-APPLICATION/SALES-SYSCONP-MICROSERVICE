@@ -30,8 +30,13 @@ public class ContactTypeRepositoryAdapter  implements ContactTypeRepositoryOutPo
     }
 
     @Override
-    public Optional<ContactTypeModel> findByUUID(UUID uuid) {
+    public Optional<ContactTypeModel> findByUuid(UUID uuid) {
         return jpaRepository.findByUuid(uuid).map(mapper::toModel);
+    }
+
+    @Override
+    public Optional<ContactTypeModel> findByName(String name) {
+        return jpaRepository.findByName(name).map(mapper::toModel);
     }
 
     @Override

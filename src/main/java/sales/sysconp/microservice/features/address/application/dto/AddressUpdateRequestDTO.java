@@ -15,6 +15,8 @@ public class AddressUpdateRequestDTO {
 
     private String description;
 
+    private String postalCode;
+
     public String getCountry() {
         return country;
     }
@@ -41,5 +43,9 @@ public class AddressUpdateRequestDTO {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
     }
 }

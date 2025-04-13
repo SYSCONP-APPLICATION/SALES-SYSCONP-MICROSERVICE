@@ -22,6 +22,8 @@ public class AddressCreateRequestDTO {
 
     private String description;
 
+    private String postalCode;
+
     @NotNull(message = "Client Id is required")
     private Long clientId;
 
@@ -58,5 +60,9 @@ public class AddressCreateRequestDTO {
 
     public String getCountry() {
         return country;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
     }
 }

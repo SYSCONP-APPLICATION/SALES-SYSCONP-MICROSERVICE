@@ -40,6 +40,12 @@ public class ClientRepositoryAdapter implements ClientRepositoryOutPort {
     }
 
     @Override
+    public Optional<ClientModel> findByIdentityCardNumberAndCompanyId(String identityCardNumber, Long companyId) {
+        return jpaRepository.findByIdentityCardNumberAndCompanyId(identityCardNumber, companyId)
+                .map(clientMapper::toModel);
+    }
+
+    @Override
     public ClientModel save(ClientModel clientModel) {
         ClientEntity clientEntity = clientMapper.toEntity(clientModel);
         return clientMapper.toModel(jpaRepository.save(clientEntity));

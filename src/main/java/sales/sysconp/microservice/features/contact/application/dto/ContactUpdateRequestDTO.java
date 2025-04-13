@@ -7,8 +7,6 @@ public class ContactUpdateRequestDTO {
 
     private Long contactTypeId;
 
-    private Long clientId;
-
     public String getValue() {
         return value;
     }
@@ -19,9 +17,5 @@ public class ContactUpdateRequestDTO {
 
     public Long getContactTypeId() {
         return contactTypeId;
-    }
-
-    public Long getClientId() {
-        return clientId;
     }
 }

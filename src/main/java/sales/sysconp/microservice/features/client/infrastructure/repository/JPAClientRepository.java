@@ -11,4 +11,6 @@ public interface JPAClientRepository extends JpaRepository<ClientEntity, Long> {
     List<ClientEntity> findByCompanyId(Long companyId);
 
     Optional<ClientEntity> findByUuid(UUID uuid);
+
+    Optional<ClientEntity> findByIdentityCardNumberAndCompanyId(String identityCardNumber, Long companyId);
 }

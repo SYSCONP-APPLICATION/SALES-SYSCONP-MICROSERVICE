@@ -13,9 +13,9 @@ public interface ContactTypeServiceInPort {
 
     ContactTypeResponseDTO updateContactType(Long id, ContactTypeUpdateRequestDTO contactTypeUpdateRequestDTO);
 
-    Optional<ContactTypeResponseDTO> getContactTypeById(Long id);
+    ContactTypeResponseDTO getContactTypeById(Long id);
 
-    Optional<ContactTypeResponseDTO> getContactTypeByUUID(UUID uuid);
+    ContactTypeResponseDTO getContactTypeByUUID(UUID uuid);
 
     List<ContactTypeResponseDTO> getAllContactTypes();
 

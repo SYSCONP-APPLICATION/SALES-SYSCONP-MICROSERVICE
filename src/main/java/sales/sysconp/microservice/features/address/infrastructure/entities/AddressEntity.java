@@ -41,6 +41,9 @@ public class AddressEntity {
     private String municipality;
 
     @Column(nullable = false)
+    private String postalCode;
+
+    @Column(nullable = false)
     private String city;
 
     @Column(nullable = true)
@@ -65,11 +68,12 @@ public class AddressEntity {
 
     public AddressEntity() {}
 
-    public AddressEntity(Long id, UUID uuid, ClientEntity client, String country, String province, String municipality, String city, String neighborhood, String street, String description, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public AddressEntity(Long id, UUID uuid, ClientEntity client, String postalCode, String country, String province, String municipality, String city, String neighborhood, String street, String description, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.client = client;
         this.country = country;
+        this.postalCode = postalCode;
         this.province = province;
         this.municipality = municipality;
         this.city = city;
@@ -183,5 +187,13 @@ public class AddressEntity {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 }

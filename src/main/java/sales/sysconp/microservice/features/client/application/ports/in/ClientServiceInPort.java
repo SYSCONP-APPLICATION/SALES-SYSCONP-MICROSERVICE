@@ -12,15 +12,13 @@ import java.util.UUID;
 public interface ClientServiceInPort {
     List<ClientResponseDTO> getAllClientsByCompanyId(Long companyId);
 
-    Optional<ClientResponseDTO> getClientById(Long id);
+    ClientResponseDTO getClientById(Long id);
 
-    Optional<ClientResponseDTO> getClientByUUID(UUID uuid);
-
-    Optional<ClientResponseDTO> findByNameAndCompanyId(String name);
+    ClientResponseDTO getClientByUUID(UUID uuid);
 
     ClientModel createClient(ClientCreateRequestDTO clientCreateRequestDTO);
 
-    ClientModel updateClient(ClientUpdateRequestDTO clientUpdateRequestDTO);
+    ClientModel updateClient(Long id, ClientUpdateRequestDTO clientUpdateRequestDTO);
 
     void deleteClientById(Long id);
 }

@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface JPAContactTypeRepository extends JpaRepository<ContactTypeEntity, Long> {
     Optional<ContactTypeEntity> findByUuid(UUID uuid);
+    Optional<ContactTypeEntity> findByName(String name);
 }

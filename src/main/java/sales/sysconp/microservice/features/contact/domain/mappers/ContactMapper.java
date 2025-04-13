@@ -1,6 +1,7 @@
 package sales.sysconp.microservice.features.contact.domain.mappers;
 
 import org.mapstruct.Mapper;
+import sales.sysconp.microservice.features.contact.application.dto.ContactResponseDTO;
 import sales.sysconp.microservice.features.contact.domain.models.ContactModel;
 import sales.sysconp.microservice.features.contact.infrastructure.entities.ContactEntity;
 
@@ -8,4 +9,5 @@ import sales.sysconp.microservice.features.contact.infrastructure.entities.Conta
 public interface ContactMapper {
     ContactModel toModel(ContactEntity entity);
     ContactEntity toEntity(ContactModel model);
+    ContactResponseDTO toResponseDTO(ContactModel model);
 }

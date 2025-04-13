@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.features.address.domain.models;
 
+import sales.sysconp.microservice.features.client.domain.models.ClientModel;
 import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
 
 import java.time.LocalDateTime;
@@ -8,12 +9,13 @@ import java.util.UUID;
 public class AddressModel {
     private Long id;
     private UUID uuid;
-    private ClientEntity client;
+    private ClientModel client;
     private String country;
     private String province;
     private String municipality;
     private String city;
     private String neighborhood;
+    private String postalCode;
     private String street;
     private String description;
     private LocalDateTime createdAt;
@@ -22,7 +24,7 @@ public class AddressModel {
 
     public AddressModel() { }
 
-    public AddressModel(Long id, UUID uuid, ClientEntity client, String country, String province, String municipality, String city, String neighborhood, String street, String description, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public AddressModel(Long id, UUID uuid, ClientModel client, String postalCode, String country, String province, String municipality, String city, String neighborhood, String street, String description, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.client = client;
@@ -30,6 +32,7 @@ public class AddressModel {
         this.province = province;
         this.municipality = municipality;
         this.city = city;
+        this.postalCode = postalCode;
         this.neighborhood = neighborhood;
         this.street = street;
         this.description = description;
@@ -54,11 +57,11 @@ public class AddressModel {
         this.uuid = uuid;
     }
 
-    public ClientEntity getClient() {
+    public ClientModel getClient() {
         return client;
     }
 
-    public void setClient(ClientEntity client) {
+    public void setClient(ClientModel client) {
         this.client = client;
     }
 
@@ -132,6 +135,14 @@ public class AddressModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public LocalDateTime getDeletedAt() {
