@@ -1,7 +1,7 @@
 package sales.sysconp.microservice.features.bank.domain.models;
 
-import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
+import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
+import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,8 +15,8 @@ public class BankModel {
     private String accountHolder;
     private String accountNumber;
     private String iban;
-    private List<PaymentEntity> payments;
-    private CompanyEntity company;
+    private List<PaymentModel> payments;
+    private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -24,7 +24,7 @@ public class BankModel {
     public BankModel() {
     }
 
-    public BankModel(Long id, UUID uuid, String acronym, String name, String accountHolder, String accountNumber, String iban, List<PaymentEntity> payments, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public BankModel(Long id, UUID uuid, String acronym, String name, String accountHolder, String accountNumber, String iban, List<PaymentModel> payments, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.acronym = acronym;
@@ -95,19 +95,19 @@ public class BankModel {
         this.iban = iban;
     }
 
-    public List<PaymentEntity> getPayments() {
+    public List<PaymentModel> getPayments() {
         return payments;
     }
 
-    public void setPayments(List<PaymentEntity> payments) {
+    public void setPayments(List<PaymentModel> payments) {
         this.payments = payments;
     }
 
-    public CompanyEntity getCompany() {
+    public CompanyModel getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyEntity company) {
+    public void setCompany(CompanyModel company) {
         this.company = company;
     }
 

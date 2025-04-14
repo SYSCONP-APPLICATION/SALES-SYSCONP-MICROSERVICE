@@ -1,6 +1,5 @@
 package sales.sysconp.microservice.features.payment_configuration.domain.models;
 
-import sales.sysconp.microservice.features.payment_stump.domain.models.PaymentStampModel;
 import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
 
 import java.time.LocalDateTime;
@@ -11,7 +10,7 @@ public class PaymentConfigurationModel {
     private UUID uuid;
     private Long dayOfMonth;
     private SaleModel sale;
-    private PaymentStampModel paymentStamp;
+    private Long applyDebtAfter;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -19,12 +18,12 @@ public class PaymentConfigurationModel {
     public PaymentConfigurationModel() {
     }
 
-    public PaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, SaleModel sale, PaymentStampModel paymentStamp, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PaymentConfigurationModel(Long id, UUID uuid, Long applyDebtAfter, Long dayOfMonth, SaleModel sale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
+        this.applyDebtAfter = applyDebtAfter;
         this.sale = sale;
-        this.paymentStamp = paymentStamp;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -36,6 +35,14 @@ public class PaymentConfigurationModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getApplyDebtAfter() {
+        return applyDebtAfter;
+    }
+
+    public void setApplyDebtAfter(Long applyDebtAfter) {
+        this.applyDebtAfter = applyDebtAfter;
     }
 
     public UUID getUuid() {
@@ -60,14 +67,6 @@ public class PaymentConfigurationModel {
 
     public void setSale(SaleModel sale) {
         this.sale = sale;
-    }
-
-    public PaymentStampModel getPaymentStamp() {
-        return paymentStamp;
-    }
-
-    public void setPaymentStamp(PaymentStampModel paymentStamp) {
-        this.paymentStamp = paymentStamp;
     }
 
     public LocalDateTime getCreatedAt() {

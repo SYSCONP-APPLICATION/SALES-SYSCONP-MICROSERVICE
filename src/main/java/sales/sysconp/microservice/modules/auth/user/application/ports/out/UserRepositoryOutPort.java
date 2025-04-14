@@ -15,5 +15,7 @@ public interface UserRepositoryOutPort {
 
     UserModel save(UserModel model);
 
+    List<UserModel> findByCompanyId(long companyId);
+
     void deleteById(long id);
 }

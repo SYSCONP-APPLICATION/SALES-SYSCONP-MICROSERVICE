@@ -3,6 +3,7 @@ package sales.sysconp.microservice.modules.project.property.domain.models;
 import sales.sysconp.microservice.features.client.domain.models.ClientModel;
 import sales.sysconp.microservice.modules.project.collections.domain.models.CollectionModel;
 import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
+import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
 import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyTypeEnum;
 import sales.sysconp.microservice.modules.project.property_category.domain.models.PropertyCategoryModel;
 import sales.sysconp.microservice.modules.project.street.domain.models.StreetModel;
@@ -24,6 +25,7 @@ public class PropertyModel {
     private ClientModel client;
     private PropertyCategoryModel propertyCategory;
     private List<UnityModel> unities;
+    private PropertyStatusEnum status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -31,7 +33,7 @@ public class PropertyModel {
     public PropertyModel() {
     }
 
-    public PropertyModel(Long id, UUID uuid, String name, String description, PropertyTypeEnum type, ProjectModel project, StreetModel street, ClientModel client, CollectionModel collection, PropertyCategoryModel propertyCategory, List<UnityModel> unities, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PropertyModel(Long id, UUID uuid, String name, String description, PropertyTypeEnum type, ProjectModel project, StreetModel street, ClientModel client, CollectionModel collection, PropertyStatusEnum status, PropertyCategoryModel propertyCategory, List<UnityModel> unities, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -43,6 +45,7 @@ public class PropertyModel {
         this.unities = unities;
         this.street = street;
         this.client =  client;
+        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -158,5 +161,13 @@ public class PropertyModel {
 
     public void setClient(ClientModel client) {
         this.client = client;
+    }
+
+    public PropertyStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(PropertyStatusEnum status) {
+        this.status = status;
     }
 }

@@ -7,6 +7,7 @@ import sales.sysconp.microservice.features.payment_configuration.domain.models.P
 import sales.sysconp.microservice.features.sale.domain.enums.SaleStatus;
 import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
+import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +19,7 @@ public class SaleModel {
     private SaleStatus status;
     private ClientModel client;
     private UserModel user;
+    private List<UnityModel> unities;
     private List<PaymentModel> payments;
     private List<InstallmentModel> installments;
     private PaymentConfigurationModel paymentConfiguration;
@@ -29,12 +31,13 @@ public class SaleModel {
     public SaleModel() {
     }
 
-    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientModel client, UserModel user, List<PaymentModel> payments, List<InstallmentModel> installments, PaymentConfigurationModel paymentConfiguration, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientModel client, UserModel user, List<UnityModel> unities, List<PaymentModel> payments, List<InstallmentModel> installments, PaymentConfigurationModel paymentConfiguration, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
         this.client = client;
         this.user = user;
+        this.unities = unities;
         this.payments = payments;
         this.installments = installments;
         this.paymentConfiguration = paymentConfiguration;
@@ -42,6 +45,14 @@ public class SaleModel {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public List<UnityModel> getUnities() {
+        return unities;
+    }
+
+    public void setUnities(List<UnityModel> unities) {
+        this.unities = unities;
     }
 
     public Long getId() {

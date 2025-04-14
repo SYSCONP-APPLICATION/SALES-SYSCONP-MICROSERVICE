@@ -1,6 +1,8 @@
 package sales.sysconp.microservice.modules.project.project.infrastructure.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 import sales.sysconp.microservice.modules.project.collections.infrastructure.entities.CollectionEntity;
 import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
@@ -13,6 +15,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "projects")
+@SQLDelete(sql = "UPDATE projects SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class ProjectEntity {
     @Id
     private Long id;
@@ -32,6 +36,9 @@ public class ProjectEntity {
     @Column(nullable = false)
     private LocalDateTime startDate;
 
+    @Column(nullable = false)
+    private String location;
+
     @Column(nullable = true)
     private LocalDateTime endDate;
 
@@ -45,12 +52,8 @@ public class ProjectEntity {
     private List<CollectionEntity> collections;
 
     @ManyToOne()
-    @JoinColumn(name = "company_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "company_id", nullable = false, unique = false, referencedColumnName = "id")
     private CompanyEntity company;
-
-    @ManyToOne()
-    @JoinColumn(name = "street_id", nullable = false, referencedColumnName = "id")
-    private StreetEntity street;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -64,19 +67,19 @@ public class ProjectEntity {
     public ProjectEntity() {
     }
 
-    public ProjectEntity(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, LocalDateTime startDate, LocalDateTime endDate, List<StreetEntity> streets, List<PropertyEntity> properties, List<CollectionEntity> collections, CompanyEntity company, StreetEntity street, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public ProjectEntity(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, String location, LocalDateTime startDate, LocalDateTime endDate, List<StreetEntity> streets, List<PropertyEntity> properties, List<CollectionEntity> collections, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.description = description;
         this.status = status;
         this.startDate = startDate;
+        this.location = location;
         this.endDate = endDate;
         this.streets = streets;
         this.properties = properties;
         this.collections = collections;
         this.company = company;
-        this.street = street;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -92,6 +95,14 @@ public class ProjectEntity {
 
     public UUID getUuid() {
         return uuid;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setUuid(UUID uuid) {
@@ -168,14 +179,6 @@ public class ProjectEntity {
 
     public void setCompany(CompanyEntity company) {
         this.company = company;
-    }
-
-    public StreetEntity getStreet() {
-        return street;
-    }
-
-    public void setStreet(StreetEntity street) {
-        this.street = street;
     }
 
     public LocalDateTime getCreatedAt() {

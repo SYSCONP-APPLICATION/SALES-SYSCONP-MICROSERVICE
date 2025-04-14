@@ -1,9 +1,12 @@
 package sales.sysconp.microservice.modules.project.property.infrastructure.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
 import sales.sysconp.microservice.modules.project.collections.infrastructure.entities.CollectionEntity;
 import sales.sysconp.microservice.modules.project.project.infrastructure.entities.ProjectEntity;
+import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
 import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyTypeEnum;
 import sales.sysconp.microservice.modules.project.property_category.infrastructure.entities.PropertyCategoryEntity;
 import sales.sysconp.microservice.modules.project.street.infrastructure.entities.StreetEntity;
@@ -15,6 +18,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "properties")
+@SQLDelete(sql = "UPDATE properties SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class PropertyEntity {
     @Id
     private Long id;
@@ -36,11 +41,11 @@ public class PropertyEntity {
     private ProjectEntity project;
 
     @ManyToOne()
-    @JoinColumn(name = "collection_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "collection_id", nullable = true, referencedColumnName = "id")
     private CollectionEntity collection;
 
     @ManyToOne()
-    @JoinColumn(name = "property_category_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "property_category_id", nullable = true, referencedColumnName = "id")
     private PropertyCategoryEntity propertyCategory;
 
     @ManyToOne()
@@ -53,6 +58,9 @@ public class PropertyEntity {
     @ManyToOne()
     @JoinColumn(name = "client_id", nullable = true, referencedColumnName = "id")
     private ClientEntity client;
+
+    @Column(nullable = false)
+    private PropertyStatusEnum status;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -193,5 +201,13 @@ public class PropertyEntity {
 
     public void setClient(ClientEntity client) {
         this.client = client;
+    }
+
+    public PropertyStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(PropertyStatusEnum status) {
+        this.status = status;
     }
 }

@@ -1,6 +1,7 @@
 package sales.sysconp.microservice.modules.project.compartment.domain.models;
 
 import sales.sysconp.microservice.modules.project.compartment.domain.enums.CompartmentTypeEnum;
+import sales.sysconp.microservice.modules.project.compartment.domain.enums.UnitOfMeditionEnum;
 import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,10 @@ public class CompartmentModel {
     private Long id;
     private UUID uuid;
     private String description;
-    private double area;
+    private double height;
+    private double width;
+    private UnitOfMeditionEnum heightMeasurement;
+    private UnitOfMeditionEnum widthMeasurement;
     private CompartmentTypeEnum type;
     private UnityModel unity;
     private LocalDateTime createdAt;
@@ -20,11 +24,14 @@ public class CompartmentModel {
     public CompartmentModel() {
     }
 
-    public CompartmentModel(Long id, UUID uuid, String description, double area, CompartmentTypeEnum type, UnityModel unity, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CompartmentModel(Long id, UUID uuid, String description, double height, double width, UnitOfMeditionEnum heightMeasurement, UnitOfMeditionEnum widthMeasurement, CompartmentTypeEnum type, UnityModel unity, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.description = description;
-        this.area = area;
+        this.height = height;
+        this.width = width;
+        this.heightMeasurement = heightMeasurement;
+        this.widthMeasurement = widthMeasurement;
         this.type = type;
         this.unity = unity;
         this.createdAt = createdAt;
@@ -56,12 +63,36 @@ public class CompartmentModel {
         this.description = description;
     }
 
-    public double getArea() {
-        return area;
+    public double getHeight() {
+        return height;
     }
 
-    public void setArea(double area) {
-        this.area = area;
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public UnitOfMeditionEnum getHeightMeasurement() {
+        return heightMeasurement;
+    }
+
+    public void setHeightMeasurement(UnitOfMeditionEnum heightMeasurement) {
+        this.heightMeasurement = heightMeasurement;
+    }
+
+    public UnitOfMeditionEnum getWidthMeasurement() {
+        return widthMeasurement;
+    }
+
+    public void setWidthMeasurement(UnitOfMeditionEnum widthMeasurement) {
+        this.widthMeasurement = widthMeasurement;
     }
 
     public CompartmentTypeEnum getType() {

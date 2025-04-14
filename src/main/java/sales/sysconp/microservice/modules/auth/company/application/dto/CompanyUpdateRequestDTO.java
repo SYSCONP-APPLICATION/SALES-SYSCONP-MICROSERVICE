@@ -1,18 +1,18 @@
 package sales.sysconp.microservice.modules.auth.company.application.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
 public class CompanyUpdateRequestDTO {
-    @NotBlank(message = "O nome da marca não pode estar em branco")
+    @Size(min = 1, message = "Brand name must have at least 1 character")
     private String brandName;
 
-    @NotBlank(message = "O nome comercial não pode estar em branco")
+    @Size(min = 1, message = "Commercial name must have at least 1 character")
     private String commercialName;
 
-    @NotNull(message = "A data de atualização não pode ser nula")
+    private String location;
+
     private LocalDateTime updatedAt;
 
     public String getBrandName() {
@@ -25,5 +25,9 @@ public class CompanyUpdateRequestDTO {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public String getLocation() {
+        return location;
     }
 }

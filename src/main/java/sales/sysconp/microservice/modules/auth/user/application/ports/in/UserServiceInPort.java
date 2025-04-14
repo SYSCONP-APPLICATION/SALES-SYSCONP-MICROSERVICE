@@ -15,5 +15,7 @@ public interface UserServiceInPort {
 
     UserResponseDTO createUser(UserCreateRequestDTO userCreateRequestDTO);
 
+    List<UserResponseDTO> getUsersByCompany(Long id);
+
     void deleteUser(Long id);
 }

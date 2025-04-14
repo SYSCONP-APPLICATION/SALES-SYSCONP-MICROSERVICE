@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.modules.auth.company.infrastructure.repository;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import sales.sysconp.microservice.modules.auth.company.application.ports.out.CompanyRepositoryOutPort;
 import sales.sysconp.microservice.modules.auth.company.domain.mapper.CompanyMapper;

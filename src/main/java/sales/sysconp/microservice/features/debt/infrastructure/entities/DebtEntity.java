@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
@@ -17,6 +19,8 @@ import sales.sysconp.microservice.features.installment.infrastructure.entities.I
 
 @Entity
 @Table(name = "debts")
+@SQLDelete(sql = "UPDATE debts SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class DebtEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

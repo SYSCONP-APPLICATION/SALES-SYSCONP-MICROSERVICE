@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.features.client.domain.models;
 
+import sales.sysconp.microservice.features.address.domain.models.AddressModel;
 import sales.sysconp.microservice.features.contact.domain.models.ContactModel;
 import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
 import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
@@ -16,6 +17,7 @@ public class ClientModel {
     private String identityCardNumber;
     private List<ContactModel> contacts;
     private List<SaleModel> sales;
+    private AddressModel address;
     private CompanyModel company;
     private List<PropertyModel> properties;
     private LocalDateTime createdAt;
@@ -25,7 +27,7 @@ public class ClientModel {
     public ClientModel() {
     }
 
-    public ClientModel(Long id, UUID uuid, String name, String identityCardNumber, List<ContactModel> contacts, List<SaleModel> sales, CompanyModel company, List<PropertyModel> properties, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public ClientModel(Long id, UUID uuid, String name, AddressModel address, String identityCardNumber, List<ContactModel> contacts, List<SaleModel> sales, CompanyModel company, List<PropertyModel> properties, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -33,6 +35,7 @@ public class ClientModel {
         this.contacts = contacts;
         this.sales = sales;
         this.company = company;
+        this.address = address;
         this.properties = properties;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -113,6 +116,14 @@ public class ClientModel {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public AddressModel getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressModel address) {
+        this.address = address;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {

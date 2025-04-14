@@ -1,6 +1,7 @@
 package sales.sysconp.microservice.modules.project.measurements.infrastructure.entities;
 
 import jakarta.persistence.*;
+import sales.sysconp.microservice.modules.project.compartment.domain.enums.UnitOfMeditionEnum;
 import sales.sysconp.microservice.modules.project.unity.infrastructure.entities.UnityEntity;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,16 @@ public class MeasurementEntity {
     private UUID uuid;
 
     @Column(nullable = false)
-    private Boolean area;
+    private double height;
+
+    @Column(nullable = false)
+    private double width;
+
+    @Column(nullable = false)
+    private UnitOfMeditionEnum heightMeasurement;
+
+    @Column(nullable = false)
+    private UnitOfMeditionEnum widthMeasurement;
 
     @OneToOne
     @JoinColumn(name = "unity_id", nullable = false, referencedColumnName = "id")
@@ -34,10 +44,13 @@ public class MeasurementEntity {
     public MeasurementEntity() {
     }
 
-    public MeasurementEntity(Long id, UUID uuid, Boolean area, UnityEntity unity, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public MeasurementEntity(Long id, UUID uuid, double height, double width, UnitOfMeditionEnum heightMeasurement, UnitOfMeditionEnum widthMeasurement, UnityEntity unity, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
-        this.area = area;
+        this.height = height;
+        this.width = width;
+        this.heightMeasurement = heightMeasurement;
+        this.widthMeasurement = widthMeasurement;
         this.unity = unity;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -60,12 +73,36 @@ public class MeasurementEntity {
         this.uuid = uuid;
     }
 
-    public Boolean getArea() {
-        return area;
+    public double getHeight() {
+        return height;
     }
 
-    public void setArea(Boolean area) {
-        this.area = area;
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public UnitOfMeditionEnum getHeightMeasurement() {
+        return heightMeasurement;
+    }
+
+    public void setHeightMeasurement(UnitOfMeditionEnum heightMeasurement) {
+        this.heightMeasurement = heightMeasurement;
+    }
+
+    public UnitOfMeditionEnum getWidthMeasurement() {
+        return widthMeasurement;
+    }
+
+    public void setWidthMeasurement(UnitOfMeditionEnum widthMeasurement) {
+        this.widthMeasurement = widthMeasurement;
     }
 
     public UnityEntity getUnity() {

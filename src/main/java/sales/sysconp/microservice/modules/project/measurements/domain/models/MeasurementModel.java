@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.modules.project.measurements.domain.models;
 
+import sales.sysconp.microservice.modules.project.compartment.domain.enums.UnitOfMeditionEnum;
 import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
 
 import java.time.LocalDateTime;
@@ -8,7 +9,10 @@ import java.util.UUID;
 public class MeasurementModel {
     private Long id;
     private UUID uuid;
-    private Boolean area;
+    private double height;
+    private double width;
+    private UnitOfMeditionEnum heightMeasurement;
+    private UnitOfMeditionEnum widthMeasurement;
     private UnityModel unity;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -17,10 +21,13 @@ public class MeasurementModel {
     public MeasurementModel() {
     }
 
-    public MeasurementModel(Long id, UUID uuid, Boolean area, UnityModel unity, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public MeasurementModel(Long id, UUID uuid, double height, double width, UnitOfMeditionEnum heightMeasurement, UnitOfMeditionEnum widthMeasurement, UnityModel unity, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
-        this.area = area;
+        this.height = height;
+        this.width = width;
+        this.heightMeasurement = heightMeasurement;
+        this.widthMeasurement = widthMeasurement;
         this.unity = unity;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -43,12 +50,36 @@ public class MeasurementModel {
         this.uuid = uuid;
     }
 
-    public Boolean getArea() {
-        return area;
+    public double getHeight() {
+        return height;
     }
 
-    public void setArea(Boolean area) {
-        this.area = area;
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public UnitOfMeditionEnum getHeightMeasurement() {
+        return heightMeasurement;
+    }
+
+    public void setHeightMeasurement(UnitOfMeditionEnum heightMeasurement) {
+        this.heightMeasurement = heightMeasurement;
+    }
+
+    public UnitOfMeditionEnum getWidthMeasurement() {
+        return widthMeasurement;
+    }
+
+    public void setWidthMeasurement(UnitOfMeditionEnum widthMeasurement) {
+        this.widthMeasurement = widthMeasurement;
     }
 
     public UnityModel getUnity() {

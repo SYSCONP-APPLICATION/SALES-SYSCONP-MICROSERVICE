@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.GeneratedValue;
@@ -11,15 +13,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
-import sales.sysconp.microservice.features.payment_stump.infrastructure.entities.PaymentStampEntity;
 import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
 @Table(name = "payment_configurations")
+@SQLDelete(sql = "UPDATE payment_configurations SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class PaymentConfigurationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,13 +35,12 @@ public class PaymentConfigurationEntity {
     
     @Column(nullable = false)
     private Long dayOfMonth;
+
+    @Column(nullable = false)
+    private Long applyDebtAfter;
     
     @OneToOne(mappedBy = "paymentConfiguration")
     private SaleEntity sale;
-
-    @ManyToOne
-    @JoinColumn(name = "payment_stamp_id", nullable = false)
-    private PaymentStampEntity paymentStamp;
 
     @Column(updatable = false)  
     @CreationTimestamp
@@ -56,12 +56,12 @@ public class PaymentConfigurationEntity {
     public PaymentConfigurationEntity() {
     }
 
-    public PaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, SaleEntity sale, PaymentStampEntity paymentStamp, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, Long applyDebtAfter, SaleEntity sale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
         this.sale = sale;
-        this.paymentStamp = paymentStamp;
+        this.applyDebtAfter = applyDebtAfter;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -73,6 +73,14 @@ public class PaymentConfigurationEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getApplyDebtAfter() {
+        return applyDebtAfter;
+    }
+
+    public void setApplyDebtAfter(Long applyDebtAfter) {
+        this.applyDebtAfter = applyDebtAfter;
     }
 
     public UUID getUuid() {
@@ -97,14 +105,6 @@ public class PaymentConfigurationEntity {
 
     public void setSale(SaleEntity sale) {
         this.sale = sale;
-    }
-
-    public PaymentStampEntity getPaymentStamp() {
-        return paymentStamp;
-    }
-
-    public void setPaymentStamp(PaymentStampEntity paymentStamp) {
-        this.paymentStamp = paymentStamp;
     }
 
     public LocalDateTime getCreatedAt() {

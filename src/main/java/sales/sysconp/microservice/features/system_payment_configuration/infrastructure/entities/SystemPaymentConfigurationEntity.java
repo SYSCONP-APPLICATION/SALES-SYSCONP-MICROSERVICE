@@ -3,25 +3,18 @@ package sales.sysconp.microservice.features.system_payment_configuration.infrast
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
-import sales.sysconp.microservice.features.payment_stump.infrastructure.entities.PaymentStampEntity;
-// import sales.sysconp.microservice.features.payment_stamp.infrastructure.entities.PaymentStampEntity;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
-@Table(name = "payment_configurations")
+@Table(name = "system_payment_configurations")
+@SQLDelete(sql = "UPDATE system_payment_configurations SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class SystemPaymentConfigurationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +23,7 @@ public class SystemPaymentConfigurationEntity {
     @Column(unique = true, nullable = false)
     private UUID uuid;
 
+    @PrePersist()
     public void generateUUID () {
         this.uuid = UUID.randomUUID();
     }
@@ -38,16 +32,16 @@ public class SystemPaymentConfigurationEntity {
     private Long dayOfMonth;
 
     @Column(nullable = false)
+    private Long applyDebtAfter;
+
+    @Column(nullable = false)
     private boolean requireOnCreateSale;
 
     @Column(nullable = false)
     private boolean requireForAllSales;
 
-    @ManyToOne
-    @JoinColumn(name = "payment_stamp_id", nullable = false)
-    private PaymentStampEntity paymentStamp;
-
-    @OneToOne(mappedBy = "systemPaymentConfiguration", cascade = CascadeType.ALL)
+    @OneToOne()
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
     private CompanyEntity company;
 
     @Column(updatable = false)  
@@ -64,14 +58,14 @@ public class SystemPaymentConfigurationEntity {
     public SystemPaymentConfigurationEntity() {
     }
 
-    public SystemPaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, boolean requireForAllSales, PaymentStampEntity paymentStamp, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SystemPaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, Long applyDebtAfter, boolean requireOnCreateSale, boolean requireForAllSales, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
         this.requireOnCreateSale = requireOnCreateSale;
         this.requireForAllSales = requireForAllSales;
-        this.paymentStamp = paymentStamp;
         this.company = company;
+        this.applyDebtAfter = applyDebtAfter;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -101,6 +95,14 @@ public class SystemPaymentConfigurationEntity {
         this.dayOfMonth = dayOfMonth;
     }
 
+    public Long getApplyDebtAfter() {
+        return applyDebtAfter;
+    }
+
+    public void setApplyDebtAfter(Long applyDebtAfter) {
+        this.applyDebtAfter = applyDebtAfter;
+    }
+
     public boolean isRequireOnCreateSale() {
         return requireOnCreateSale;
     }
@@ -115,14 +117,6 @@ public class SystemPaymentConfigurationEntity {
 
     public void setRequireForAllSales(boolean requireForAllSales) {
         this.requireForAllSales = requireForAllSales;
-    }
-
-    public PaymentStampEntity getPaymentStamp() {
-        return paymentStamp;
-    }
-
-    public void setPaymentStamp(PaymentStampEntity paymentStamp) {
-        this.paymentStamp = paymentStamp;
     }
 
     public CompanyEntity getCompany() {

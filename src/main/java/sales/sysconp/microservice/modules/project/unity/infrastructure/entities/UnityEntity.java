@@ -1,6 +1,9 @@
 package sales.sysconp.microservice.modules.project.unity.infrastructure.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import sales.sysconp.microservice.modules.project.compartment.infrastructure.entities.CompartmentEntity;
 import sales.sysconp.microservice.modules.project.measurements.infrastructure.entities.MeasurementEntity;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
@@ -11,12 +14,17 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "unities")
+@SQLDelete(sql = "UPDATE unities SET deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class UnityEntity {
     @Id
     private Long id;
 
     @Column(unique = true, nullable = false)
     private UUID uuid;
+
+    @Column(nullable = true)
+    private String name;
 
     @ManyToOne()
     @JoinColumn(name = "property_id", nullable = false, referencedColumnName = "id")
@@ -28,6 +36,10 @@ public class UnityEntity {
     @OneToOne()
     @JoinColumn(name = "measurement_id", nullable = true, referencedColumnName = "id")
     private MeasurementEntity measurement;
+
+    @ManyToOne()
+    @JoinColumn(name = "sale_id", nullable = true, referencedColumnName = "id")
+    private SaleEntity sale;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -41,15 +53,24 @@ public class UnityEntity {
     public UnityEntity() {
     }
 
-    public UnityEntity(Long id, UUID uuid, PropertyEntity property, List<CompartmentEntity> compartments, MeasurementEntity measurement, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public UnityEntity(Long id, UUID uuid, String name, PropertyEntity property, List<CompartmentEntity> compartments, MeasurementEntity measurement, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.property = property;
+        this.name = name;
         this.compartments = compartments;
         this.measurement = measurement;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getId() {

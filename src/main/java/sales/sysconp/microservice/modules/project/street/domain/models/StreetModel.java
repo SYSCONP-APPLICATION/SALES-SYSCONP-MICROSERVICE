@@ -62,14 +62,6 @@ public class StreetModel {
         this.properties = properties;
     }
 
-    public ProjectModel getProject() {
-        return project;
-    }
-
-    public void setProject(ProjectModel project) {
-        this.project = project;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -92,5 +84,13 @@ public class StreetModel {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public ProjectModel getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectModel project) {
+        this.project = project;
     }
 }

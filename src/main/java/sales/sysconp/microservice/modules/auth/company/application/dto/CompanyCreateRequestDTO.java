@@ -19,6 +19,9 @@ public class CompanyCreateRequestDTO {
     @NotBlank(message = "O nome comercial não pode estar em branco")
     private String commercialName;
 
+    @NotBlank(message = "A localização não pode estar em branco")
+    private String location;
+
     @NotNull(message = "A data de criação não pode ser nula")
     private LocalDateTime createdAt;
 
@@ -47,5 +50,9 @@ public class CompanyCreateRequestDTO {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public String getLocation() {
+        return location;
     }
 }

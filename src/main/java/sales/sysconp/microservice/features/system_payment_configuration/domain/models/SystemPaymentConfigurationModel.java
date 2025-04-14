@@ -1,6 +1,5 @@
 package sales.sysconp.microservice.features.system_payment_configuration.domain.models;
 
-import sales.sysconp.microservice.features.payment_stump.domain.models.PaymentStampModel;
 import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 
 import java.time.LocalDateTime;
@@ -12,8 +11,8 @@ public class SystemPaymentConfigurationModel {
     private Long dayOfMonth;
     private boolean requireOnCreateSale;
     private boolean requireForAllSales;
-    private PaymentStampModel paymentStamp;
     private CompanyModel company;
+    private Long applyDebtAfter;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -21,13 +20,13 @@ public class SystemPaymentConfigurationModel {
     public SystemPaymentConfigurationModel() {
     }
 
-    public SystemPaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, boolean requireForAllSales, PaymentStampModel paymentStamp, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SystemPaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, boolean requireForAllSales, Long applyDebtAfter, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
+        this.applyDebtAfter = applyDebtAfter;
         this.requireOnCreateSale = requireOnCreateSale;
         this.requireForAllSales = requireForAllSales;
-        this.paymentStamp = paymentStamp;
         this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -48,6 +47,14 @@ public class SystemPaymentConfigurationModel {
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
+    }
+
+    public Long getApplyDebtAfter() {
+        return applyDebtAfter;
+    }
+
+    public void setApplyDebtAfter(Long applyDebtAfter) {
+        this.applyDebtAfter = applyDebtAfter;
     }
 
     public Long getDayOfMonth() {
@@ -72,14 +79,6 @@ public class SystemPaymentConfigurationModel {
 
     public void setRequireForAllSales(boolean requireForAllSales) {
         this.requireForAllSales = requireForAllSales;
-    }
-
-    public PaymentStampModel getPaymentStamp() {
-        return paymentStamp;
-    }
-
-    public void setPaymentStamp(PaymentStampModel paymentStamp) {
-        this.paymentStamp = paymentStamp;
     }
 
     public CompanyModel getCompany() {

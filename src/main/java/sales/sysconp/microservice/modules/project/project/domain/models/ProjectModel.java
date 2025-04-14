@@ -1,15 +1,10 @@
 package sales.sysconp.microservice.modules.project.project.domain.models;
 
-import jakarta.persistence.*;
 import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
-import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 import sales.sysconp.microservice.modules.project.collections.domain.models.CollectionModel;
-import sales.sysconp.microservice.modules.project.collections.infrastructure.entities.CollectionEntity;
 import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
-import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
 import sales.sysconp.microservice.modules.project.street.domain.models.StreetModel;
-import sales.sysconp.microservice.modules.project.street.infrastructure.entities.StreetEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,15 +21,15 @@ public class ProjectModel {
     private List<StreetModel> streets;
     private List<PropertyModel> properties;
     private List<CollectionModel> collections;
+    private String location;
     private CompanyModel company;
-    private StreetModel street;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
     public ProjectModel() {}
 
-    public ProjectModel(Long id, UUID uuid, String name, String description, ProjectStatusEnum status, LocalDateTime startDate, LocalDateTime endDate, List<StreetModel> streets, List<PropertyModel> properties, List<CollectionModel> collections, CompanyModel company, StreetModel street, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public ProjectModel(Long id, UUID uuid, String name, String location, String description, ProjectStatusEnum status, LocalDateTime startDate, LocalDateTime endDate, List<StreetModel> streets, List<PropertyModel> properties, List<CollectionModel> collections, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -46,7 +41,6 @@ public class ProjectModel {
         this.properties = properties;
         this.collections = collections;
         this.company = company;
-        this.street = street;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -62,6 +56,14 @@ public class ProjectModel {
 
     public UUID getUuid() {
         return uuid;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setUuid(UUID uuid) {
@@ -138,14 +140,6 @@ public class ProjectModel {
 
     public void setCompany(CompanyModel company) {
         this.company = company;
-    }
-
-    public StreetModel getStreet() {
-        return street;
-    }
-
-    public void setStreet(StreetModel street) {
-        this.street = street;
     }
 
     public LocalDateTime getCreatedAt() {
