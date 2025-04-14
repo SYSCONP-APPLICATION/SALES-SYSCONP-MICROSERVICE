@@ -16,9 +16,9 @@ public interface ClientServiceInPort {
 
     ClientResponseDTO getClientByUUID(UUID uuid);
 
-    ClientModel createClient(ClientCreateRequestDTO clientCreateRequestDTO);
+    ClientResponseDTO createClient(ClientCreateRequestDTO clientCreateRequestDTO);
 
-    ClientModel updateClient(Long id, ClientUpdateRequestDTO clientUpdateRequestDTO);
+    ClientResponseDTO updateClient(Long id, ClientUpdateRequestDTO clientUpdateRequestDTO);
 
     void deleteClientById(Long id);
 }

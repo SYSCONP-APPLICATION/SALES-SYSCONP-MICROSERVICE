@@ -12,11 +12,11 @@ public interface AddressServiceInPort {
 
     AddressResponseDTO updateAddress(Long id, AddressUpdateRequestDTO addressUpdateRequestDTO);
 
-    Optional<AddressResponseDTO> getAddressById(Long id);
+    AddressResponseDTO getAddressById(Long id);
 
-    Optional<AddressResponseDTO> getAddressByUUID(UUID uuid);
+    AddressResponseDTO getAddressByUUID(UUID uuid);
 
-    Optional<AddressResponseDTO> getAddressByClientId(Long clientId);
+    AddressResponseDTO getAddressByClientId(Long clientId);
 
     void deleteAddress(Long id);
 }

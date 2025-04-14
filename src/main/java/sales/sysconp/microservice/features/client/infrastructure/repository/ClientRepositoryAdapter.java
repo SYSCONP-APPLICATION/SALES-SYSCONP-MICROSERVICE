@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.features.client.infrastructure.repository;
 
+import org.springframework.stereotype.Repository;
 import sales.sysconp.microservice.features.client.application.ports.out.ClientRepositoryOutPort;
 import sales.sysconp.microservice.features.client.domain.mappers.ClientMapper;
 import sales.sysconp.microservice.features.client.domain.models.ClientModel;
@@ -9,8 +10,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public class ClientRepositoryAdapter implements ClientRepositoryOutPort {
-
     private final JPAClientRepository jpaRepository;
     private final ClientMapper clientMapper;
 

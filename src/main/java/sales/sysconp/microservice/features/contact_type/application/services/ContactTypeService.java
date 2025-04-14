@@ -1,6 +1,5 @@
 package sales.sysconp.microservice.features.contact_type.application.services;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sales.sysconp.microservice.features.contact_type.application.dto.ContactTypeCreateRequestDTO;
 import sales.sysconp.microservice.features.contact_type.application.dto.ContactTypeResponseDTO;
@@ -16,16 +15,22 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class ContactTypeService implements ContactTypeServiceInPort {
     private final ContactTypeRepositoryAdapter contactTypeRepositoryAdapter;
     private final ContactTypeMapper contactTypeMapper;
 
+    public ContactTypeService(ContactTypeRepositoryAdapter contactTypeRepositoryAdapter, ContactTypeMapper contactTypeMapper) {
+        this.contactTypeRepositoryAdapter = contactTypeRepositoryAdapter;
+        this.contactTypeMapper = contactTypeMapper;
+    }
+
     @Override
     public ContactTypeResponseDTO createContactType(ContactTypeCreateRequestDTO contactTypeCreateRequestDTO) {
-        this.contactTypeRepositoryAdapter
+        if (this.contactTypeRepositoryAdapter
                 .findByName(contactTypeCreateRequestDTO.getName())
-                .orElseThrow(() -> new NoSuchElementException("ContactType already exists"));
+                .isPresent()) {
+            throw new IllegalArgumentException("ContactType with name " + contactTypeCreateRequestDTO.getName() + " already exists");
+        }
 
         ContactTypeModel contactType = new ContactTypeModel();
         contactType.setName(contactTypeCreateRequestDTO.getName());

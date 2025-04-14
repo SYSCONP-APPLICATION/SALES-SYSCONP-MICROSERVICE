@@ -5,7 +5,6 @@ import sales.sysconp.microservice.features.contact.application.dto.ContactRespon
 import sales.sysconp.microservice.features.contact.application.dto.ContactUpdateRequestDTO;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface ContactServiceInPort {
@@ -15,11 +14,9 @@ public interface ContactServiceInPort {
 
     ContactResponseDTO getContactById(Long id);
 
-    List<ContactResponseDTO> getContactsByClientId(Long clientId);
-
     ContactResponseDTO getContactByUUID(UUID uuid);
 
-    List<ContactResponseDTO> findAllContactsByClientId(Long clientId);
+    List<ContactResponseDTO> getAllContactsByClientId(Long clientId);
 
     List<ContactResponseDTO> getAllContactsByCompanyId(Long companyId);
 

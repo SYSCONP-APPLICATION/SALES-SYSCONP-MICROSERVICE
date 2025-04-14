@@ -49,7 +49,7 @@ public class ClientEntity {
     @JoinColumn(name = "company_id", nullable = false)
     private CompanyEntity company;
 
-    @OneToOne(mappedBy = "client")
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
     private AddressEntity address;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)

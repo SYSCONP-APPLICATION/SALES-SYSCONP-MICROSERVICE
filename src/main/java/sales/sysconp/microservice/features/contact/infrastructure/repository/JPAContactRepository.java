@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface JPAContactRepository extends JpaRepository<ContactEntity, Long> {
-    List<ContactEntity> findAllByCompanyId(Long companyId);
+    List<ContactEntity> findAllByClient_Company_Id(Long companyId);
 
     Optional<ContactEntity> findByUuid(UUID uuid);
 

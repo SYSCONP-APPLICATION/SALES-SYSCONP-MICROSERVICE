@@ -58,7 +58,7 @@ public class ClientService implements ClientServiceInPort {
     }
 
     @Override
-    public ClientModel createClient(ClientCreateRequestDTO clientCreateRequestDTO) {
+    public ClientResponseDTO createClient(ClientCreateRequestDTO clientCreateRequestDTO) {
         CompanyModel companyModel = this.companyRepositoryAdapter
                 .findById(clientCreateRequestDTO.getCompanyId())
                 .orElseThrow(() -> new NoSuchElementException("Company not found with id: " + clientCreateRequestDTO.getCompanyId()));
@@ -75,11 +75,11 @@ public class ClientService implements ClientServiceInPort {
         clientModel.setIdentityCardNumber(clientCreateRequestDTO.getIdentityCardNumber());
         clientModel.setCompany(companyModel);
 
-        return clientRepositoryAdapter.save(clientModel);
+        return clientMapper.toResponseDTO(clientRepositoryAdapter.save(clientModel));
     }
 
     @Override
-    public ClientModel updateClient(Long id, ClientUpdateRequestDTO clientUpdateRequestDTO) {
+    public ClientResponseDTO updateClient(Long id, ClientUpdateRequestDTO clientUpdateRequestDTO) {
         ClientModel clientModel = clientRepositoryAdapter.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Client not found with id: " + id));
 
@@ -98,7 +98,7 @@ public class ClientService implements ClientServiceInPort {
             clientModel.setIdentityCardNumber(clientUpdateRequestDTO.getIdentityCardNumber());
         }
 
-        return clientRepositoryAdapter.save(clientModel);
+        return this.clientMapper.toResponseDTO(this.clientRepositoryAdapter.save(clientModel));
     }
 
     @Override

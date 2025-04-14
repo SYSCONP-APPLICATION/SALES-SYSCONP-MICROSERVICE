@@ -1,7 +1,6 @@
 package sales.sysconp.microservice.features.address.domain.models;
 
 import sales.sysconp.microservice.features.client.domain.models.ClientModel;
-import sales.sysconp.microservice.features.client.infrastructure.entities.ClientEntity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

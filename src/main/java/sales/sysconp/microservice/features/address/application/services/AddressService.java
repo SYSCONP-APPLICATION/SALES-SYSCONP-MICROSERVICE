@@ -93,19 +93,19 @@ public class AddressService implements AddressServiceInPort {
     }
 
     @Override
-    public Optional<AddressResponseDTO> getAddressById(Long id) {
+    public AddressResponseDTO getAddressById(Long id) {
         return addressRepositoryAdapter.findById(id)
-                .map(addressMapper::toResponseDTO);
+                .map(addressMapper::toResponseDTO).orElseThrow(() -> new NoSuchElementException("Address not found with id: " + id));
     }
 
     @Override
-    public Optional<AddressResponseDTO> getAddressByUUID(UUID uuid) {
+    public AddressResponseDTO getAddressByUUID(UUID uuid) {
         return addressRepositoryAdapter.findByUUID(uuid)
-                .map(addressMapper::toResponseDTO);
+                .map(addressMapper::toResponseDTO).orElseThrow(() -> new NoSuchElementException("Address not found with uuid: " + uuid));
     }
 
     @Override
-    public Optional<AddressResponseDTO> getAddressByClientId(Long clientId) {
+    public AddressResponseDTO getAddressByClientId(Long clientId) {
         this.clientRepositoryAdapter
                 .findById(clientId)
                 .orElseThrow(() -> new NoSuchElementException("Client not found with id: " + clientId));
@@ -113,14 +113,18 @@ public class AddressService implements AddressServiceInPort {
         return addressRepositoryAdapter.findByClientId(clientId)
                 .stream()
                 .findFirst()
-                .map(addressMapper::toResponseDTO);
+                .map(addressMapper::toResponseDTO)
+                .orElseThrow(() -> new NoSuchElementException("Address not found with client id: " + clientId));
     }
 
     @Override
     public void deleteAddress(Long id) {
-        this.addressRepositoryAdapter
+        AddressModel addressModel = this.addressRepositoryAdapter
                 .findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Address not found with id: " + id));
+
+        addressModel.setClient(null);
+        this.addressRepositoryAdapter.save(addressModel);
 
         this.addressRepositoryAdapter.deleteById(id);
     }

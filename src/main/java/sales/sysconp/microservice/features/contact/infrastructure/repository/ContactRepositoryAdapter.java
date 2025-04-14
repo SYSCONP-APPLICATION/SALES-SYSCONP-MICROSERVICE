@@ -21,7 +21,7 @@ public class ContactRepositoryAdapter implements ContactRepositoryOutPort {
 
     @Override
     public List<ContactModel> findAllByCompanyId(Long companyId) {
-        return jpaRepository.findAllByCompanyId(companyId)
+        return jpaRepository.findAllByClient_Company_Id(companyId)
                             .stream()
                             .map(mapper::toModel)
                             .toList();

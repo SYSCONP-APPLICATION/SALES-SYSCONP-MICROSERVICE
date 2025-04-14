@@ -99,12 +99,6 @@ public class ContactService implements ContactServiceInPort {
                 .map(contactMapper::toResponseDTO)
                 .orElseThrow(() -> new NoSuchElementException("Contact not found with UUID: " + id));
     }
-    @Override
-    public List<ContactResponseDTO> getContactsByClientId(Long clientId) {
-        return contactRepositoryAdapter.findAllByClientId(clientId).stream()
-                .map(contactMapper::toResponseDTO)
-                .toList();
-    }
 
     @Override
     public ContactResponseDTO getContactByUUID(UUID uuid) {
@@ -114,7 +108,7 @@ public class ContactService implements ContactServiceInPort {
     }
 
     @Override
-    public List<ContactResponseDTO> findAllContactsByClientId(Long clientId) {
+    public List<ContactResponseDTO> getAllContactsByClientId(Long clientId) {
         this.clientRepositoryAdapter.findById(clientId)
                 .orElseThrow(() -> new NoSuchElementException("Client not found with id: " + clientId));
 
@@ -122,6 +116,7 @@ public class ContactService implements ContactServiceInPort {
                 .map(contactMapper::toResponseDTO)
                 .toList();
     }
+
     @Override
     public List<ContactResponseDTO> getAllContactsByCompanyId(Long companyId) {
         this.companyRepositoryAdapter
