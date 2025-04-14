@@ -9,6 +9,8 @@ public class SystemPaymentConfigurationUpdateRequestDTO {
 
     private Boolean requireForAllSales;
 
+    private Long newMonthAfterDate;
+
     public Long getDayOfMonth() {
         return dayOfMonth;
     }
@@ -23,5 +25,9 @@ public class SystemPaymentConfigurationUpdateRequestDTO {
 
     public Boolean getRequireForAllSales() {
         return requireForAllSales;
+    }
+
+    public Long getNewMonthAfterDate() {
+        return newMonthAfterDate;
     }
 }

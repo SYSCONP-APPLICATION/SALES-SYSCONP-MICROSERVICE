@@ -40,6 +40,9 @@ public class SystemPaymentConfigurationEntity {
     @Column(nullable = false)
     private boolean requireForAllSales;
 
+    @Column(nullable = false)
+    private Long newMonthAfterDate;
+
     @OneToOne()
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private CompanyEntity company;
@@ -58,12 +61,13 @@ public class SystemPaymentConfigurationEntity {
     public SystemPaymentConfigurationEntity() {
     }
 
-    public SystemPaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, Long applyDebtAfter, boolean requireOnCreateSale, boolean requireForAllSales, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SystemPaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, Long applyDebtAfter, Long newMonthAfterDate, boolean requireOnCreateSale, boolean requireForAllSales, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
         this.requireOnCreateSale = requireOnCreateSale;
         this.requireForAllSales = requireForAllSales;
+        this.newMonthAfterDate = newMonthAfterDate;
         this.company = company;
         this.applyDebtAfter = applyDebtAfter;
         this.createdAt = createdAt;
@@ -149,5 +153,13 @@ public class SystemPaymentConfigurationEntity {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public Long getNewMonthAfterDate() {
+        return newMonthAfterDate;
+    }
+
+    public void setNewMonthAfterDate(Long newMonthAfterDate) {
+        this.newMonthAfterDate = newMonthAfterDate;
     }
 }

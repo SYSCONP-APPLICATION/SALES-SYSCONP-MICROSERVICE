@@ -15,6 +15,9 @@ public class SystemPaymentConfigurationCreateRequestDTO {
     @NotNull(message = "Require for all sales is required")
     private Boolean requireForAllSales;
 
+    @NotNull(message = "new month after date is required")
+    private Long newMonthAfterDate;
+
     @NotNull(message = "Company ID is required")
     private Long companyId;
 
@@ -36,5 +39,9 @@ public class SystemPaymentConfigurationCreateRequestDTO {
 
     public Long getCompanyId() {
         return companyId;
+    }
+
+    public Long getNewMonthAfterDate() {
+        return newMonthAfterDate;
     }
 }
