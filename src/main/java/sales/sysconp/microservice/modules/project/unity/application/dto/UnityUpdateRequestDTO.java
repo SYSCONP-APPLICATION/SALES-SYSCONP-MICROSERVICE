@@ -1,16 +1,14 @@
 package sales.sysconp.microservice.modules.project.unity.application.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import sales.sysconp.microservice.modules.project.unity.domain.enums.UnityStatusEnum;
 
 import java.time.LocalDateTime;
 
 public class UnityUpdateRequestDTO {
-    @NotNull(message = "Name cannot be null")
-    @NotBlank(message = "Name cannot be empty")
     private String name;
 
-    @NotNull(message = "UpdatedAt cannot be null")
+    private UnityStatusEnum unityStatus;
+
     private LocalDateTime updatedAt;
 
     public String getName() {
@@ -19,5 +17,9 @@ public class UnityUpdateRequestDTO {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public UnityStatusEnum getUnityStatus() {
+        return unityStatus;
     }
 }

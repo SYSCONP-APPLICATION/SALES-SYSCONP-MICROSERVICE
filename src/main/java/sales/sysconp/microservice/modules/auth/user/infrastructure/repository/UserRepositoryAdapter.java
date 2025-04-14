@@ -30,7 +30,7 @@ public class UserRepositoryAdapter implements UserRepositoryOutPort {
     }
 
     @Override
-    public Optional<UserModel> findById(long id) {
+    public Optional<UserModel> findById(Long id) {
         return this.jpaRepository
                 .findById(id)
                 .map(userMapper::toModel);
@@ -44,19 +44,26 @@ public class UserRepositoryAdapter implements UserRepositoryOutPort {
     }
 
     @Override
+    public Optional<UserModel> findByIdAndCompanyId(Long id, Long companyId) {
+        return this.jpaRepository
+            .findByIdAndCompanyId(id, companyId)
+            .map(userMapper::toModel);
+    }
+
+    @Override
     public UserModel save(UserModel model) {
         UserEntity savedModel = this.jpaRepository.save(userMapper.toEntity(model));
         return userMapper.toModel(savedModel);
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         this.jpaRepository.deleteById(id);
     }
 
 
     @Override
-    public List<UserModel> findByCompanyId(long companyId) {
+    public List<UserModel> findByCompanyId(Long companyId) {
         return this.jpaRepository
                 .findByCompanyId(companyId)
                 .stream()

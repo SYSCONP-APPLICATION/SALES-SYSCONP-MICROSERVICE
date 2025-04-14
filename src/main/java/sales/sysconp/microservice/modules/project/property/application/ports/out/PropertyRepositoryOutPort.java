@@ -23,6 +23,8 @@ public interface PropertyRepositoryOutPort {
 
     Optional<PropertyModel> getPropertyByIdAndProjectId(Long id, Long projectId);
 
+    List<PropertyModel> saveAll(List<PropertyModel> propertyModels);
+
     Optional<PropertyModel> getPropertyByUuidAndProjectId(UUID uuid, Long projectId);
 
     PropertyModel save(PropertyModel propertyModel);

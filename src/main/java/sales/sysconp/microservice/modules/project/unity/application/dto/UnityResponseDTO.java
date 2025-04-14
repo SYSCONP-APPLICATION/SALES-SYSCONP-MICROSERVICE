@@ -3,6 +3,7 @@ package sales.sysconp.microservice.modules.project.unity.application.dto;
 import sales.sysconp.microservice.modules.project.compartment.domain.models.CompartmentModel;
 import sales.sysconp.microservice.modules.project.measurements.domain.models.MeasurementModel;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
+import sales.sysconp.microservice.modules.project.unity.domain.enums.UnityStatusEnum;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +14,7 @@ public class UnityResponseDTO {
     private UUID uuid;
     private String name;
     private PropertyModel property;
+    private UnityStatusEnum status;
     private List<CompartmentModel> compartments;
     private MeasurementModel measurement;
     private LocalDateTime createdAt;
@@ -21,11 +23,12 @@ public class UnityResponseDTO {
     public UnityResponseDTO() {
     }
 
-    public UnityResponseDTO(Long id, UUID uuid, String name, PropertyModel property, List<CompartmentModel> compartments, MeasurementModel measurement, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UnityResponseDTO(Long id, UUID uuid, String name, UnityStatusEnum status, PropertyModel property, List<CompartmentModel> compartments, MeasurementModel measurement, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.property = property;
+        this.status = status;
         this.compartments = compartments;
         this.measurement = measurement;
         this.createdAt = createdAt;
@@ -94,5 +97,13 @@ public class UnityResponseDTO {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public UnityStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(UnityStatusEnum status) {
+        this.status = status;
     }
 }

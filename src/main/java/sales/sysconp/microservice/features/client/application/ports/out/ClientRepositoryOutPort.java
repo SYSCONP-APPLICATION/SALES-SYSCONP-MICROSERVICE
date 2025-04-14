@@ -11,6 +11,8 @@ public interface ClientRepositoryOutPort {
 
     Optional<ClientModel> findById(Long id);
 
+    Optional<ClientModel> findByIdAndCompanyId(Long id, Long companyId);
+
     Optional<ClientModel> findByUUID(UUID uuid);
 
     Optional<ClientModel> findByIdentityCardNumberAndCompanyId(String identityCardNumber, Long companyId);

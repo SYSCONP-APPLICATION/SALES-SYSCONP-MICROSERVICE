@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Repository
 public class PropertyRepositoryAdapter implements PropertyRepositoryOutPort {
@@ -34,28 +35,28 @@ public class PropertyRepositoryAdapter implements PropertyRepositoryOutPort {
     public List<PropertyModel> getPropertiesByProjectId(Long projectId) {
         return jpaRepository.findByProjectId(projectId).stream()
                 .map(propertyMapper::toModel)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public List<PropertyModel> getPropertiesByCollectionId(Long collectionId) {
         return jpaRepository.findByCollectionId(collectionId).stream()
                 .map(propertyMapper::toModel)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public List<PropertyModel> getPropertiesByStreetId(Long streetId) {
         return jpaRepository.findByStreetId(streetId).stream()
                 .map(propertyMapper::toModel)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public List<PropertyModel> getPropertiesByPropertyCategoryId(Long propertyCategoryId) {
         return jpaRepository.findByPropertyCategoryId(propertyCategoryId).stream()
                 .map(propertyMapper::toModel)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -66,6 +67,15 @@ public class PropertyRepositoryAdapter implements PropertyRepositoryOutPort {
     @Override
     public Optional<PropertyModel> getPropertyByIdAndProjectId(Long id, Long projectId) {
         return jpaRepository.findByIdAndProjectId(id, projectId).map(propertyMapper::toModel);
+    }
+
+    @Override
+    public List<PropertyModel> saveAll(List<PropertyModel> propertyModels) {
+        return jpaRepository.saveAll(propertyModels.stream()
+                .map(propertyMapper::toEntity)
+                .toList()).stream()
+                .map(propertyMapper::toModel)
+                .toList();
     }
 
     @Override

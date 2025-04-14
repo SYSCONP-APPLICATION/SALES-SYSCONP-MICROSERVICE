@@ -9,13 +9,15 @@ import java.util.UUID;
 public interface UserRepositoryOutPort {
     List<UserModel> findAll();
 
-    Optional<UserModel> findById(long id);
+    Optional<UserModel> findById(Long id);
 
     Optional<UserModel> findByUUID(UUID uuid);
 
+    Optional<UserModel> findByIdAndCompanyId(Long id, Long companyId);
+
     UserModel save(UserModel model);
 
-    List<UserModel> findByCompanyId(long companyId);
+    List<UserModel> findByCompanyId(Long companyId);
 
-    void deleteById(long id);
+    void deleteById(Long id);
 }

@@ -35,6 +35,12 @@ public class ClientRepositoryAdapter implements ClientRepositoryOutPort {
     }
 
     @Override
+    public Optional<ClientModel> findByIdAndCompanyId(Long id, Long companyId) {
+        return jpaRepository.findByIdAndCompanyId(id, companyId)
+                .map(clientMapper::toModel);
+    }
+
+    @Override
     public Optional<ClientModel> findByUUID(UUID uuid) {
         return jpaRepository.findByUuid(uuid)
                 .map(clientMapper::toModel);

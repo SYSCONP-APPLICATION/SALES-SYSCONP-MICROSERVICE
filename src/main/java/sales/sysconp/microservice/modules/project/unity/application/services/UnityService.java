@@ -1,23 +1,24 @@
 package sales.sysconp.microservice.modules.project.unity.application.services;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
-import sales.sysconp.microservice.modules.project.project.infrastructure.repository.ProjectRepositoryAdapter;
+import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 import sales.sysconp.microservice.modules.project.property.infrastructure.repository.PropertyRepositoryAdapter;
 import sales.sysconp.microservice.modules.project.unity.application.dto.UnityCreateRequestDTO;
 import sales.sysconp.microservice.modules.project.unity.application.dto.UnityResponseDTO;
 import sales.sysconp.microservice.modules.project.unity.application.dto.UnityUpdateRequestDTO;
 import sales.sysconp.microservice.modules.project.unity.application.ports.in.UnityServiceInPort;
+import sales.sysconp.microservice.modules.project.unity.domain.enums.UnityStatusEnum;
 import sales.sysconp.microservice.modules.project.unity.domain.mappers.UnityMapper;
 import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
 import sales.sysconp.microservice.modules.project.unity.infrastructure.repository.UnityRepositoryAdapter;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UnityService implements UnityServiceInPort {
@@ -81,6 +82,7 @@ public class UnityService implements UnityServiceInPort {
         unityModel.setUuid(unityCreateRequestDTO.getUuid());
         unityModel.setName(unityCreateRequestDTO.getName());
         unityModel.setProperty(propertyModel);
+        unityModel.setStatus(UnityStatusEnum.AVAILABLE);
         unityModel.setCreatedAt(unityCreateRequestDTO.getCreatedAt());
         unityModel.setUpdatedAt(unityCreateRequestDTO.getUpdatedAt());
 
@@ -103,7 +105,71 @@ public class UnityService implements UnityServiceInPort {
             unityModel.setUpdatedAt(unityUpdateRequestDTO.getUpdatedAt());
         }
 
+        if (unityUpdateRequestDTO.getUnityStatus() != null) {
+            unityModel.setStatus(unityUpdateRequestDTO.getUnityStatus());
+        }
+
         return unityMapper.toResponseDTO(unityRepositoryAdapter.save(unityModel));
+    }
+
+    @Override
+    public List<UnityResponseDTO> getByPropertyIdAndStatus(Long propertyId, UnityStatusEnum status) {
+        this.propertyRepositoryAdapter
+                .getPropertyById(propertyId)
+                .orElseThrow(() -> new NoSuchElementException("Property not found with ID: " + propertyId));
+
+        List<UnityModel> unityModels = unityRepositoryAdapter.findByPropertyIdAndStatus(propertyId, status);
+
+        if (unityModels.isEmpty()) {
+            throw new IllegalArgumentException("No unities found for property ID " + propertyId + " and status " + status);
+        }
+
+        return unityModels.stream()
+                .map(unityMapper::toResponseDTO)
+                .toList();
+    }
+
+    @Override
+    public UnityResponseDTO changeUnityStatus(Long id, UnityStatusEnum status) {
+        UnityModel unityModel = unityRepositoryAdapter.findById(id);
+
+        if (unityModel == null) {
+            throw new NoSuchElementException("Unity not found with ID: " + id);
+        }
+
+        unityModel.setStatus(status);
+
+        return unityMapper.toResponseDTO(unityRepositoryAdapter.save(unityModel));
+    }
+
+    @Transactional
+    @Override
+    public List<UnityResponseDTO> updateStatusesByIds(List<Long> unityIds, UnityStatusEnum status) {
+        int unityModelsUpdated = unityRepositoryAdapter.updateStatusesByIds(unityIds, status);
+
+        if (unityModelsUpdated != unityIds.size()) {
+            throw new IllegalArgumentException("Some unities not found to update" + unityIds);
+        }
+
+        List<UnityModel> unityModels = unityRepositoryAdapter.findAllById(unityIds);
+
+        Map<Long, List<UnityModel>> unitiesByPropertyId = unityModels.stream()
+                .collect(Collectors.groupingBy(unityModel -> unityModel.getProperty().getId()));
+
+        unitiesByPropertyId.forEach((propertyId, propertyUnityModels) -> {
+            List<UnityModel> availableUnities = propertyUnityModels.stream()
+                    .filter(unityModel -> unityModel.getStatus() == UnityStatusEnum.AVAILABLE)
+                    .toList();
+
+            if (availableUnities.isEmpty()) {
+                propertyUnityModels.forEach(unityModel -> unityModel.getProperty().setStatus(PropertyStatusEnum.WITHOUT_SPACE));
+                propertyRepositoryAdapter.saveAll(propertyUnityModels.stream().map(UnityModel::getProperty).toList());
+            }
+        });
+
+        return unityModels.stream()
+                .map(unityMapper::toResponseDTO)
+                .toList();
     }
 
     @Override

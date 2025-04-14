@@ -2,6 +2,7 @@ package sales.sysconp.microservice.modules.project.unity.infrastructure.reposito
 
 import org.springframework.stereotype.Repository;
 import sales.sysconp.microservice.modules.project.unity.application.ports.out.UnityRepositoryOutPort;
+import sales.sysconp.microservice.modules.project.unity.domain.enums.UnityStatusEnum;
 import sales.sysconp.microservice.modules.project.unity.domain.mappers.UnityMapper;
 import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
 
@@ -10,7 +11,6 @@ import java.util.UUID;
 
 @Repository
 public class UnityRepositoryAdapter implements UnityRepositoryOutPort {
-
     private final JPAUnityRepository jpaRepository;
     private final UnityMapper unityMapper;
 
@@ -37,6 +37,30 @@ public class UnityRepositoryAdapter implements UnityRepositoryOutPort {
     @Override
     public UnityModel findByUuidAndProperty(UUID uuid, Long propertyId) {
         return unityMapper.toModel(jpaRepository.findByUuidAndPropertyId(uuid, propertyId).orElseThrow());
+    }
+
+    @Override
+    public int updateStatusesByIds(List<Long> unityIds, UnityStatusEnum status) {
+        return jpaRepository.updateStatusesByIds(status, unityIds);
+    }
+
+    @Override
+    public List<UnityModel> findByPropertyIdAndStatus(Long propertyId, UnityStatusEnum status) {
+        return jpaRepository.findByStatusAndPropertyId(status, propertyId).stream()
+                .map(unityMapper::toModel)
+                .toList();
+    }
+
+    @Override
+    public List<UnityModel> findAllById(List<Long> ids) {
+        return jpaRepository.findAllByIds(ids).stream().map(unityMapper::toModel).toList();
+    }
+
+    @Override
+    public List<UnityModel> findUnitiesInArrayAndStatus(List<Long> unitiesArray, UnityStatusEnum status) {
+        return jpaRepository.findUnitiesInArrayAndStatus(unitiesArray, status).stream()
+                .map(unityMapper::toModel)
+                .toList();
     }
 
     @Override

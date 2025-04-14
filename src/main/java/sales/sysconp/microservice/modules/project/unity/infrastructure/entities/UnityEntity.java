@@ -7,6 +7,7 @@ import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEnti
 import sales.sysconp.microservice.modules.project.compartment.infrastructure.entities.CompartmentEntity;
 import sales.sysconp.microservice.modules.project.measurements.infrastructure.entities.MeasurementEntity;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
+import sales.sysconp.microservice.modules.project.unity.domain.enums.UnityStatusEnum;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +37,9 @@ public class UnityEntity {
     @OneToOne()
     @JoinColumn(name = "measurement_id", nullable = true, referencedColumnName = "id")
     private MeasurementEntity measurement;
+
+    @Column(nullable = true)
+    private UnityStatusEnum status;
 
     @ManyToOne()
     @JoinColumn(name = "sale_id", nullable = true, referencedColumnName = "id")
