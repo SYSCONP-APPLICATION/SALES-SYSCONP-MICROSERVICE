@@ -25,5 +25,5 @@ public interface JPAPropertyRepository extends JpaRepository<PropertyEntity, Lon
 
     Optional<PropertyEntity> findByUuidAndProjectId(UUID uuid, Long projectId);
 
-    List<PropertyEntity> findByStatus(PropertyStatusEnum status);
+    List<PropertyEntity> findByStatusAndProjectId(PropertyStatusEnum status, Long projectId);
 }

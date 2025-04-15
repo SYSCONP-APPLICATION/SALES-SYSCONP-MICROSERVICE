@@ -32,5 +32,5 @@ public interface PropertyRepositoryOutPort {
 
     void delete(PropertyModel propertyModel);
 
-    List<PropertyModel> getPropertiesByStatus(PropertyStatusEnum status);
+    List<PropertyModel> getPropertiesByStatusAndProjectId(PropertyStatusEnum status, Long projectId);
 }

@@ -16,7 +16,9 @@ import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyMode
 import sales.sysconp.microservice.modules.auth.company.infrastructure.repository.CompanyRepositoryAdapter;
 import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
 import sales.sysconp.microservice.modules.auth.user.infrastructure.repository.UserRepositoryAdapter;
+import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
 import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
+import sales.sysconp.microservice.modules.project.project.infrastructure.repository.ProjectRepositoryAdapter;
 import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 import sales.sysconp.microservice.modules.project.property.infrastructure.repository.PropertyRepositoryAdapter;
@@ -25,9 +27,7 @@ import sales.sysconp.microservice.modules.project.unity.domain.enums.UnityStatus
 import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
 import sales.sysconp.microservice.modules.project.unity.infrastructure.repository.UnityRepositoryAdapter;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class SaleService implements SaleServiceInPort {
@@ -37,15 +37,17 @@ public class SaleService implements SaleServiceInPort {
     private final ClientRepositoryAdapter clientRepositoryAdapter;
     private final UnityRepositoryAdapter unityRepositoryAdapter;
     private final PropertyRepositoryAdapter propertyRepositoryAdapter;
+    private final ProjectRepositoryAdapter projectRepositoryAdapter;
     private final SaleMapper saleMapper;
 
-    public SaleService(SaleRepositoryAdapter saleRepositoryAdapter, PropertyRepositoryAdapter propertyRepositoryAdapter, UnityService unityService, SaleMapper saleMapper, UserRepositoryAdapter userRepositoryAdapter, CompanyRepositoryAdapter companyRepositoryAdapter, ClientRepositoryAdapter clientRepositoryAdapter, UnityRepositoryAdapter unityRepositoryAdapter) {
+    public SaleService(SaleRepositoryAdapter saleRepositoryAdapter, ProjectRepositoryAdapter projectRepositoryAdapter, PropertyRepositoryAdapter propertyRepositoryAdapter, UnityService unityService, SaleMapper saleMapper, UserRepositoryAdapter userRepositoryAdapter, CompanyRepositoryAdapter companyRepositoryAdapter, ClientRepositoryAdapter clientRepositoryAdapter, UnityRepositoryAdapter unityRepositoryAdapter) {
         this.saleRepositoryAdapter = saleRepositoryAdapter;
         this.userRepositoryAdapter = userRepositoryAdapter;
         this.companyRepositoryAdapter = companyRepositoryAdapter;
         this.propertyRepositoryAdapter = propertyRepositoryAdapter;
         this.clientRepositoryAdapter = clientRepositoryAdapter;
         this.unityRepositoryAdapter = unityRepositoryAdapter;
+        this.projectRepositoryAdapter = projectRepositoryAdapter;
         this.saleMapper = saleMapper;
     }
 
@@ -102,8 +104,6 @@ public class SaleService implements SaleServiceInPort {
 
         SaleModel savedSale = this.saleRepositoryAdapter.save(newSale);
 
-
-        // 1. Check if all of the unities exist
         dto.getUnitiesArray().forEach(unityId -> {
             UnityModel unity = this.unityRepositoryAdapter.findById(unityId);
 
@@ -111,31 +111,37 @@ public class SaleService implements SaleServiceInPort {
                 throw new NoSuchElementException("Unity not found with id: " + unityId + " or it is not available");
             }
 
-            // 2. Update unity status
             unity.setStatus(UnityStatusEnum.IN_SALE);
-
-            // 3. Update unities sale_id
             unity.setSale(savedSale);
-
             this.unityRepositoryAdapter.save(unity);
 
-            // 4. Check inside of eac propert if are still free or not
-            List<UnityModel> unities = this.unityRepositoryAdapter.findByPropertyIdAndStatus(unity.getProperty().getId(), UnityStatusEnum.AVAILABLE);
+            List<UnityModel> unities = this.unityRepositoryAdapter.findByPropertyIdAndStatus(
+                    unity.getProperty().getId(), UnityStatusEnum.AVAILABLE
+            );
 
             if (unities.isEmpty()) {
-                PropertyModel propertyModel = this.propertyRepositoryAdapter
+                PropertyModel propertyModel = propertyRepositoryAdapter
                         .getPropertyById(unity.getProperty().getId())
-                        .orElseThrow(() -> new NoSuchElementException("Propriedade nao encontrada"));
+                        .orElseThrow(() -> new NoSuchElementException("Property not found"));
 
-                // 5. Update property status too
                 propertyModel.setStatus(PropertyStatusEnum.WITHOUT_SPACE);
-                this.propertyRepositoryAdapter.save(propertyModel);
+                propertyRepositoryAdapter.save(propertyModel);
             }
 
-            // Check if all proprieties all available to update project
+            Long projectId = unity.getProperty().getProject().getId();
+
+            List<PropertyModel> properties = this.propertyRepositoryAdapter
+                    .getPropertiesByStatusAndProjectId(PropertyStatusEnum.WITH_SPACE, projectId);
+
+            if (properties.isEmpty()) {
+                ProjectModel projectModel = this.projectRepositoryAdapter
+                        .findById(projectId)
+                        .orElseThrow(() -> new NoSuchElementException("Project not found with id: " + projectId));
+
+                projectModel.setStatus(ProjectStatusEnum.COMPLETED);
+                this.projectRepositoryAdapter.save(projectModel);
+            }
         });
-
-
 
         SaleModel createdSale = this.saleRepositoryAdapter
                 .findById(savedSale.getId())
@@ -143,6 +149,7 @@ public class SaleService implements SaleServiceInPort {
 
         return this.saleMapper.toResponseDTO(createdSale);
     }
+
 
     @Override
     public SaleResponseDTO updateSale(Long id, SaleUpdateRequestDTO dto) {

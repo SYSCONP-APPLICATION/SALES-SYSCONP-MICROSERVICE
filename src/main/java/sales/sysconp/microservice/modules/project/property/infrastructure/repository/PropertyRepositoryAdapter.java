@@ -94,5 +94,10 @@ public class PropertyRepositoryAdapter implements PropertyRepositoryOutPort {
         jpaRepository.delete(propertyMapper.toEntity(propertyModel));
     }
 
-
+    @Override
+    public List<PropertyModel> getPropertiesByStatusAndProjectId(PropertyStatusEnum status, Long projectId) {
+        return jpaRepository.findByStatusAndProjectId(status, projectId).stream()
+                .map(propertyMapper::toModel)
+                .toList();
+    }
 }
