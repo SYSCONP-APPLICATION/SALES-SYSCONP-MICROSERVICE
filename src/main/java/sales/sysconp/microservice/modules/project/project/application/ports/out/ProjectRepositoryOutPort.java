@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.modules.project.project.application.ports.out;
 
+import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
 import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface ProjectRepositoryOutPort {
     List<ProjectModel> findAllByCompanyId(Long companyId);
 
     void deleteById(Long id);
+
+    void updateProjectStatus(Long projectId, ProjectStatusEnum status);
 }

@@ -48,4 +48,8 @@ public class ProjectUpdateRequestDTO {
     public String getLocation() {
         return location;
     }
+
+    public void setStatus(ProjectStatusEnum status) {
+        this.status = status;
+    }
 }
