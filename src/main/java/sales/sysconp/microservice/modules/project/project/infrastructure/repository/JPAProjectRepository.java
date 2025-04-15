@@ -9,6 +9,8 @@ import java.util.UUID;
 
 public interface JPAProjectRepository extends JpaRepository<ProjectEntity, Long> {
     Optional<ProjectEntity> findByUuid(UUID uuid);
+
     Optional<ProjectEntity> findByName(String name);
+
     List<ProjectEntity> findAllByCompanyId(Long companyId);
 }

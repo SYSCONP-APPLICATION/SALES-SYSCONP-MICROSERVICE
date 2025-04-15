@@ -2,6 +2,7 @@ package sales.sysconp.microservice.modules.project.property.infrastructure.repos
 
 import org.springframework.stereotype.Repository;
 import sales.sysconp.microservice.modules.project.property.application.ports.out.PropertyRepositoryOutPort;
+import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
 import sales.sysconp.microservice.modules.project.property.domain.mappers.PropertyMapper;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 
@@ -92,4 +93,6 @@ public class PropertyRepositoryAdapter implements PropertyRepositoryOutPort {
     public void delete(PropertyModel propertyModel) {
         jpaRepository.delete(propertyMapper.toEntity(propertyModel));
     }
+
+
 }

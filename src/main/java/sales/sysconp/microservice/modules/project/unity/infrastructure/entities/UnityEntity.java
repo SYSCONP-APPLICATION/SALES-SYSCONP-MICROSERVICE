@@ -57,24 +57,18 @@ public class UnityEntity {
     public UnityEntity() {
     }
 
-    public UnityEntity(Long id, UUID uuid, String name, PropertyEntity property, List<CompartmentEntity> compartments, MeasurementEntity measurement, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public UnityEntity(Long id, UUID uuid, String name, PropertyEntity property, List<CompartmentEntity> compartments, MeasurementEntity measurement, UnityStatusEnum status, SaleEntity sale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
-        this.property = property;
         this.name = name;
+        this.property = property;
         this.compartments = compartments;
         this.measurement = measurement;
+        this.status = status;
+        this.sale = sale;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Long getId() {
@@ -91,6 +85,14 @@ public class UnityEntity {
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public PropertyEntity getProperty() {
@@ -115,6 +117,22 @@ public class UnityEntity {
 
     public void setMeasurement(MeasurementEntity measurement) {
         this.measurement = measurement;
+    }
+
+    public UnityStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(UnityStatusEnum status) {
+        this.status = status;
+    }
+
+    public SaleEntity getSale() {
+        return sale;
+    }
+
+    public void setSale(SaleEntity sale) {
+        this.sale = sale;
     }
 
     public LocalDateTime getCreatedAt() {

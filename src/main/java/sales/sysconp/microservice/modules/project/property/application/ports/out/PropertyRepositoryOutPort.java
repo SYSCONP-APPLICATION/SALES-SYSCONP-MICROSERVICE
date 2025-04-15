@@ -1,5 +1,6 @@
 package sales.sysconp.microservice.modules.project.property.application.ports.out;
 
+import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 
 import java.util.List;
@@ -30,4 +31,6 @@ public interface PropertyRepositoryOutPort {
     PropertyModel save(PropertyModel propertyModel);
 
     void delete(PropertyModel propertyModel);
+
+    List<PropertyModel> getPropertiesByStatus(PropertyStatusEnum status);
 }

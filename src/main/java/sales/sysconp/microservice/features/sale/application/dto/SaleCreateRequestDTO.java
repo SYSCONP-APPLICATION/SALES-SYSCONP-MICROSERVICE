@@ -6,9 +6,6 @@ import sales.sysconp.microservice.features.sale.domain.enums.SaleStatus;
 import java.util.List;
 
 public class SaleCreateRequestDTO {
-    @NotNull(message = "status cannot be null")
-    private SaleStatus status;
-
     @NotNull(message = "clientId cannot be null")
     private Long clientId;
 
@@ -20,10 +17,6 @@ public class SaleCreateRequestDTO {
 
     @NotNull(message = "unitiesArray cannot be null")
     private List<Long> unitiesArray;
-
-    public SaleStatus getStatus() {
-        return status;
-    }
 
     public Long getClientId() {
         return clientId;

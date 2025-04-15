@@ -142,36 +142,6 @@ public class UnityService implements UnityServiceInPort {
         return unityMapper.toResponseDTO(unityRepositoryAdapter.save(unityModel));
     }
 
-    @Transactional
-    @Override
-    public List<UnityResponseDTO> updateStatusesByIds(List<Long> unityIds, UnityStatusEnum status) {
-        int unityModelsUpdated = unityRepositoryAdapter.updateStatusesByIds(unityIds, status);
-
-        if (unityModelsUpdated != unityIds.size()) {
-            throw new IllegalArgumentException("Some unities not found to update" + unityIds);
-        }
-
-        List<UnityModel> unityModels = unityRepositoryAdapter.findAllById(unityIds);
-
-        Map<Long, List<UnityModel>> unitiesByPropertyId = unityModels.stream()
-                .collect(Collectors.groupingBy(unityModel -> unityModel.getProperty().getId()));
-
-        unitiesByPropertyId.forEach((propertyId, propertyUnityModels) -> {
-            List<UnityModel> availableUnities = propertyUnityModels.stream()
-                    .filter(unityModel -> unityModel.getStatus() == UnityStatusEnum.AVAILABLE)
-                    .toList();
-
-            if (availableUnities.isEmpty()) {
-                propertyUnityModels.forEach(unityModel -> unityModel.getProperty().setStatus(PropertyStatusEnum.WITHOUT_SPACE));
-                propertyRepositoryAdapter.saveAll(propertyUnityModels.stream().map(UnityModel::getProperty).toList());
-            }
-        });
-
-        return unityModels.stream()
-                .map(unityMapper::toResponseDTO)
-                .toList();
-    }
-
     @Override
     public void deleteUnity(Long id) {
         UnityModel unityModel = unityRepositoryAdapter.findById(id);

@@ -23,7 +23,5 @@ public interface UnityServiceInPort {
 
     UnityResponseDTO changeUnityStatus(Long id, UnityStatusEnum status);
 
-    List<UnityResponseDTO> updateStatusesByIds(List<Long> unityIds, UnityStatusEnum status);
-
     void deleteUnity(Long id);
 }

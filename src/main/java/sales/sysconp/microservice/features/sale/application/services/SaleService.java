@@ -8,6 +8,7 @@ import sales.sysconp.microservice.features.sale.application.dto.SaleCreateReques
 import sales.sysconp.microservice.features.sale.application.dto.SaleResponseDTO;
 import sales.sysconp.microservice.features.sale.application.dto.SaleUpdateRequestDTO;
 import sales.sysconp.microservice.features.sale.application.ports.in.SaleServiceInPort;
+import sales.sysconp.microservice.features.sale.domain.enums.SaleStatus;
 import sales.sysconp.microservice.features.sale.domain.mappers.SaleMapper;
 import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
 import sales.sysconp.microservice.features.sale.infrastructure.repository.SaleRepositoryAdapter;
@@ -15,6 +16,10 @@ import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyMode
 import sales.sysconp.microservice.modules.auth.company.infrastructure.repository.CompanyRepositoryAdapter;
 import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
 import sales.sysconp.microservice.modules.auth.user.infrastructure.repository.UserRepositoryAdapter;
+import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
+import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
+import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
+import sales.sysconp.microservice.modules.project.property.infrastructure.repository.PropertyRepositoryAdapter;
 import sales.sysconp.microservice.modules.project.unity.application.services.UnityService;
 import sales.sysconp.microservice.modules.project.unity.domain.enums.UnityStatusEnum;
 import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
@@ -31,14 +36,14 @@ public class SaleService implements SaleServiceInPort {
     private final CompanyRepositoryAdapter companyRepositoryAdapter;
     private final ClientRepositoryAdapter clientRepositoryAdapter;
     private final UnityRepositoryAdapter unityRepositoryAdapter;
-    private final UnityService unityService;
+    private final PropertyRepositoryAdapter propertyRepositoryAdapter;
     private final SaleMapper saleMapper;
 
-    public SaleService(SaleRepositoryAdapter saleRepositoryAdapter, UnityService unityService, SaleMapper saleMapper, UserRepositoryAdapter userRepositoryAdapter, CompanyRepositoryAdapter companyRepositoryAdapter, ClientRepositoryAdapter clientRepositoryAdapter, UnityRepositoryAdapter unityRepositoryAdapter) {
+    public SaleService(SaleRepositoryAdapter saleRepositoryAdapter, PropertyRepositoryAdapter propertyRepositoryAdapter, UnityService unityService, SaleMapper saleMapper, UserRepositoryAdapter userRepositoryAdapter, CompanyRepositoryAdapter companyRepositoryAdapter, ClientRepositoryAdapter clientRepositoryAdapter, UnityRepositoryAdapter unityRepositoryAdapter) {
         this.saleRepositoryAdapter = saleRepositoryAdapter;
         this.userRepositoryAdapter = userRepositoryAdapter;
         this.companyRepositoryAdapter = companyRepositoryAdapter;
-        this.unityService = unityService;
+        this.propertyRepositoryAdapter = propertyRepositoryAdapter;
         this.clientRepositoryAdapter = clientRepositoryAdapter;
         this.unityRepositoryAdapter = unityRepositoryAdapter;
         this.saleMapper = saleMapper;
@@ -88,21 +93,55 @@ public class SaleService implements SaleServiceInPort {
                 .findById(dto.getUserId())
                 .orElseThrow(() -> new NoSuchElementException("User not found with id: " + dto.getUserId()));
 
-        List<UnityModel> unities = this.unityRepositoryAdapter
-                .findUnitiesInArrayAndStatus(dto.getUnitiesArray(), UnityStatusEnum.AVAILABLE);
-
         SaleModel newSale = new SaleModel();
 
-        newSale.setStatus(dto.getStatus());
+        newSale.setStatus(SaleStatus.IN_PROGRESS);
         newSale.setCompany(company);
         newSale.setClient(client);
         newSale.setUser(user);
-        newSale.setUnities(unities);
 
-        // Update unities to unavailable & Check if there are available unities, to update property status
-        this.unityService.updateStatusesByIds(newSale.getUnities().stream().map(UnityModel::getId).toList(), UnityStatusEnum.SOLD);
+        SaleModel savedSale = this.saleRepositoryAdapter.save(newSale);
 
-        return this.saleMapper.toResponseDTO(this.saleRepositoryAdapter.save(newSale));
+
+        // 1. Check if all of the unities exist
+        dto.getUnitiesArray().forEach(unityId -> {
+            UnityModel unity = this.unityRepositoryAdapter.findById(unityId);
+
+            if (unity == null || unity.getStatus() != UnityStatusEnum.AVAILABLE) {
+                throw new NoSuchElementException("Unity not found with id: " + unityId + " or it is not available");
+            }
+
+            // 2. Update unity status
+            unity.setStatus(UnityStatusEnum.IN_SALE);
+
+            // 3. Update unities sale_id
+            unity.setSale(savedSale);
+
+            this.unityRepositoryAdapter.save(unity);
+
+            // 4. Check inside of eac propert if are still free or not
+            List<UnityModel> unities = this.unityRepositoryAdapter.findByPropertyIdAndStatus(unity.getProperty().getId(), UnityStatusEnum.AVAILABLE);
+
+            if (unities.isEmpty()) {
+                PropertyModel propertyModel = this.propertyRepositoryAdapter
+                        .getPropertyById(unity.getProperty().getId())
+                        .orElseThrow(() -> new NoSuchElementException("Propriedade nao encontrada"));
+
+                // 5. Update property status too
+                propertyModel.setStatus(PropertyStatusEnum.WITHOUT_SPACE);
+                this.propertyRepositoryAdapter.save(propertyModel);
+            }
+
+            // Check if all proprieties all available to update project
+        });
+
+
+
+        SaleModel createdSale = this.saleRepositoryAdapter
+                .findById(savedSale.getId())
+                .orElseThrow(() -> new NoSuchElementException("Sale not found with id: " + savedSale.getId()));
+
+        return this.saleMapper.toResponseDTO(createdSale);
     }
 
     @Override
