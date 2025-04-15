@@ -72,7 +72,7 @@ public class SaleEntity {
     @JoinColumn(name = "company_id", nullable = false)
     private CompanyEntity company;
 
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "sale")
     private List<UnityEntity> unities;
 
     @Column(updatable = false)  

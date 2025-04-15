@@ -162,6 +162,11 @@ public class SaleService implements SaleServiceInPort {
                 .findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Sale not found with id: " + id));
 
+        List<UnityModel> unities = unityRepositoryAdapter.findBySaleId(id);
+        unities.forEach(unity -> unity.setSale(null));
+        unities.forEach(unity -> unity.setStatus(UnityStatusEnum.AVAILABLE));
+        unityRepositoryAdapter.saveAll(unities);
+
         saleRepositoryAdapter.deleteById(id);
     }
 }

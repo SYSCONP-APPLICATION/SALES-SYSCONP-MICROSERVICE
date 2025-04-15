@@ -33,4 +33,6 @@ public interface JPAUnityRepository extends JpaRepository<UnityEntity, Long> {
 
     @Query(value = "SELECT u FROM UnityEntity u WHERE u.id IN (:unitiesArray) AND u.status = :status")
     List<UnityEntity> findUnitiesInArrayAndStatus(@Param("unitiesArray") List<Long> unitiesArray, @Param("status") UnityStatusEnum status);
+
+    List<UnityEntity> findBySaleId(Long saleId);
 }

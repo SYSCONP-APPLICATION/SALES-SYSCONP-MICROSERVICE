@@ -30,4 +30,8 @@ public interface UnityRepositoryOutPort {
     List<UnityModel> findByProperty(Long propertyId);
 
     void delete(Long id);
+
+    List<UnityModel> findBySaleId(Long saleId);
+
+    List<UnityModel> saveAll(List<UnityModel> unityModels);
 }

@@ -77,4 +77,18 @@ public class UnityRepositoryAdapter implements UnityRepositoryOutPort {
     public void delete(Long id) {
         jpaRepository.deleteById(id);
     }
+
+    @Override
+    public List<UnityModel> findBySaleId(Long saleId) {
+        return jpaRepository.findBySaleId(saleId).stream()
+                .map(unityMapper::toModel)
+                .toList();
+    }
+
+    @Override
+    public List<UnityModel> saveAll(List<UnityModel> unityModels) {
+        return jpaRepository.saveAll(unityModels.stream().map(unityMapper::toEntity).toList()).stream()
+                .map(unityMapper::toModel)
+                .toList();
+    }
 }
