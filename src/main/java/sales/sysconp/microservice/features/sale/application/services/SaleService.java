@@ -16,10 +16,8 @@ import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyMode
 import sales.sysconp.microservice.modules.auth.company.infrastructure.repository.CompanyRepositoryAdapter;
 import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
 import sales.sysconp.microservice.modules.auth.user.infrastructure.repository.UserRepositoryAdapter;
-import sales.sysconp.microservice.modules.project.project.application.dto.ProjectUpdateRequestDTO;
 import sales.sysconp.microservice.modules.project.project.application.services.ProjectService;
 import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
-import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
 import sales.sysconp.microservice.modules.project.project.infrastructure.repository.ProjectRepositoryAdapter;
 import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
@@ -41,15 +39,13 @@ public class SaleService implements SaleServiceInPort {
     private final PropertyRepositoryAdapter propertyRepositoryAdapter;
     private final ProjectRepositoryAdapter projectRepositoryAdapter;
     private final SaleMapper saleMapper;
-    private final ProjectService projectService;
 
-    public SaleService(SaleRepositoryAdapter saleRepositoryAdapter, ProjectService ProjectService, ProjectRepositoryAdapter projectRepositoryAdapter, PropertyRepositoryAdapter propertyRepositoryAdapter, UnityService unityService, SaleMapper saleMapper, UserRepositoryAdapter userRepositoryAdapter, CompanyRepositoryAdapter companyRepositoryAdapter, ClientRepositoryAdapter clientRepositoryAdapter, UnityRepositoryAdapter unityRepositoryAdapter) {
+    public SaleService(SaleRepositoryAdapter saleRepositoryAdapter, ProjectRepositoryAdapter projectRepositoryAdapter, PropertyRepositoryAdapter propertyRepositoryAdapter, UnityService unityService, SaleMapper saleMapper, UserRepositoryAdapter userRepositoryAdapter, CompanyRepositoryAdapter companyRepositoryAdapter, ClientRepositoryAdapter clientRepositoryAdapter, UnityRepositoryAdapter unityRepositoryAdapter) {
         this.saleRepositoryAdapter = saleRepositoryAdapter;
         this.userRepositoryAdapter = userRepositoryAdapter;
         this.companyRepositoryAdapter = companyRepositoryAdapter;
         this.propertyRepositoryAdapter = propertyRepositoryAdapter;
         this.clientRepositoryAdapter = clientRepositoryAdapter;
-        this.projectService = ProjectService;
         this.unityRepositoryAdapter = unityRepositoryAdapter;
         this.projectRepositoryAdapter = projectRepositoryAdapter;
         this.saleMapper = saleMapper;
