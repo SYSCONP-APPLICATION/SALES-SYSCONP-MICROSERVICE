@@ -3,19 +3,13 @@ package sales.sysconp.microservice.features.payment_configuration.infrastructure
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
 import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 
 @Entity
 @Table(name = "payment_configurations")
@@ -29,6 +23,7 @@ public class PaymentConfigurationEntity {
     @Column(unique = true, nullable = false)
     private UUID uuid;
 
+    @PrePersist
     public void generateUUID () {
         this.uuid = UUID.randomUUID();
     }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
 import sales.sysconp.microservice.modules.project.project.infrastructure.repository.ProjectRepositoryAdapter;
 import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
+import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyTypeEnum;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 import sales.sysconp.microservice.modules.project.property.infrastructure.repository.PropertyRepositoryAdapter;
 import sales.sysconp.microservice.modules.project.unity.application.dto.UnityCreateRequestDTO;
@@ -78,6 +79,12 @@ public class UnityService implements UnityServiceInPort {
     public UnityResponseDTO createUnity(UnityCreateRequestDTO unityCreateRequestDTO) {
         PropertyModel propertyModel = propertyRepositoryAdapter.getPropertyById(unityCreateRequestDTO.getPropertyId())
                 .orElseThrow(() -> new NoSuchElementException("Property not found with ID: " + unityCreateRequestDTO.getPropertyId()));
+
+        List<UnityModel> unities = unityRepositoryAdapter.findByProperty(unityCreateRequestDTO.getPropertyId());
+
+        if (!propertyModel.getType().equals(PropertyTypeEnum.BUILDING) && !unities.isEmpty()) {
+            throw new IllegalArgumentException("Property not of type BUILDING cannot have more than 1 unity.");
+        }
 
         UnityModel unityModel = new UnityModel();
 

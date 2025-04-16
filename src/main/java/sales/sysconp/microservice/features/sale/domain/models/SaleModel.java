@@ -5,6 +5,7 @@ import sales.sysconp.microservice.features.installment.domain.models.Installment
 import sales.sysconp.microservice.features.payment.domain.models.PaymentModel;
 import sales.sysconp.microservice.features.payment_configuration.domain.models.PaymentConfigurationModel;
 import sales.sysconp.microservice.features.sale.domain.enums.SaleStatus;
+import sales.sysconp.microservice.features.sale.domain.enums.SaleType;
 import sales.sysconp.microservice.modules.auth.company.domain.models.CompanyModel;
 import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
 import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
@@ -23,6 +24,12 @@ public class SaleModel {
     private List<PaymentModel> payments;
     private List<InstallmentModel> installments;
     private PaymentConfigurationModel paymentConfiguration;
+    private Double initialValue;
+    private Double globalValue;
+    private Double remainValue;
+    private Double installmentValue;
+    private SaleType saleType;
+    private String additionalInfo;
     private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -31,7 +38,7 @@ public class SaleModel {
     public SaleModel() {
     }
 
-    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientModel client, UserModel user, List<UnityModel> unities, List<PaymentModel> payments, List<InstallmentModel> installments, PaymentConfigurationModel paymentConfiguration, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientModel client, UserModel user, List<UnityModel> unities, List<PaymentModel> payments, List<InstallmentModel> installments, PaymentConfigurationModel paymentConfiguration, Double initialValue, Double globalValue, Double remainValue, Double installmentValue, SaleType saleType, String additionalInfo, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
@@ -41,18 +48,16 @@ public class SaleModel {
         this.payments = payments;
         this.installments = installments;
         this.paymentConfiguration = paymentConfiguration;
+        this.initialValue = initialValue;
+        this.globalValue = globalValue;
+        this.remainValue = remainValue;
+        this.installmentValue = installmentValue;
+        this.saleType = saleType;
+        this.additionalInfo = additionalInfo;
         this.company = company;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-    }
-
-    public List<UnityModel> getUnities() {
-        return unities;
-    }
-
-    public void setUnities(List<UnityModel> unities) {
-        this.unities = unities;
     }
 
     public Long getId() {
@@ -95,6 +100,14 @@ public class SaleModel {
         this.user = user;
     }
 
+    public List<UnityModel> getUnities() {
+        return unities;
+    }
+
+    public void setUnities(List<UnityModel> unities) {
+        this.unities = unities;
+    }
+
     public List<PaymentModel> getPayments() {
         return payments;
     }
@@ -117,6 +130,54 @@ public class SaleModel {
 
     public void setPaymentConfiguration(PaymentConfigurationModel paymentConfiguration) {
         this.paymentConfiguration = paymentConfiguration;
+    }
+
+    public Double getInitialValue() {
+        return initialValue;
+    }
+
+    public void setInitialValue(Double initialValue) {
+        this.initialValue = initialValue;
+    }
+
+    public Double getGlobalValue() {
+        return globalValue;
+    }
+
+    public void setGlobalValue(Double globalValue) {
+        this.globalValue = globalValue;
+    }
+
+    public Double getRemainValue() {
+        return remainValue;
+    }
+
+    public void setRemainValue(Double remainValue) {
+        this.remainValue = remainValue;
+    }
+
+    public Double getInstallmentValue() {
+        return installmentValue;
+    }
+
+    public void setInstallmentValue(Double installmentValue) {
+        this.installmentValue = installmentValue;
+    }
+
+    public SaleType getSaleType() {
+        return saleType;
+    }
+
+    public void setSaleType(SaleType saleType) {
+        this.saleType = saleType;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public CompanyModel getCompany() {

@@ -5,6 +5,7 @@ import sales.sysconp.microservice.features.installment.infrastructure.entities.I
 import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
 import sales.sysconp.microservice.features.payment_configuration.infrastructure.entities.PaymentConfigurationEntity;
 import sales.sysconp.microservice.features.sale.domain.enums.SaleStatus;
+import sales.sysconp.microservice.features.sale.domain.enums.SaleType;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 import sales.sysconp.microservice.modules.auth.user.infrastructure.entities.UserEntity;
 import sales.sysconp.microservice.modules.project.unity.infrastructure.entities.UnityEntity;
@@ -22,6 +23,12 @@ public class SaleResponseDTO {
     private List<PaymentEntity> payments;
     private List<InstallmentEntity> installments;
     private PaymentConfigurationEntity paymentConfiguration;
+    private Double initialValue;
+    private Double globalValue;
+    private Double remainValue;
+    private Double installmentValue;
+    private SaleType saleType;
+    private String additionalInfo;
     private CompanyEntity company;
     private List<UnityEntity> unities;
     private LocalDateTime createdAt;
@@ -29,7 +36,7 @@ public class SaleResponseDTO {
 
     public SaleResponseDTO() { }
 
-    public SaleResponseDTO(Long id, UUID uuid, SaleStatus status, ClientEntity client, UserEntity user, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, CompanyEntity company, List<UnityEntity> unities, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SaleResponseDTO(Long id, UUID uuid, SaleStatus status, ClientEntity client, UserEntity user, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, Double initialValue, Double globalValue, Double remainValue, Double installmentValue, SaleType saleType, String additionalInfo, CompanyEntity company, List<UnityEntity> unities, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
@@ -38,6 +45,12 @@ public class SaleResponseDTO {
         this.payments = payments;
         this.installments = installments;
         this.paymentConfiguration = paymentConfiguration;
+        this.initialValue = initialValue;
+        this.globalValue = globalValue;
+        this.remainValue = remainValue;
+        this.installmentValue = installmentValue;
+        this.saleType = saleType;
+        this.additionalInfo = additionalInfo;
         this.company = company;
         this.unities = unities;
         this.createdAt = createdAt;
@@ -106,6 +119,54 @@ public class SaleResponseDTO {
 
     public void setPaymentConfiguration(PaymentConfigurationEntity paymentConfiguration) {
         this.paymentConfiguration = paymentConfiguration;
+    }
+
+    public Double getInitialValue() {
+        return initialValue;
+    }
+
+    public void setInitialValue(Double initialValue) {
+        this.initialValue = initialValue;
+    }
+
+    public Double getGlobalValue() {
+        return globalValue;
+    }
+
+    public void setGlobalValue(Double globalValue) {
+        this.globalValue = globalValue;
+    }
+
+    public Double getRemainValue() {
+        return remainValue;
+    }
+
+    public void setRemainValue(Double remainValue) {
+        this.remainValue = remainValue;
+    }
+
+    public Double getInstallmentValue() {
+        return installmentValue;
+    }
+
+    public void setInstallmentValue(Double installmentValue) {
+        this.installmentValue = installmentValue;
+    }
+
+    public SaleType getSaleType() {
+        return saleType;
+    }
+
+    public void setSaleType(SaleType saleType) {
+        this.saleType = saleType;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public CompanyEntity getCompany() {

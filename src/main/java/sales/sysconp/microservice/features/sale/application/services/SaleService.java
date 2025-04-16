@@ -101,6 +101,12 @@ public class SaleService implements SaleServiceInPort {
         newSale.setCompany(company);
         newSale.setClient(client);
         newSale.setUser(user);
+        newSale.setInitialValue(dto.getInitialValue());
+        newSale.setGlobalValue(dto.getGlobalValue());
+        newSale.setRemainValue(dto.getGlobalValue()-dto.getInitialValue());
+        newSale.setSaleType(dto.getSaleType());
+        newSale.setInstallmentValue(dto.getInstallmentValue());
+        newSale.setAdditionalInfo(dto.getAdditionalInfo());
 
         SaleModel savedSale = this.saleRepositoryAdapter.save(newSale);
 
@@ -151,7 +157,13 @@ public class SaleService implements SaleServiceInPort {
                 .findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Sale not found with id: " + id));
 
-        sale.setStatus(dto.getStatus());
+        if (dto.getStatus() != null) {
+            sale.setStatus(dto.getStatus());
+        }
+
+        if (dto.getAdditionalInfo() != null) {
+            sale.setAdditionalInfo(dto.getAdditionalInfo());
+        }
 
         return this.saleMapper.toResponseDTO(this.saleRepositoryAdapter.save(sale));
     }
