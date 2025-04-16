@@ -2,6 +2,8 @@ package sales.sysconp.microservice.modules.project.unity.application.services;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
+import sales.sysconp.microservice.modules.project.project.infrastructure.repository.ProjectRepositoryAdapter;
 import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
 import sales.sysconp.microservice.modules.project.property.infrastructure.repository.PropertyRepositoryAdapter;
@@ -15,20 +17,20 @@ import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel
 import sales.sysconp.microservice.modules.project.unity.infrastructure.repository.UnityRepositoryAdapter;
 
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class UnityService implements UnityServiceInPort {
     private final UnityRepositoryAdapter unityRepositoryAdapter;
-    private final PropertyRepositoryAdapter propertyRepositoryAdapter;
     private final UnityMapper unityMapper;
+    private final ProjectRepositoryAdapter projectRepositoryAdapter;
+    private final PropertyRepositoryAdapter propertyRepositoryAdapter;
 
-    public UnityService(UnityRepositoryAdapter unityRepositoryAdapter, PropertyRepositoryAdapter propertyRepositoryAdapter, UnityMapper unityMapper) {
+    public UnityService(UnityRepositoryAdapter unityRepositoryAdapter, ProjectRepositoryAdapter projectRepositoryAdapter, PropertyRepositoryAdapter propertyRepositoryAdapter, UnityMapper unityMapper) {
         this.unityRepositoryAdapter = unityRepositoryAdapter;
         this.propertyRepositoryAdapter = propertyRepositoryAdapter;
+        this.projectRepositoryAdapter = projectRepositoryAdapter;
         this.unityMapper = unityMapper;
     }
 
@@ -71,6 +73,7 @@ public class UnityService implements UnityServiceInPort {
                 .toList();
     }
 
+    @Transactional
     @Override
     public UnityResponseDTO createUnity(UnityCreateRequestDTO unityCreateRequestDTO) {
         PropertyModel propertyModel = propertyRepositoryAdapter.getPropertyById(unityCreateRequestDTO.getPropertyId())
@@ -86,7 +89,26 @@ public class UnityService implements UnityServiceInPort {
         unityModel.setCreatedAt(unityCreateRequestDTO.getCreatedAt());
         unityModel.setUpdatedAt(unityCreateRequestDTO.getUpdatedAt());
 
-        return unityMapper.toResponseDTO(unityRepositoryAdapter.save(unityModel));
+        UnityModel savedUnityModel = this.unityRepositoryAdapter.save(unityModel);
+
+        UnityModel unity = this.unityRepositoryAdapter.findById(savedUnityModel.getId());
+
+        if (unity == null || unity.getStatus() != UnityStatusEnum.AVAILABLE) {
+            throw new NoSuchElementException("Unity not found with id: " + savedUnityModel.getId() + " or it is not available");
+        }
+
+        PropertyModel propertyModelVer = propertyRepositoryAdapter
+                .getPropertyById(unity.getProperty().getId())
+                .orElseThrow(() -> new NoSuchElementException("Property not found"));
+
+        propertyModel.setStatus(PropertyStatusEnum.WITH_SPACE);
+        propertyRepositoryAdapter.save(propertyModelVer);
+
+        Long projectId = unity.getProperty().getProject().getId();
+
+        this.projectRepositoryAdapter.updateProjectStatus(projectId, ProjectStatusEnum.IN_PROGRESS);
+
+        return this.unityMapper.toResponseDTO(this.unityRepositoryAdapter.findById(savedUnityModel.getId()));
     }
 
     @Override
