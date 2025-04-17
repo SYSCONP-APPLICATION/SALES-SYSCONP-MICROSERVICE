@@ -1,7 +1,6 @@
 package sales.sysconp.microservice.features.sale.application.dto;
 
 import jakarta.validation.constraints.NotNull;
-import sales.sysconp.microservice.features.sale.domain.enums.SaleStatus;
 import sales.sysconp.microservice.features.sale.domain.enums.SaleType;
 
 import java.util.List;
@@ -12,6 +11,9 @@ public class SaleCreateRequestDTO {
 
     @NotNull(message = "userId cannot be null")
     private Long userId;
+
+    @NotNull(message = "discount cannot be null")
+    private Double discount;
 
     @NotNull(message = "companyId cannot be null")
     private Long companyId;
@@ -57,6 +59,8 @@ public class SaleCreateRequestDTO {
     public Double getGlobalValue() {
         return globalValue;
     }
+
+    public Double getDiscount() { return discount; }
 
     public Double getInstallmentValue() {
         return installmentValue;

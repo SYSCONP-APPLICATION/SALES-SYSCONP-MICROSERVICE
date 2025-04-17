@@ -26,7 +26,7 @@ public class SaleModel {
     private PaymentConfigurationModel paymentConfiguration;
     private Double initialValue;
     private Double globalValue;
-    private Double remainValue;
+    private Double discount;
     private Double installmentValue;
     private SaleType saleType;
     private String additionalInfo;
@@ -38,7 +38,7 @@ public class SaleModel {
     public SaleModel() {
     }
 
-    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientModel client, UserModel user, List<UnityModel> unities, List<PaymentModel> payments, List<InstallmentModel> installments, PaymentConfigurationModel paymentConfiguration, Double initialValue, Double globalValue, Double remainValue, Double installmentValue, SaleType saleType, String additionalInfo, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SaleModel(Long id, UUID uuid, SaleStatus status, ClientModel client, UserModel user, List<UnityModel> unities, List<PaymentModel> payments, List<InstallmentModel> installments, PaymentConfigurationModel paymentConfiguration, Double initialValue, Double globalValue, Double discount, Double installmentValue, SaleType saleType, String additionalInfo, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
@@ -50,7 +50,7 @@ public class SaleModel {
         this.paymentConfiguration = paymentConfiguration;
         this.initialValue = initialValue;
         this.globalValue = globalValue;
-        this.remainValue = remainValue;
+        this.discount = discount;
         this.installmentValue = installmentValue;
         this.saleType = saleType;
         this.additionalInfo = additionalInfo;
@@ -148,12 +148,12 @@ public class SaleModel {
         this.globalValue = globalValue;
     }
 
-    public Double getRemainValue() {
-        return remainValue;
+    public Double getDiscount() {
+        return discount;
     }
 
-    public void setRemainValue(Double remainValue) {
-        this.remainValue = remainValue;
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 
     public Double getInstallmentValue() {

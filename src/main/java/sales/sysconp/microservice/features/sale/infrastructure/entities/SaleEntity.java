@@ -58,7 +58,7 @@ public class SaleEntity {
     private Double globalValue;
 
     @Column(nullable = false)
-    private Double remainValue;
+    private Double discount;
 
     @Column(nullable = false)
     private Double installmentValue;
@@ -107,13 +107,13 @@ public class SaleEntity {
 
     public SaleEntity() {}
 
-    public SaleEntity(Long id, UUID uuid, SaleStatus status, Double initialValue, Double globalValue, Double remainValue, Double installmentValue, SaleType saleType, String additionalInfo, ClientEntity client, UserEntity user, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, CompanyEntity company, List<UnityEntity> unities, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SaleEntity(Long id, UUID uuid, SaleStatus status, Double initialValue, Double globalValue, Double discount, Double installmentValue, SaleType saleType, String additionalInfo, ClientEntity client, UserEntity user, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, CompanyEntity company, List<UnityEntity> unities, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
         this.initialValue = initialValue;
         this.globalValue = globalValue;
-        this.remainValue = remainValue;
+        this.discount = discount;
         this.installmentValue = installmentValue;
         this.saleType = saleType;
         this.additionalInfo = additionalInfo;
@@ -169,12 +169,12 @@ public class SaleEntity {
         this.globalValue = globalValue;
     }
 
-    public Double getRemainValue() {
-        return remainValue;
+    public Double getDiscount() {
+        return discount;
     }
 
-    public void setRemainValue(Double remainValue) {
-        this.remainValue = remainValue;
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 
     public Double getInstallmentValue() {

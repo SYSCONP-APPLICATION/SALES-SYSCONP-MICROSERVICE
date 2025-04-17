@@ -25,7 +25,7 @@ public class SaleResponseDTO {
     private PaymentConfigurationEntity paymentConfiguration;
     private Double initialValue;
     private Double globalValue;
-    private Double remainValue;
+    private Double discount;
     private Double installmentValue;
     private SaleType saleType;
     private String additionalInfo;
@@ -36,7 +36,7 @@ public class SaleResponseDTO {
 
     public SaleResponseDTO() { }
 
-    public SaleResponseDTO(Long id, UUID uuid, SaleStatus status, ClientEntity client, UserEntity user, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, Double initialValue, Double globalValue, Double remainValue, Double installmentValue, SaleType saleType, String additionalInfo, CompanyEntity company, List<UnityEntity> unities, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SaleResponseDTO(Long id, UUID uuid, SaleStatus status, ClientEntity client, UserEntity user, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, Double initialValue, Double globalValue, Double discount, Double installmentValue, SaleType saleType, String additionalInfo, CompanyEntity company, List<UnityEntity> unities, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
@@ -47,7 +47,7 @@ public class SaleResponseDTO {
         this.paymentConfiguration = paymentConfiguration;
         this.initialValue = initialValue;
         this.globalValue = globalValue;
-        this.remainValue = remainValue;
+        this.discount = discount;
         this.installmentValue = installmentValue;
         this.saleType = saleType;
         this.additionalInfo = additionalInfo;
@@ -137,12 +137,12 @@ public class SaleResponseDTO {
         this.globalValue = globalValue;
     }
 
-    public Double getRemainValue() {
-        return remainValue;
+    public Double getDiscount() {
+        return discount;
     }
 
-    public void setRemainValue(Double remainValue) {
-        this.remainValue = remainValue;
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 
     public Double getInstallmentValue() {

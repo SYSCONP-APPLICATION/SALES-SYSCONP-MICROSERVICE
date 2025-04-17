@@ -103,7 +103,7 @@ public class SaleService implements SaleServiceInPort {
         newSale.setUser(user);
         newSale.setInitialValue(dto.getInitialValue());
         newSale.setGlobalValue(dto.getGlobalValue());
-        newSale.setRemainValue(dto.getGlobalValue()-dto.getInitialValue());
+        newSale.setDiscount(dto.getDiscount());
         newSale.setSaleType(dto.getSaleType());
         newSale.setInstallmentValue(dto.getInstallmentValue());
         newSale.setAdditionalInfo(dto.getAdditionalInfo());
