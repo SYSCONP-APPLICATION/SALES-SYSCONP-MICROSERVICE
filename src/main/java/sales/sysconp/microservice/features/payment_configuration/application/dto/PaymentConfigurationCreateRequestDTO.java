@@ -6,7 +6,6 @@ public class PaymentConfigurationCreateRequestDTO {
     @NotNull(message = "Day of month is required")
     private Long dayOfMonth;
     
-    @NotNull(message = "Sale is required")
     private Long saleId;
     
     @NotNull(message = "Apply debt after is required")
@@ -22,5 +21,9 @@ public class PaymentConfigurationCreateRequestDTO {
 
     public Long getApplyDebtAfter() {
         return applyDebtAfter;
+    }
+
+    public void setSaleId(Long saleId) {
+        this.saleId = saleId;
     }
 }

@@ -1,4 +1,4 @@
-package sales.sysconp.microservice.features.installment.domain.models;
+package sales.sysconp.microservice.features.installment.application.dto;
 
 import sales.sysconp.microservice.features.debt.domain.models.DebtModel;
 import sales.sysconp.microservice.features.installment.domain.enums.InstallmentTypeEnum;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class InstallmentModel {
+public class InstallmentResponseDTO {
     private Long id;
     private UUID uuid;
     private Double amount;
@@ -28,12 +28,10 @@ public class InstallmentModel {
     private DebtModel debt;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public InstallmentModel() {
-    }
+    public InstallmentResponseDTO() {}
 
-    public InstallmentModel(Long id, UUID uuid, Double amount, LocalDateTime paymentDate, Double value, Integer index, Double discount, String additionalInfo, LocalDateTime paidAt, MonthEnum month, int year, InstallmentTypeEnum type, SaleModel sale, List<PaymentModel> payments, DebtModel debt, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public InstallmentResponseDTO(Long id, UUID uuid, Double amount, LocalDateTime paymentDate, Double value, Integer index, Double discount, String additionalInfo, LocalDateTime paidAt, MonthEnum month, int year, InstallmentTypeEnum type, SaleModel sale, List<PaymentModel> payments, DebtModel debt, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.amount = amount;
@@ -51,7 +49,6 @@ public class InstallmentModel {
         this.debt = debt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -188,13 +185,5 @@ public class InstallmentModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }
