@@ -1,6 +1,7 @@
 package sales.sysconp.microservice.modules.project.property.infrastructure.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import sales.sysconp.microservice.modules.project.property.domain.enums.PropertyStatusEnum;
 import sales.sysconp.microservice.modules.project.property.infrastructure.entities.PropertyEntity;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface JPAPropertyRepository extends JpaRepository<PropertyEntity, Lon
     Optional<PropertyEntity> findByIdAndProjectId(Long id, Long projectId);
 
     Optional<PropertyEntity> findByUuidAndProjectId(UUID uuid, Long projectId);
+
+    List<PropertyEntity> findByStatusAndProjectId(PropertyStatusEnum status, Long projectId);
 }

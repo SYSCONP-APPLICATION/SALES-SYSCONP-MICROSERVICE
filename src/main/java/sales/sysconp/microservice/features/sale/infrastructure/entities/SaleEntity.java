@@ -26,6 +26,7 @@ import sales.sysconp.microservice.features.installment.infrastructure.entities.I
 import sales.sysconp.microservice.features.payment.infrastructure.entities.PaymentEntity;
 import sales.sysconp.microservice.features.payment_configuration.infrastructure.entities.PaymentConfigurationEntity;
 import sales.sysconp.microservice.features.sale.domain.enums.SaleStatus;
+import sales.sysconp.microservice.features.sale.domain.enums.SaleType;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
 import sales.sysconp.microservice.modules.auth.user.infrastructure.entities.UserEntity;
 import sales.sysconp.microservice.modules.project.unity.infrastructure.entities.UnityEntity;
@@ -50,6 +51,24 @@ public class SaleEntity {
     @Column(nullable = false)
     private SaleStatus status;
 
+    @Column(nullable = false)
+    private Double initialValue;
+
+    @Column(nullable = false)
+    private Double globalValue;
+
+    @Column(nullable = false)
+    private Double discount;
+
+    @Column(nullable = false)
+    private Double installmentValue;
+
+    @Column(nullable = false)
+    private SaleType saleType;
+
+    @Column(nullable = true)
+    private String additionalInfo;
+
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false, referencedColumnName = "id")
     private ClientEntity client;
@@ -72,7 +91,7 @@ public class SaleEntity {
     @JoinColumn(name = "company_id", nullable = false)
     private CompanyEntity company;
 
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sale")
     private List<UnityEntity> unities;
 
     @Column(updatable = false)  
@@ -86,20 +105,25 @@ public class SaleEntity {
     @Column()
     private LocalDateTime deletedAt;
 
-    public SaleEntity() {
-    }
+    public SaleEntity() {}
 
-    public SaleEntity(Long id, UUID uuid, SaleStatus status, ClientEntity client, UserEntity user, List<UnityEntity> unities, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, CompanyEntity company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SaleEntity(Long id, UUID uuid, SaleStatus status, Double initialValue, Double globalValue, Double discount, Double installmentValue, SaleType saleType, String additionalInfo, ClientEntity client, UserEntity user, List<PaymentEntity> payments, List<InstallmentEntity> installments, PaymentConfigurationEntity paymentConfiguration, CompanyEntity company, List<UnityEntity> unities, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.status = status;
+        this.initialValue = initialValue;
+        this.globalValue = globalValue;
+        this.discount = discount;
+        this.installmentValue = installmentValue;
+        this.saleType = saleType;
+        this.additionalInfo = additionalInfo;
         this.client = client;
         this.user = user;
-        this.unities = unities;
         this.payments = payments;
         this.installments = installments;
         this.paymentConfiguration = paymentConfiguration;
         this.company = company;
+        this.unities = unities;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -107,14 +131,6 @@ public class SaleEntity {
 
     public Long getId() {
         return id;
-    }
-
-    public void setUnities(List<UnityEntity> unities) {
-        this.unities = unities;
-    }
-
-    public List<UnityEntity> getUnities() {
-        return unities;
     }
 
     public void setId(Long id) {
@@ -135,6 +151,54 @@ public class SaleEntity {
 
     public void setStatus(SaleStatus status) {
         this.status = status;
+    }
+
+    public Double getInitialValue() {
+        return initialValue;
+    }
+
+    public void setInitialValue(Double initialValue) {
+        this.initialValue = initialValue;
+    }
+
+    public Double getGlobalValue() {
+        return globalValue;
+    }
+
+    public void setGlobalValue(Double globalValue) {
+        this.globalValue = globalValue;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public Double getInstallmentValue() {
+        return installmentValue;
+    }
+
+    public void setInstallmentValue(Double installmentValue) {
+        this.installmentValue = installmentValue;
+    }
+
+    public SaleType getSaleType() {
+        return saleType;
+    }
+
+    public void setSaleType(SaleType saleType) {
+        this.saleType = saleType;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public ClientEntity getClient() {
@@ -183,6 +247,14 @@ public class SaleEntity {
 
     public void setCompany(CompanyEntity company) {
         this.company = company;
+    }
+
+    public List<UnityEntity> getUnities() {
+        return unities;
+    }
+
+    public void setUnities(List<UnityEntity> unities) {
+        this.unities = unities;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -71,6 +71,7 @@ public class SystemPaymentConfigurationService implements SystemPaymentConfigura
         systemPaymentConfigurationModel.setApplyDebtAfter(systemPaymentConfigurationResponseDTO.getApplyDebtAfter());
         systemPaymentConfigurationModel.setRequireOnCreateSale(systemPaymentConfigurationResponseDTO.getRequireOnCreateSale());
         systemPaymentConfigurationModel.setRequireForAllSales(systemPaymentConfigurationResponseDTO.getRequireForAllSales());
+        systemPaymentConfigurationModel.setNewMonthAfterDate(systemPaymentConfigurationResponseDTO.getNewMonthAfterDate());
         systemPaymentConfigurationModel.setCompany(companyModel);
 
         SystemPaymentConfigurationModel savedSystemPaymentConfigurationModel = systemPaymentConfigurationRepositoryAdapter.save(systemPaymentConfigurationModel);

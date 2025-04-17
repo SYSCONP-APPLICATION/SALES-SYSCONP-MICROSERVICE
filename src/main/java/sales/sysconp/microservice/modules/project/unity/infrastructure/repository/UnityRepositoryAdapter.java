@@ -2,6 +2,7 @@ package sales.sysconp.microservice.modules.project.unity.infrastructure.reposito
 
 import org.springframework.stereotype.Repository;
 import sales.sysconp.microservice.modules.project.unity.application.ports.out.UnityRepositoryOutPort;
+import sales.sysconp.microservice.modules.project.unity.domain.enums.UnityStatusEnum;
 import sales.sysconp.microservice.modules.project.unity.domain.mappers.UnityMapper;
 import sales.sysconp.microservice.modules.project.unity.domain.models.UnityModel;
 
@@ -10,7 +11,6 @@ import java.util.UUID;
 
 @Repository
 public class UnityRepositoryAdapter implements UnityRepositoryOutPort {
-
     private final JPAUnityRepository jpaRepository;
     private final UnityMapper unityMapper;
 
@@ -40,6 +40,30 @@ public class UnityRepositoryAdapter implements UnityRepositoryOutPort {
     }
 
     @Override
+    public int updateStatusesByIds(List<Long> unityIds, UnityStatusEnum status) {
+        return jpaRepository.updateStatusesByIds(status, unityIds);
+    }
+
+    @Override
+    public List<UnityModel> findByPropertyIdAndStatus(Long propertyId, UnityStatusEnum status) {
+        return jpaRepository.findByStatusAndPropertyId(status, propertyId).stream()
+                .map(unityMapper::toModel)
+                .toList();
+    }
+
+    @Override
+    public List<UnityModel> findAllById(List<Long> ids) {
+        return jpaRepository.findAllByIds(ids).stream().map(unityMapper::toModel).toList();
+    }
+
+    @Override
+    public List<UnityModel> findUnitiesInArrayAndStatus(List<Long> unitiesArray, UnityStatusEnum status) {
+        return jpaRepository.findUnitiesInArrayAndStatus(unitiesArray, status).stream()
+                .map(unityMapper::toModel)
+                .toList();
+    }
+
+    @Override
     public UnityModel save(UnityModel unityModel) {
         return unityMapper.toModel(jpaRepository.save(unityMapper.toEntity(unityModel)));
     }
@@ -52,5 +76,19 @@ public class UnityRepositoryAdapter implements UnityRepositoryOutPort {
     @Override
     public void delete(Long id) {
         jpaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<UnityModel> findBySaleId(Long saleId) {
+        return jpaRepository.findBySaleId(saleId).stream()
+                .map(unityMapper::toModel)
+                .toList();
+    }
+
+    @Override
+    public List<UnityModel> saveAll(List<UnityModel> unityModels) {
+        return jpaRepository.saveAll(unityModels.stream().map(unityMapper::toEntity).toList()).stream()
+                .map(unityMapper::toModel)
+                .toList();
     }
 }

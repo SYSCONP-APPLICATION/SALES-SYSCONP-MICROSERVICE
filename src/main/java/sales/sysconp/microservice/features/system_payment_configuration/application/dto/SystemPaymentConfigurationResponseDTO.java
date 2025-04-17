@@ -12,6 +12,7 @@ public class SystemPaymentConfigurationResponseDTO {
     private Long applyDebtAfter;
     private boolean requireOnCreateSale;
     private boolean requireForAllSales;
+    private Long newMonthAfterDate;
     private CompanyModel company;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -19,7 +20,7 @@ public class SystemPaymentConfigurationResponseDTO {
     public SystemPaymentConfigurationResponseDTO() {
     }
 
-    public SystemPaymentConfigurationResponseDTO(Long id, UUID uuid, Long dayOfMonth, Long applyDebtAfter, boolean requireOnCreateSale, boolean requireForAllSales, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SystemPaymentConfigurationResponseDTO(Long id, UUID uuid, Long dayOfMonth, Long newMonthAfterDate, Long applyDebtAfter, boolean requireOnCreateSale, boolean requireForAllSales, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
@@ -27,6 +28,7 @@ public class SystemPaymentConfigurationResponseDTO {
         this.requireOnCreateSale = requireOnCreateSale;
         this.requireForAllSales = requireForAllSales;
         this.company = company;
+        this.newMonthAfterDate = newMonthAfterDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -101,5 +103,13 @@ public class SystemPaymentConfigurationResponseDTO {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Long getNewMonthAfterDate() {
+        return newMonthAfterDate;
+    }
+
+    public void setNewMonthAfterDate(Long newMonthAfterDate) {
+        this.newMonthAfterDate = newMonthAfterDate;
     }
 }

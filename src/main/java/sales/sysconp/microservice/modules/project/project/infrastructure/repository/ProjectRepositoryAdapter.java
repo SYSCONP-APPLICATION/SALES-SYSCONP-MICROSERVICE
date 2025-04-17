@@ -2,6 +2,7 @@ package sales.sysconp.microservice.modules.project.project.infrastructure.reposi
 
 import org.springframework.stereotype.Repository;
 import sales.sysconp.microservice.modules.project.project.application.ports.out.ProjectRepositoryOutPort;
+import sales.sysconp.microservice.modules.project.project.domain.enums.ProjectStatusEnum;
 import sales.sysconp.microservice.modules.project.project.domain.mappers.ProjectMapper;
 import sales.sysconp.microservice.modules.project.project.domain.models.ProjectModel;
 
@@ -53,5 +54,10 @@ public class ProjectRepositoryAdapter implements ProjectRepositoryOutPort {
     @Override
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateProjectStatus(Long projectId, ProjectStatusEnum status) {
+        jpaRepository.updateProjectStatus(projectId, status);
     }
 }

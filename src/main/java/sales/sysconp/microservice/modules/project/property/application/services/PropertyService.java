@@ -110,7 +110,7 @@ public class PropertyService implements PropertyServiceInPort {
         propertyModel.setDescription(propertyCreateRequestDTO.getDescription());
         propertyModel.setType(propertyCreateRequestDTO.getType());
         propertyModel.setProject(projectModel);
-        propertyModel.setStatus(PropertyStatusEnum.AVAILABLE);
+        propertyModel.setStatus(PropertyStatusEnum.WITH_SPACE);
 
         if (propertyCreateRequestDTO.getCollectionId() != null) {
             propertyModel.setCollection(collectionModel);
@@ -176,6 +176,17 @@ public class PropertyService implements PropertyServiceInPort {
         }
 
         return propertyMapper.toResponseDTO(propertyRepositoryAdapter.save(propertyModel));
+    }
+
+
+    @Override
+    public PropertyResponseDTO updatePropertyStatus(Long id, PropertyStatusEnum status) {
+        PropertyModel propertyModel = this.propertyRepositoryAdapter.getPropertyById(id)
+                .orElseThrow(() -> new NoSuchElementException("Property not found with id: " + id));
+
+        propertyModel.setStatus(status);
+
+        return this.propertyMapper.toResponseDTO(propertyRepositoryAdapter.save(propertyModel));
     }
 
     @Override

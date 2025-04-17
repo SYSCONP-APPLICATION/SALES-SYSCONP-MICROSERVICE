@@ -1,10 +1,10 @@
 package sales.sysconp.microservice.modules.project.unity.domain.models;
 
 import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
-import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import sales.sysconp.microservice.modules.project.compartment.domain.models.CompartmentModel;
 import sales.sysconp.microservice.modules.project.measurements.domain.models.MeasurementModel;
 import sales.sysconp.microservice.modules.project.property.domain.models.PropertyModel;
+import sales.sysconp.microservice.modules.project.unity.domain.enums.UnityStatusEnum;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +16,7 @@ public class UnityModel {
     private String name;
     private SaleModel sale;
     private PropertyModel property;
+    private UnityStatusEnum status;
     private List<CompartmentModel> compartments;
     private MeasurementModel measurement;
     private LocalDateTime createdAt;
@@ -24,12 +25,13 @@ public class UnityModel {
 
     public UnityModel() {}
 
-    public UnityModel(Long id, UUID uuid, String name, SaleModel sale, PropertyModel property, List<CompartmentModel> compartments, MeasurementModel measurement, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public UnityModel(Long id, UUID uuid, String name, UnityStatusEnum status, SaleModel sale, PropertyModel property, List<CompartmentModel> compartments, MeasurementModel measurement, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
         this.sale = sale;
         this.property = property;
+        this.status = status;
         this.compartments = compartments;
         this.measurement = measurement;
         this.createdAt = createdAt;
@@ -115,5 +117,13 @@ public class UnityModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public UnityStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(UnityStatusEnum status) {
+        this.status = status;
     }
 }

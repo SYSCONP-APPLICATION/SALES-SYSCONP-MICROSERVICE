@@ -12,6 +12,7 @@ public class SystemPaymentConfigurationModel {
     private boolean requireOnCreateSale;
     private boolean requireForAllSales;
     private CompanyModel company;
+    private Long newMonthAfterDate;
     private Long applyDebtAfter;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -20,12 +21,13 @@ public class SystemPaymentConfigurationModel {
     public SystemPaymentConfigurationModel() {
     }
 
-    public SystemPaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, boolean requireForAllSales, Long applyDebtAfter, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public SystemPaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, boolean requireOnCreateSale, Long newMonthAfterDate, boolean requireForAllSales, Long applyDebtAfter, CompanyModel company, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
         this.applyDebtAfter = applyDebtAfter;
         this.requireOnCreateSale = requireOnCreateSale;
+        this.newMonthAfterDate = newMonthAfterDate;
         this.requireForAllSales = requireForAllSales;
         this.company = company;
         this.createdAt = createdAt;
@@ -111,5 +113,13 @@ public class SystemPaymentConfigurationModel {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public Long getNewMonthAfterDate() {
+        return newMonthAfterDate;
+    }
+
+    public void setNewMonthAfterDate(Long newMonthAfterDate) {
+        this.newMonthAfterDate = newMonthAfterDate;
     }
 }
