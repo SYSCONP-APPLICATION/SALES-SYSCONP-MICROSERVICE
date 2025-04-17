@@ -1,0 +1,26 @@
+package sales.sysconp.microservice.config.features.bank.adapters.web;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import sales.sysconp.microservice.features.bank.application.dto.BankResponseDTO;
+import sales.sysconp.microservice.features.bank.application.services.BankService;
+
+@RestController
+@RequestMapping("bank")
+public class GetBankByAccountNumberAndCompanyIdController {
+    private final BankService bankService;
+
+    public GetBankByAccountNumberAndCompanyIdController(BankService bankService) {
+        this.bankService = bankService;
+    }
+
+    @GetMapping("account-number/{accountNumber}/company/{companyId}")
+    public BankResponseDTO getBankByAccountNumber(
+            @PathVariable("accountNumber") String accountNumber,
+            @PathVariable("companyId") Long companyId
+    ) {
+        return bankService.getBankByAccountNumber(accountNumber, companyId);
+    }
+}
