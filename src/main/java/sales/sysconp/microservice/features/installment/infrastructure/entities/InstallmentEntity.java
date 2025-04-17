@@ -71,8 +71,7 @@ public class InstallmentEntity {
     @OneToMany(mappedBy = "installment", cascade = CascadeType.ALL)
     private List<PaymentEntity> payments;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "debt_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "installment")
     private DebtEntity debt;
 
     @Column(updatable = false)  

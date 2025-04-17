@@ -33,7 +33,10 @@ public class PaymentConfigurationEntity {
 
     @Column(nullable = false)
     private Long applyDebtAfter;
-    
+
+    @Column(nullable = false)
+    private Double debtValue;
+
     @OneToOne(mappedBy = "paymentConfiguration")
     private SaleEntity sale;
 
@@ -51,12 +54,13 @@ public class PaymentConfigurationEntity {
     public PaymentConfigurationEntity() {
     }
 
-    public PaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, Long applyDebtAfter, SaleEntity sale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PaymentConfigurationEntity(Long id, UUID uuid, Long dayOfMonth, Long applyDebtAfter, Double debtValue, SaleEntity sale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
-        this.sale = sale;
         this.applyDebtAfter = applyDebtAfter;
+        this.debtValue = debtValue;
+        this.sale = sale;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -112,6 +116,15 @@ public class PaymentConfigurationEntity {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+
+    public Double getDebtValue() {
+        return debtValue;
+    }
+
+    public void setDebtValue(Double debtValue) {
+        this.debtValue = debtValue;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {

@@ -5,11 +5,14 @@ import jakarta.validation.constraints.NotNull;
 public class PaymentConfigurationCreateRequestDTO {
     @NotNull(message = "Day of month is required")
     private Long dayOfMonth;
-    
-    private Long saleId;
-    
+
     @NotNull(message = "Apply debt after is required")
     private Long applyDebtAfter;
+
+    @NotNull(message = "debt value is required")
+    private Double debtValue;
+
+    private Long saleId;
 
     public Long getDayOfMonth() {
         return dayOfMonth;
@@ -25,5 +28,9 @@ public class PaymentConfigurationCreateRequestDTO {
 
     public void setSaleId(Long saleId) {
         this.saleId = saleId;
+    }
+
+    public Double getDebtValue() {
+        return debtValue;
     }
 }

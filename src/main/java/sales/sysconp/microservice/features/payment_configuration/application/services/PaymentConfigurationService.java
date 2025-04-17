@@ -60,6 +60,7 @@ public class PaymentConfigurationService implements PaymentConfigurationInServic
 
         paymentConfigurationModel.setApplyDebtAfter(request.getApplyDebtAfter());
         paymentConfigurationModel.setDayOfMonth(request.getDayOfMonth());
+        paymentConfigurationModel.setDebtValue(request.getDebtValue());
 
         sale.setPaymentConfiguration(paymentConfigurationModel);
         this.saleRepositoryAdapter.save(sale);

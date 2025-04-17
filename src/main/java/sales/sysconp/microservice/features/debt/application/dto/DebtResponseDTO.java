@@ -1,73 +1,28 @@
-package sales.sysconp.microservice.features.debt.infrastructure.entities;
+package sales.sysconp.microservice.features.debt.application.dto;
+
+import sales.sysconp.microservice.features.installment.domain.models.InstallmentModel;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import sales.sysconp.microservice.features.installment.infrastructure.entities.InstallmentEntity;
-
-@Entity
-@Table(name = "debts")
-@SQLDelete(sql = "UPDATE debts SET deleted_at = NOW() WHERE id = ?")
-@SQLRestriction("deleted_at IS NULL")
-public class DebtEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class DebtResponseDTO {
     private Long id;
-
-    @Column(unique = true, nullable = false)
     private UUID uuid;
-
-    @PrePersist
-    public void generateUUID () {
-        this.uuid = UUID.randomUUID();
-    }
-    
-    @Column(nullable = false)
     private Double debtPercentage;
-    
-    @Column(nullable = false)
     private Double debtValue;
-    
-    @Column(nullable = true)
     private String debtDescription;
-
-    @Column(nullable = true)
     private Long debtAppliedBy;
-
-    @Column(nullable = true)
     private Long debtPayedOrForgivenBy;
-
-    @Column(nullable = true)
     private LocalDateTime debtPayedAt;
-
-    @Column(nullable = true)
     private LocalDateTime forgivenAt;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "installment_id", referencedColumnName = "id")
-    private InstallmentEntity installment;
-
-    @Column(updatable = false)  
-    @CreationTimestamp
+    private InstallmentModel installment;
     private LocalDateTime createdAt;
-
-    @Column(updatable = true)  
-    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @Column()
-    private LocalDateTime deletedAt;
-
-    public DebtEntity() {
+    public DebtResponseDTO() {
     }
 
-    public DebtEntity(Long id, UUID uuid, Double debtPercentage, Double debtValue, String debtDescription, Long debtAppliedBy, Long debtPayedOrForgivenBy, LocalDateTime debtPayedAt, LocalDateTime forgivenAt, InstallmentEntity installment, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public DebtResponseDTO(Long id, UUID uuid, Double debtPercentage, Double debtValue, String debtDescription, Long debtAppliedBy, Long debtPayedOrForgivenBy, LocalDateTime debtPayedAt, LocalDateTime forgivenAt, InstallmentModel installment, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.debtPercentage = debtPercentage;
@@ -80,7 +35,6 @@ public class DebtEntity {
         this.installment = installment;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -135,8 +89,8 @@ public class DebtEntity {
         return debtPayedOrForgivenBy;
     }
 
-    public void setDebtPayedOrForgivenBy(Long debtPayedOrForgivedBy) {
-        this.debtPayedOrForgivenBy = debtPayedOrForgivedBy;
+    public void setDebtPayedOrForgivenBy(Long debtPayedOrForgivenBy) {
+        this.debtPayedOrForgivenBy = debtPayedOrForgivenBy;
     }
 
     public LocalDateTime getDebtPayedAt() {
@@ -151,15 +105,15 @@ public class DebtEntity {
         return forgivenAt;
     }
 
-    public void setForgivenAt(LocalDateTime forgivedAt) {
-        this.forgivenAt = forgivedAt;
+    public void setForgivenAt(LocalDateTime forgivenAt) {
+        this.forgivenAt = forgivenAt;
     }
 
-    public InstallmentEntity getInstallment() {
+    public InstallmentModel getInstallment() {
         return installment;
     }
 
-    public void setInstallment(InstallmentEntity installment) {
+    public void setInstallment(InstallmentModel installment) {
         this.installment = installment;
     }
 
@@ -177,13 +131,5 @@ public class DebtEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

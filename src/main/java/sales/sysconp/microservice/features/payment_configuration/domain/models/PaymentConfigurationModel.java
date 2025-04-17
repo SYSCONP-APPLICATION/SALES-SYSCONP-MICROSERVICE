@@ -10,6 +10,7 @@ public class PaymentConfigurationModel {
     private UUID uuid;
     private Long dayOfMonth;
     private SaleModel sale;
+    private Double debtValue;
     private Long applyDebtAfter;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -18,12 +19,13 @@ public class PaymentConfigurationModel {
     public PaymentConfigurationModel() {
     }
 
-    public PaymentConfigurationModel(Long id, UUID uuid, Long applyDebtAfter, Long dayOfMonth, SaleModel sale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PaymentConfigurationModel(Long id, UUID uuid, Long dayOfMonth, SaleModel sale, Double debtValue, Long applyDebtAfter, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.dayOfMonth = dayOfMonth;
-        this.applyDebtAfter = applyDebtAfter;
         this.sale = sale;
+        this.debtValue = debtValue;
+        this.applyDebtAfter = applyDebtAfter;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -35,14 +37,6 @@ public class PaymentConfigurationModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getApplyDebtAfter() {
-        return applyDebtAfter;
-    }
-
-    public void setApplyDebtAfter(Long applyDebtAfter) {
-        this.applyDebtAfter = applyDebtAfter;
     }
 
     public UUID getUuid() {
@@ -67,6 +61,22 @@ public class PaymentConfigurationModel {
 
     public void setSale(SaleModel sale) {
         this.sale = sale;
+    }
+
+    public Double getDebtValue() {
+        return debtValue;
+    }
+
+    public void setDebtValue(Double debtValue) {
+        this.debtValue = debtValue;
+    }
+
+    public Long getApplyDebtAfter() {
+        return applyDebtAfter;
+    }
+
+    public void setApplyDebtAfter(Long applyDebtAfter) {
+        this.applyDebtAfter = applyDebtAfter;
     }
 
     public LocalDateTime getCreatedAt() {
