@@ -1,4 +1,4 @@
-package sales.sysconp.microservice.features.payment.domain.models;
+package sales.sysconp.microservice.features.payment.application.dto;
 
 import sales.sysconp.microservice.features.bank.domain.models.BankModel;
 import sales.sysconp.microservice.features.installment.domain.models.InstallmentModel;
@@ -11,40 +11,38 @@ import sales.sysconp.microservice.modules.auth.user.domain.models.UserModel;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class PaymentModel {
+public class PaymentResponseDTO {
     private Long id;
     private UUID uuid;
     private Double value;
+    private PaymentProcessEnum paymentProcess;
     private PaymentMethodModel paymentMethod;
     private SaleModel sale;
     private String transactionCode;
     private InstallmentModel installment;
     private BankModel bank;
     private CompanyModel company;
-    private PaymentProcessEnum paymentProcess;
     private UserModel user;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 
-    public PaymentModel() {
+    public PaymentResponseDTO() {
     }
 
-    public PaymentModel(Long id, UUID uuid, Double value, PaymentMethodModel paymentMethod, SaleModel sale, String transactionCode, InstallmentModel installment, BankModel bank, CompanyModel company, PaymentProcessEnum paymentProcess, UserModel user, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PaymentResponseDTO(Long id, UUID uuid, Double value, PaymentProcessEnum paymentProcess, PaymentMethodModel paymentMethod, SaleModel sale, String transactionCode, InstallmentModel installment, BankModel bank, CompanyModel company, UserModel user, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.uuid = uuid;
         this.value = value;
+        this.paymentProcess = paymentProcess;
         this.paymentMethod = paymentMethod;
         this.sale = sale;
         this.transactionCode = transactionCode;
         this.installment = installment;
         this.bank = bank;
         this.company = company;
-        this.paymentProcess = paymentProcess;
         this.user = user;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Long getId() {
@@ -69,6 +67,14 @@ public class PaymentModel {
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public PaymentProcessEnum getPaymentProcess() {
+        return paymentProcess;
+    }
+
+    public void setPaymentProcess(PaymentProcessEnum paymentProcess) {
+        this.paymentProcess = paymentProcess;
     }
 
     public PaymentMethodModel getPaymentMethod() {
@@ -119,14 +125,6 @@ public class PaymentModel {
         this.company = company;
     }
 
-    public PaymentProcessEnum getPaymentProcess() {
-        return paymentProcess;
-    }
-
-    public void setPaymentProcess(PaymentProcessEnum paymentProcess) {
-        this.paymentProcess = paymentProcess;
-    }
-
     public UserModel getUser() {
         return user;
     }
@@ -149,13 +147,5 @@ public class PaymentModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

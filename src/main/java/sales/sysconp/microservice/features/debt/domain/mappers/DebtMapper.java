@@ -9,8 +9,6 @@ import sales.sysconp.microservice.features.installment.domain.mappers.Installmen
 @Mapper(componentModel = "spring", uses = { InstallmentMapper.class })
 public interface DebtMapper {
     DebtModel toModel(DebtEntity entity);
-
     DebtEntity toEntity(DebtModel model);
-
     DebtResponseDTO toResponseDTO(DebtModel model);
 }
