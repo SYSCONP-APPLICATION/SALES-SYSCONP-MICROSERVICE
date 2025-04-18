@@ -17,5 +17,7 @@ public interface DebtRepositoryOutPort {
 
     DebtModel save(DebtModel debtModel);
 
+    Optional<DebtModel> findByInstallmentId(Long installmentId);
+
     void deleteById(Long id);
 }
