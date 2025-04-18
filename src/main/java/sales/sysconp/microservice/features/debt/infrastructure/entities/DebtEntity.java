@@ -3,18 +3,12 @@ package sales.sysconp.microservice.features.debt.infrastructure.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 import sales.sysconp.microservice.features.installment.infrastructure.entities.InstallmentEntity;
 
 @Entity
@@ -29,6 +23,7 @@ public class DebtEntity {
     @Column(unique = true, nullable = false)
     private UUID uuid;
 
+    @PrePersist
     public void generateUUID () {
         this.uuid = UUID.randomUUID();
     }
@@ -54,7 +49,8 @@ public class DebtEntity {
     @Column(nullable = true)
     private LocalDateTime forgivenAt;
 
-    @OneToOne(mappedBy = "debt")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "installment_id", referencedColumnName = "id")
     private InstallmentEntity installment;
 
     @Column(updatable = false)  

@@ -40,6 +40,11 @@ public class PaymentConfigurationRepositoryAdapter implements PaymentConfigurati
     }
 
     @Override
+    public Optional<PaymentConfigurationModel> findByInstallmentId(Long installmentId) {
+        return jpaRepository.findByInstallmentId(installmentId).map(mapper::toModel);
+    }
+
+    @Override
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
     }

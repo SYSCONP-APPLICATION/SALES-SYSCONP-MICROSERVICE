@@ -11,10 +11,13 @@ import sales.sysconp.microservice.modules.auth.company.domain.mapper.CompanyMapp
 import sales.sysconp.microservice.modules.auth.user.domain.mappers.UserMapper;
 import sales.sysconp.microservice.modules.project.unity.domain.mappers.UnityMapper;
 
-@Mapper(componentModel = "spring", uses = { CompanyMapper.class, ClientMapper.class, UserMapper.class, UnityMapper.class, InstallmentMapper.class})
+@Mapper(componentModel = "spring", uses = { ClientMapper.class, CompanyMapper.class, UserMapper.class, UnityMapper.class, InstallmentMapper.class })
 public interface SaleMapper {
+    @Mapping(target = "payments", ignore = true)
     @Mapping(target = "paymentConfiguration.sale", ignore = true)
+    @Mapping(target = "installments", ignore = true)
     SaleModel toModel(SaleEntity entity);
+
     SaleEntity toEntity(SaleModel model);
     SaleResponseDTO toResponseDTO(SaleModel model);
 }

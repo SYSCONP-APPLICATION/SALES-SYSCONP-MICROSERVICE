@@ -15,5 +15,7 @@ public interface PaymentConfigurationRepositoryOutPort {
 
     PaymentConfigurationModel save(PaymentConfigurationModel paymentConfigurationModel);
 
+    Optional<PaymentConfigurationModel> findByInstallmentId(Long installmentId);
+
     void deleteById(Long id);
 }

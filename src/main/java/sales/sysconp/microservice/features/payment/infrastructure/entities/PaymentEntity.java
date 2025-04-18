@@ -3,21 +3,15 @@ package sales.sysconp.microservice.features.payment.infrastructure.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import sales.sysconp.microservice.features.bank.infrastructure.entities.BankEntity;
 import sales.sysconp.microservice.features.installment.infrastructure.entities.InstallmentEntity;
+import sales.sysconp.microservice.features.payment.domain.enums.PaymentProcessEnum;
 import sales.sysconp.microservice.features.payment_method.infrastructure.entities.PaymentMethodEntity;
 import sales.sysconp.microservice.features.sale.infrastructure.entities.SaleEntity;
 import sales.sysconp.microservice.modules.auth.company.infrastructure.entities.CompanyEntity;
@@ -35,12 +29,16 @@ public class PaymentEntity {
     @Column(unique = true, nullable = false)
     private UUID uuid;
 
+    @PrePersist
     public void generateUUID () {
         this.uuid = UUID.randomUUID();
     }
     
     @Column(nullable = false)
     private Double value;
+
+    @Column(nullable = false)
+    private PaymentProcessEnum paymentProcess;
 
     @ManyToOne
     @JoinColumn(name = "payment_method_id", nullable = false)
@@ -53,6 +51,9 @@ public class PaymentEntity {
     @ManyToOne
     @JoinColumn(name = "installment_id", nullable = false, referencedColumnName = "id")
     private InstallmentEntity installment;
+
+    @Column(nullable = false)
+    private String transactionCode;
 
     @ManyToOne
     @JoinColumn(name = "bank_id", nullable = false)
@@ -80,13 +81,15 @@ public class PaymentEntity {
     public PaymentEntity() {
     }
 
-    public PaymentEntity(Long id, UUID uuid, Double value, PaymentMethodEntity paymentMethod, SaleEntity sale, InstallmentEntity installment, BankEntity bank, CompanyEntity company, UserEntity user, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public PaymentEntity(Long id, UUID uuid, Double value, PaymentProcessEnum paymentProcess, PaymentMethodEntity paymentMethod, SaleEntity sale, InstallmentEntity installment, String transactionCode, BankEntity bank, CompanyEntity company, UserEntity user, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.value = value;
+        this.paymentProcess = paymentProcess;
         this.paymentMethod = paymentMethod;
         this.sale = sale;
         this.installment = installment;
+        this.transactionCode = transactionCode;
         this.bank = bank;
         this.company = company;
         this.user = user;
@@ -119,6 +122,14 @@ public class PaymentEntity {
         this.value = value;
     }
 
+    public PaymentProcessEnum getPaymentProcess() {
+        return paymentProcess;
+    }
+
+    public void setPaymentProcess(PaymentProcessEnum paymentProcess) {
+        this.paymentProcess = paymentProcess;
+    }
+
     public PaymentMethodEntity getPaymentMethod() {
         return paymentMethod;
     }
@@ -141,6 +152,14 @@ public class PaymentEntity {
 
     public void setInstallment(InstallmentEntity installment) {
         this.installment = installment;
+    }
+
+    public String getTransactionCode() {
+        return transactionCode;
+    }
+
+    public void setTransactionCode(String transactionCode) {
+        this.transactionCode = transactionCode;
     }
 
     public BankEntity getBank() {
