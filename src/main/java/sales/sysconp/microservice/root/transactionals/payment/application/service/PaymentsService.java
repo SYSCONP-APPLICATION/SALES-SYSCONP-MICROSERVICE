@@ -73,7 +73,7 @@ public class PaymentsService implements PaymentsServiceInPort {
             // Verifica se o pagamento é completo
             if (Double.compare(totalPaid, requiredTotal) != 0) {
                 throw new IllegalArgumentException(
-                        "Installment " + installmentId +
+                        "Installment of " + installment.getMonth() +
                                 " expected payment of " + requiredTotal +
                                 ", but received " + totalPaid
                 );
@@ -91,6 +91,7 @@ public class PaymentsService implements PaymentsServiceInPort {
 
             // Se houver dívida, trata conforme o processo
             DebtModel debt = installment.getDebt();
+
             if (debt != null && debt.getDebtPayedAt() == null && debt.getForgivenAt() == null) {
                 if (referenceProcess == PaymentProcessEnum.PAY_DEBT) {
                     debtService.payDebt(debt.getId(), installmentPayments.get(0).getUserId());
