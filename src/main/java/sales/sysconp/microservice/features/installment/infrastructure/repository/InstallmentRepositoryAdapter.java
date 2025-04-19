@@ -5,6 +5,7 @@ import sales.sysconp.microservice.features.installment.application.ports.out.Ins
 import sales.sysconp.microservice.features.installment.domain.mappers.InstallmentMapper;
 import sales.sysconp.microservice.features.installment.domain.models.InstallmentModel;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -58,6 +59,18 @@ public class InstallmentRepositoryAdapter implements InstallmentRepositoryOutPor
         return jpaRepository.findBySaleUuid(saleUuid).stream()
                 .map(installmentMapper::toModel)
                 .toList();
+    }
+
+    @Override
+    public List<InstallmentModel> findBySaleIdAndPaidAtIsNull(Long saleId) {
+        return jpaRepository.findBySaleIdAndPaidAtIsNull(saleId).stream()
+                .map(installmentMapper::toModel)
+                .toList();
+    }
+
+    @Override
+    public void updatePaidAt(Long id, LocalDateTime paidAt) {
+        jpaRepository.updatePaidAt(id, paidAt);
     }
 
     @Override

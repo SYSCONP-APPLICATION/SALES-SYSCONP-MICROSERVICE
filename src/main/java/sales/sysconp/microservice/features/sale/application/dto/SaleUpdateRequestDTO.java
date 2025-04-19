@@ -14,4 +14,8 @@ public class SaleUpdateRequestDTO {
     public String getAdditionalInfo() {
         return additionalInfo;
     }
+
+    public void setStatus(SaleStatus status) {
+        this.status = status;
+    }
 }

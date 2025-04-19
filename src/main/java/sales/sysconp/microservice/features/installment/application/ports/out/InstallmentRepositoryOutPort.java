@@ -2,6 +2,7 @@ package sales.sysconp.microservice.features.installment.application.ports.out;
 
 import sales.sysconp.microservice.features.installment.domain.models.InstallmentModel;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,6 +19,10 @@ public interface InstallmentRepositoryOutPort {
     List<InstallmentModel> saveAll(List<InstallmentModel> installmentModels);
 
     List<InstallmentModel> findBySaleUuid(UUID saleUuid);
+
+    List<InstallmentModel> findBySaleIdAndPaidAtIsNull(Long saleId);
+
+    void updatePaidAt(Long id, LocalDateTime paidAt);
 
     void deleteById(Long id);
 }

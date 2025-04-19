@@ -14,6 +14,7 @@ import sales.sysconp.microservice.features.installment.infrastructure.repository
 import sales.sysconp.microservice.features.sale.domain.enums.SaleType;
 import sales.sysconp.microservice.features.sale.domain.models.SaleModel;
 import sales.sysconp.microservice.features.sale.infrastructure.repository.SaleRepositoryAdapter;
+import sales.sysconp.microservice.features.system_payment_configuration.application.services.SystemPaymentConfigurationService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,11 +23,13 @@ import java.util.*;
 @Service
 public class InstallmentService implements InstallmentServiceInPort {
     private final InstallmentRepositoryAdapter installmentRepositoryAdapter;
+    private final SystemPaymentConfigurationService systemPaymentConfigurationService;
     private final SaleRepositoryAdapter saleRepositoryAdapter;
     private final InstallmentMapper installmentMapper;
 
-    public InstallmentService(InstallmentRepositoryAdapter installmentRepositoryAdapter, SaleRepositoryAdapter saleRepositoryAdapter, InstallmentMapper installmentMapper) {
+    public InstallmentService(InstallmentRepositoryAdapter installmentRepositoryAdapter, SystemPaymentConfigurationService systemPaymentConfigurationService, SaleRepositoryAdapter saleRepositoryAdapter, InstallmentMapper installmentMapper) {
         this.installmentRepositoryAdapter = installmentRepositoryAdapter;
+        this.systemPaymentConfigurationService = systemPaymentConfigurationService;
         this.saleRepositoryAdapter = saleRepositoryAdapter;
         this.installmentMapper = installmentMapper;
     }
@@ -71,6 +74,10 @@ public class InstallmentService implements InstallmentServiceInPort {
             throw new IllegalArgumentException("Esta venda não tem um payment configuration - crie uma");
         }
 
+        Long newMonthAfterDate = this.systemPaymentConfigurationService
+                .getSystemPaymentConfigurationByCompanyId(sale.getCompany().getId())
+                .getNewMonthAfterDate();
+
         Long limitDay = sale.getPaymentConfiguration().getApplyDebtAfter();
         int paymentDay = Math.toIntExact(sale.getPaymentConfiguration().getDayOfMonth());
 
@@ -89,7 +96,12 @@ public class InstallmentService implements InstallmentServiceInPort {
         List<InstallmentModel> installments = new ArrayList<>();
 
         LocalDate now = LocalDate.now();
-        LocalDate baseDate = (limitDay == null || now.getDayOfMonth() <= limitDay) ? now : now.plusMonths(1);
+
+        // 👉 Nova lógica para determinar o mês base
+        LocalDate baseDate = now;
+        if (newMonthAfterDate != null && now.getDayOfMonth() > newMonthAfterDate) {
+            baseDate = baseDate.plusMonths(1);
+        }
 
         baseDate = baseDate.withDayOfMonth(1);
 
@@ -108,7 +120,7 @@ public class InstallmentService implements InstallmentServiceInPort {
             InstallmentModel installment = new InstallmentModel();
             installment.setValue(installmentValue);
             installment.setIndex(i + 1);
-            installment.setSale(sale); // importante!
+            installment.setSale(sale);
             installment.setMonth(MonthEnum.valueOf(paymentDate.getMonth().toString()));
             installment.setType(InstallmentTypeEnum.INSTALLMENT);
             installment.setPaymentDate(paymentDate);
